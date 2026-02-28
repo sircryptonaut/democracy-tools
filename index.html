@@ -3,1938 +3,1944 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Democracy Health Monitor — Oath & Action</title>
+<title>Oath &amp; Action — Fighting for the republic we were promised.</title>
+<meta name="description" content="A nonpartisan newsletter on democracy reform. Ranked choice voting, open primaries, and veteran-led advocacy. By Dustin Cathcart.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Oath & Action — Fighting for the republic we were promised.">
+<meta property="og:description" content="A nonpartisan newsletter on democracy reform. Ranked choice voting, open primaries, and veteran-led advocacy. By Dustin Cathcart.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Oath & Action — Fighting for the republic we were promised.">
+<meta name="twitter:description" content="A nonpartisan newsletter on democracy reform. Ranked choice voting, open primaries, and veteran-led advocacy.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy: rgb(20, 30, 52);
-  --navy-deep: rgb(12, 18, 35);
-  --navy-light: rgb(30, 42, 68);
-  --navy-mid: rgb(25, 36, 60);
-  --gold: rgb(200, 164, 78);
-  --gold-light: rgb(220, 190, 120);
-  --gold-dim: rgba(200, 164, 78, 0.15);
-  --gold-border: rgba(200, 164, 78, 0.25);
-  --warm-gray: rgb(160, 155, 145);
-  --off-white: rgb(240, 239, 234);
-  --cream: rgb(248, 246, 240);
-  --text-dark: rgb(35, 35, 40);
-  --text-body: rgb(55, 55, 60);
-  --text-muted: rgb(120, 118, 112);
-  --red-warn: rgb(192, 64, 64);
-  --red-dim: rgba(192, 64, 64, 0.12);
-  --green-good: rgb(72, 140, 96);
-  --green-dim: rgba(72, 140, 96, 0.12);
-  --amber: rgb(210, 140, 40);
-  --amber-dim: rgba(210, 140, 40, 0.12);
-  --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Source Sans 3', sans-serif;
-  color: var(--text-body);
-  background: var(--cream);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* NOISE TEXTURE */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  opacity: 0.015;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 256px;
-  pointer-events: none;
-  z-index: 1000;
-}
-
-/* FOCUS */
-a:focus-visible, button:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
-}
-
-/* HERO */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: var(--navy);
-  overflow: hidden;
-}
-
-.hero-stars {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(200,164,78,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(200,164,78,0.05) 0%, transparent 50%),
-    linear-gradient(180deg, rgba(12,18,35,0.4) 0%, transparent 40%, rgba(12,18,35,0.6) 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 2rem;
-  max-width: 860px;
-}
-
-.hero-badge {
-  display: inline-block;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 500;
-  font-size: 0.72rem;
-  letter-spacing: 3.5px;
-  text-transform: uppercase;
-  color: var(--gold);
-  border: 1px solid var(--gold-border);
-  padding: 0.5rem 1.5rem;
-  margin-bottom: 2.5rem;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.2s forwards;
-}
-
-.hero-title {
-  font-family: 'Libre Baskerville', serif;
-  font-weight: 700;
-  color: var(--off-white);
-  font-size: clamp(2.2rem, 5.5vw, 4.2rem);
-  letter-spacing: 3px;
-  line-height: 1.12;
-  margin-bottom: 0.5em;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.4s forwards;
-}
-
-.hero-title .gold { color: var(--gold); }
-
-.hero-divider {
-  width: 80px;
-  height: 1.5px;
-  background: var(--gold);
-  margin: 1.5rem auto;
-  opacity: 0;
-  animation: expandLine 0.6s ease 0.7s forwards;
-}
-
-.hero-tagline {
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
-  color: var(--warm-gray);
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.9s forwards;
-}
-
-.hero-description {
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 300;
-  font-size: 1rem;
-  line-height: 1.75;
-  color: rgba(240,239,234,0.6);
-  max-width: 560px;
-  margin: 0 auto 3rem;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 1.1s forwards;
-}
-
-.hero-cta-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 1.3s forwards;
-}
-
-.btn-gold {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
-  font-size: 0.88rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--navy);
-  background: var(--gold);
-  padding: 0.9rem 2rem;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.btn-gold:hover {
-  background: var(--gold-light);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(200,164,78,0.3);
-}
-
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 500;
-  font-size: 0.85rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: rgba(240,239,234,0.65);
-  border: 1px solid rgba(240,239,234,0.2);
-  padding: 0.9rem 2rem;
-  background: transparent;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.btn-outline:hover {
-  color: var(--gold);
-  border-color: var(--gold-border);
-}
-
-.scroll-indicator {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 1.6s forwards;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.scroll-indicator span {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(240,239,234,0.3);
-}
-
-.scroll-line {
-  display: block;
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  animation: scrollPulse 2s ease infinite;
-}
-
-/* NAV */
-.nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 1.25rem 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.4s ease;
-}
-
-.nav.scrolled {
-  background: rgba(20,30,52,0.97);
-  backdrop-filter: blur(12px);
-  padding: 0.8rem 3rem;
-  box-shadow: 0 2px 30px rgba(0,0,0,0.35);
-}
-
-.nav-logo {
-  font-family: 'Libre Baskerville', serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--off-white);
-  text-decoration: none;
-  letter-spacing: 2px;
-}
-
-.nav-logo .amp {
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-weight: 500;
-  color: var(--gold);
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-  align-items: center;
-}
-
-.nav-links a {
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 400;
-  font-size: 0.82rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: rgba(240,239,234,0.65);
-  text-decoration: none;
-  transition: color 0.3s ease;
-  position: relative;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px; left: 0;
-  width: 0; height: 1px;
-  background: var(--gold);
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover { color: var(--off-white); }
-.nav-links a:hover::after { width: 100%; }
-
-/* OVERALL HEALTH METER */
-.health-meter-section {
-  background: var(--navy-deep);
-  padding: 5rem 2rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.health-meter-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(200,164,78,0.04) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.section-container {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.section-label {
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 500;
-  font-size: 0.7rem;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--gold);
-  display: block;
-  margin-bottom: 1rem;
-}
-
-.section-title {
-  font-family: 'Libre Baskerville', serif;
-  font-weight: 700;
-  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
-  color: var(--off-white);
-  letter-spacing: 1px;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
-
-.section-intro {
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-size: 1.05rem;
-  color: var(--warm-gray);
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.7;
-}
-
-/* GAUGE */
-.gauge-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 4rem;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.gauge-wrapper.visible { opacity: 1; transform: none; }
-
-.gauge-container {
-  position: relative;
-  width: 320px;
-  height: 180px;
-  margin-bottom: 1.5rem;
-}
-
-.gauge-svg { width: 100%; height: 100%; overflow: visible; }
-
-.gauge-label {
-  font-family: 'Libre Baskerville', serif;
-  font-weight: 700;
-  font-size: 2.8rem;
-  fill: var(--off-white);
-  text-anchor: middle;
-}
-
-.gauge-sublabel {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.7rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  fill: var(--warm-gray);
-  text-anchor: middle;
-}
-
-.gauge-status {
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-size: 1.15rem;
-  color: var(--gold);
-  text-align: center;
-  margin-bottom: 0.5rem;
-}
-
-.gauge-note {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.85rem;
-  color: rgba(160,155,145,0.7);
-  text-align: center;
-  max-width: 400px;
-  line-height: 1.6;
-}
-
-/* PILLARS */
-.pillars-section {
-  background: var(--cream);
-  padding: 5rem 2rem;
-}
-
-.pillars-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2px;
-  margin-top: 1rem;
-}
-
-.pillar-card {
-  background: white;
-  padding: 2.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  border-bottom: 2px solid transparent;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s ease, border-color 0.3s ease;
-}
-
-.pillar-card.visible { opacity: 1; transform: none; }
-
-.pillar-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 3px;
-  height: 0;
-  transition: height 0.4s ease;
-}
-
-.pillar-card:hover::before { height: 100%; }
-.pillar-card:hover { background: rgb(252,251,248); }
-
-.pillar-card.status-critical { border-bottom-color: var(--red-warn); }
-.pillar-card.status-critical::before { background: var(--red-warn); }
-.pillar-card.status-warning { border-bottom-color: var(--amber); }
-.pillar-card.status-warning::before { background: var(--amber); }
-.pillar-card.status-good { border-bottom-color: var(--green-good); }
-.pillar-card.status-good::before { background: var(--green-good); }
-
-.pillar-icon {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  display: block;
-}
-
-.pillar-name {
-  font-family: 'Libre Baskerville', serif;
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--text-dark);
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.5px;
-}
-
-.pillar-status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 0.25rem 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.status-critical .pillar-status-badge { background: var(--red-dim); color: var(--red-warn); }
-.status-warning .pillar-status-badge { background: var(--amber-dim); color: var(--amber); }
-.status-good .pillar-status-badge { background: var(--green-dim); color: var(--green-good); }
-
-.pillar-score-bar {
-  height: 4px;
-  background: rgba(0,0,0,0.06);
-  margin-bottom: 1rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.pillar-score-fill {
-  position: absolute;
-  top: 0; left: 0;
-  height: 100%;
-  width: 0%;
-  transition: width 1s var(--transition-smooth) 0.3s;
-}
-
-.status-critical .pillar-score-fill { background: var(--red-warn); }
-.status-warning .pillar-score-fill { background: var(--amber); }
-.status-good .pillar-score-fill { background: var(--green-good); }
-
-.pillar-score-label {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-  letter-spacing: 0.5px;
-}
-
-.pillar-description {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.9rem;
-  line-height: 1.65;
-  color: var(--text-body);
-}
-
-.pillar-expand-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.2rem;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
-  font-size: 0.72rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--navy);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: color 0.3s ease;
-}
-
-.pillar-expand-btn:hover { color: var(--gold); }
-
-.pillar-expand-btn svg {
-  transition: transform 0.3s ease;
-}
-
-.pillar-card.expanded .pillar-expand-btn svg { transform: rotate(180deg); }
-
-/* MODAL */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(12,18,35,0.85);
-  backdrop-filter: blur(8px);
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.modal-overlay.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.modal {
-  background: var(--navy);
-  max-width: 760px;
-  width: 100%;
-  max-height: 85vh;
-  overflow-y: auto;
-  position: relative;
-  transform: scale(0.95) translateY(20px);
-  transition: transform 0.3s var(--transition-smooth);
-  border-top: 3px solid var(--gold);
-}
-
-.modal-overlay.active .modal { transform: scale(1) translateY(0); }
-
-.modal-header {
-  padding: 2.5rem 3rem 1.5rem;
-  border-bottom: 1px solid rgba(200,164,78,0.15);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.modal-title-group { flex: 1; }
-
-.modal-label {
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 500;
-  font-size: 0.65rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--gold);
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.modal-title {
-  font-family: 'Libre Baskerville', serif;
-  font-weight: 700;
-  font-size: 1.6rem;
-  color: var(--off-white);
-  letter-spacing: 0.5px;
-  line-height: 1.2;
-}
-
-.modal-close {
-  background: none;
-  border: none;
-  color: rgba(240,239,234,0.4);
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0.25rem;
-  transition: color 0.3s ease;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.modal-close:hover { color: var(--off-white); }
-
-.modal-body {
-  padding: 2rem 3rem 3rem;
-}
-
-.modal-section-title {
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
-  font-size: 0.72rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.modal-section-title::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: rgba(200,164,78,0.2);
-}
-
-.modal-section-title:first-child { margin-top: 0; }
-
-.modal-text {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.75;
-  color: rgba(240,239,234,0.75);
-  margin-bottom: 1rem;
-}
-
-.modal-quote {
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-size: 1.05rem;
-  color: var(--warm-gray);
-  border-left: 2px solid var(--gold);
-  padding-left: 1.5rem;
-  margin: 1.5rem 0;
-  line-height: 1.7;
-}
-
-.indicator-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.indicator-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: rgba(240,239,234,0.75);
-}
-
-.indicator-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  margin-top: 0.45rem;
-  flex-shrink: 0;
-}
-
-.dot-red { background: var(--red-warn); box-shadow: 0 0 6px rgba(192,64,64,0.5); }
-.dot-gold { background: var(--gold); box-shadow: 0 0 6px rgba(200,164,78,0.5); }
-.dot-green { background: var(--green-good); box-shadow: 0 0 6px rgba(72,140,96,0.5); }
-
-.modal-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 2rem;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
-  font-size: 0.8rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--navy);
-  background: var(--gold);
-  padding: 0.8rem 1.75rem;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.modal-cta:hover {
-  background: var(--gold-light);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(200,164,78,0.3);
-}
-
-/* THREATS SECTION */
-.threats-section {
-  background: var(--navy-deep);
-  padding: 5rem 2rem;
-  position: relative;
-}
-
-.threats-section::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(200,164,78,0.3), transparent);
-}
-
-.threats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
-.threat-card {
-  background: rgba(30,42,68,0.5);
-  border: 1px solid rgba(200,164,78,0.1);
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s ease, border-color 0.3s ease;
-}
-
-.threat-card.visible { opacity: 1; transform: none; }
-.threat-card:hover { background: rgba(30,42,68,0.8); border-color: rgba(200,164,78,0.25); }
-
-.threat-severity {
-  position: absolute;
-  top: 0; right: 0;
-  width: 0; height: 0;
-  border-left: 50px solid transparent;
-  border-top: 50px solid;
-}
-
-.severity-critical .threat-severity { border-top-color: rgba(192,64,64,0.35); }
-.severity-high .threat-severity { border-top-color: rgba(210,140,40,0.35); }
-.severity-medium .threat-severity { border-top-color: rgba(200,164,78,0.25); }
-
-.threat-sev-label {
-  position: absolute;
-  top: 0.4rem; right: 0.3rem;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 700;
-  font-size: 0.5rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: white;
-  transform: rotate(45deg);
-  width: 30px;
-  text-align: center;
-  line-height: 1.2;
-}
-
-.threat-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
-
-.threat-title {
-  font-family: 'Libre Baskerville', serif;
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--off-white);
-  margin-bottom: 0.75rem;
-  letter-spacing: 0.3px;
-  line-height: 1.3;
-}
-
-.threat-excerpt {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.88rem;
-  line-height: 1.65;
-  color: rgba(160,155,145,0.85);
-}
-
-.threat-read-more {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-top: 1.2rem;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
-  font-size: 0.68rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: gap 0.3s ease;
-}
-
-.threat-card:hover .threat-read-more { gap: 0.7rem; }
-
-/* WHAT DEMOCRACY NEEDS */
-.solutions-section {
-  background: var(--cream);
-  padding: 5rem 2rem;
-}
-
-.timeline {
-  position: relative;
-  max-width: 800px;
-  margin: 0 auto;
-  padding-left: 3rem;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 0.75rem;
-  width: 1px;
-  background: linear-gradient(to bottom, var(--gold), rgba(200,164,78,0.1));
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 3rem;
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.timeline-item.visible { opacity: 1; transform: none; }
-
-.timeline-dot {
-  position: absolute;
-  left: -2.5rem;
-  top: 0.25rem;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--gold);
-  border: 3px solid var(--cream);
-  box-shadow: 0 0 0 1px var(--gold);
-}
-
-.timeline-num {
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 700;
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-}
-
-.timeline-title {
-  font-family: 'Libre Baskerville', serif;
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: var(--text-dark);
-  margin-bottom: 0.75rem;
-  letter-spacing: 0.3px;
-}
-
-.timeline-body {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.92rem;
-  line-height: 1.7;
-  color: var(--text-body);
-}
-
-/* REFORM SPOTLIGHT */
-.reforms-section {
-  background: var(--navy);
-  padding: 5rem 2rem;
-  position: relative;
-}
-
-.reform-tabs {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid rgba(200,164,78,0.2);
-  margin-bottom: 3rem;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.reform-tabs::-webkit-scrollbar { display: none; }
-
-.reform-tab {
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 500;
-  font-size: 0.8rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: rgba(240,239,234,0.45);
-  padding: 1rem 1.75rem;
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.3s ease;
-}
-
-.reform-tab:hover { color: rgba(240,239,234,0.8); }
-.reform-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
-
-.reform-panel { display: none; }
-.reform-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-
-.reform-panel-title {
-  font-family: 'Libre Baskerville', serif;
-  font-weight: 700;
-  font-size: 1.8rem;
-  color: var(--off-white);
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  letter-spacing: 0.5px;
-}
-
-.reform-panel-desc {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.75;
-  color: rgba(240,239,234,0.65);
-  margin-bottom: 2rem;
-}
-
-.reform-panel-quote {
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-size: 1rem;
-  color: var(--warm-gray);
-  border-left: 2px solid var(--gold);
-  padding-left: 1.5rem;
-  line-height: 1.7;
-  margin-bottom: 2rem;
-}
-
-.reform-stat-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-
-.reform-stat {
-  background: rgba(30,42,68,0.5);
-  border: 1px solid rgba(200,164,78,0.12);
-  padding: 1.5rem;
-}
-
-.reform-stat-num {
-  font-family: 'Libre Baskerville', serif;
-  font-weight: 700;
-  font-size: 2rem;
-  color: var(--gold);
-  line-height: 1;
-  margin-bottom: 0.4rem;
-}
-
-.reform-stat-label {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.82rem;
-  color: rgba(160,155,145,0.8);
-  line-height: 1.4;
-}
-
-/* CALL TO ACTION */
-.cta-section {
-  background: var(--navy-deep);
-  padding: 6rem 2rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(200,164,78,0.06) 0%, transparent 70%);
-}
-
-.cta-section .section-title {
-  margin-bottom: 1rem;
-}
-
-.cta-section .section-intro {
-  margin-bottom: 2.5rem;
-}
-
-/* FOOTER */
-.footer {
-  background: var(--navy-deep);
-  padding: 2rem 3rem;
-  border-top: 1px solid rgba(200,164,78,0.12);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.footer-logo {
-  font-family: 'Libre Baskerville', serif;
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--off-white);
-  letter-spacing: 2px;
-  text-decoration: none;
-}
-
-.footer-logo .amp {
-  font-family: 'Lora', serif;
-  font-style: italic;
-  color: var(--gold);
-}
-
-.footer-copy {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 0.78rem;
-  color: rgba(160,155,145,0.5);
-  letter-spacing: 0.5px;
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes expandLine {
-  from { opacity: 0; width: 0; }
-  to { opacity: 1; width: 80px; }
-}
-
-@keyframes scrollPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-@keyframes needleSpin {
-  from { transform: rotate(var(--needle-start)); }
-  to { transform: rotate(var(--needle-end)); }
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .nav { padding: 1rem 1.5rem; }
-  .nav.scrolled { padding: 0.75rem 1.5rem; }
-  .nav-links { display: none; }
-  .reform-panel.active { grid-template-columns: 1fr; gap: 2rem; }
-  .reform-stat-grid { grid-template-columns: 1fr 1fr; }
-  .modal-header, .modal-body { padding: 1.5rem; }
-  .footer { padding: 1.5rem; }
-}
+  :root {
+    --navy: rgb(20, 30, 52);
+    --navy-deep: rgb(12, 18, 35);
+    --navy-light: rgb(30, 42, 68);
+    --gold: rgb(200, 164, 78);
+    --gold-light: rgb(220, 190, 120);
+    --gold-dim: rgba(200, 164, 78, 0.15);
+    --warm-gray: rgb(160, 155, 145);
+    --off-white: rgb(240, 239, 234);
+    --cream: rgb(248, 246, 240);
+    --text-dark: rgb(35, 35, 40);
+    --text-body: rgb(55, 55, 60);
+    --text-muted: rgb(120, 118, 112);
+    --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-body);
+    background: var(--cream);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── SKIP NAV (Accessibility) ─── */
+  .skip-nav {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--navy);
+    padding: 0.75rem 1.5rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    z-index: 200;
+    transition: top 0.2s ease;
+  }
+
+  .skip-nav:focus {
+    top: 1rem;
+    outline: 2px solid var(--navy);
+    outline-offset: 2px;
+  }
+
+  /* ─── FOCUS STATES (Accessibility) ─── */
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  /* ─── NOSCRIPT FALLBACK ─── */
+  noscript .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--navy);
+    overflow: hidden;
+  }
+
+  .hero-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(200, 164, 78, 0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(200, 164, 78, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(200, 164, 78, 0.03) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(12,18,35,0.4) 0%, transparent 40%, rgba(12,18,35,0.6) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 256px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 820px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(200, 164, 78, 0.3);
+    padding: 0.5rem 1.5rem;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    color: var(--off-white);
+    font-size: clamp(2.5rem, 6vw, 4.8rem);
+    letter-spacing: 5px;
+    line-height: 1.12;
+    margin-bottom: 0.15em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero-title .amp {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--gold);
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-title .action {
+    color: var(--gold);
+    position: relative;
+  }
+
+  .hero-title .action::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  .hero-divider {
+    width: 100px;
+    height: 1.5px;
+    background: var(--gold);
+    margin: 1.5rem auto;
+    opacity: 0;
+    animation: expandLine 0.6s ease 0.7s forwards;
+  }
+
+  .hero-tagline {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+    color: var(--warm-gray);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+
+  .hero-description {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: rgba(240, 239, 234, 0.6);
+    max-width: 560px;
+    margin: 0 auto 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.1s forwards;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.3s forwards;
+    flex-wrap: wrap;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--gold);
+    padding: 1rem 2.5rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .hero-cta:hover::before {
+    left: 100%;
+  }
+
+  .hero-cta:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(200, 164, 78, 0.3);
+  }
+
+  .hero-cta svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-cta:hover svg {
+    transform: translateX(3px);
+  }
+
+  .hero-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(240, 239, 234, 0.6);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    padding: 1rem 0.5rem;
+  }
+
+  .hero-cta-secondary:hover {
+    color: var(--gold);
+  }
+
+  .hero-cta-secondary svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-cta-secondary:hover svg {
+    transform: translateY(2px);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.6s forwards;
+  }
+
+  .scroll-indicator span {
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    margin: 0 auto;
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.25rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+  }
+
+  .nav.scrolled {
+    background: rgba(20, 30, 52, 0.97);
+    backdrop-filter: blur(12px);
+    padding: 0.8rem 3rem;
+    box-shadow: 0 2px 30px rgba(0,0,0,0.35);
+  }
+
+  .nav-logo {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--off-white);
+    text-decoration: none;
+    letter-spacing: 2px;
+    z-index: 101;
+  }
+
+  .nav-logo .amp {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 400;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(240, 239, 234, 0.65);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--off-white); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-subscribe {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--navy) !important;
+    background: var(--gold);
+    padding: 0.55rem 1.5rem;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+  }
+
+  .nav-subscribe::after { display: none !important; }
+  .nav-subscribe:hover {
+    background: var(--gold-light) !important;
+    color: var(--navy) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(200, 164, 78, 0.25);
+  }
+
+  /* Hamburger */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 101;
+    background: none;
+    border: none;
+    padding: 8px;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--off-white);
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  .nav-hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(4.5px, 4.5px);
+  }
+  .nav-hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(4.5px, -4.5px);
+  }
+
+  /* Mobile menu overlay */
+  .nav-mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 18, 35, 0.98);
+    z-index: 99;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .nav-mobile-overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .nav-mobile-overlay a {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.5rem;
+    color: var(--off-white);
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+  }
+
+  .nav-mobile-overlay a:hover {
+    color: var(--gold);
+  }
+
+  /* ─── OATH QUOTE ─── */
+  .oath-quote {
+    padding: 5.5rem 2rem;
+    background: var(--cream);
+    text-align: center;
+    position: relative;
+  }
+
+  .oath-quote::before,
+  .oath-quote::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 2.5rem;
+  }
+
+  .oath-quote::after {
+    margin: 2.5rem auto 0;
+  }
+
+  .oath-quote blockquote {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.1rem, 2.5vw, 1.55rem);
+    line-height: 1.7;
+    color: var(--text-dark);
+    max-width: 650px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .oath-quote blockquote .oath-word {
+    opacity: 0;
+    display: inline;
+    transition: opacity 0.4s ease;
+  }
+
+  .oath-quote blockquote .oath-word.visible {
+    opacity: 1;
+  }
+
+  .oath-quote cite {
+    font-family: 'Source Sans 3', sans-serif;
+    font-style: normal;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ─── SECTION DIVIDERS ─── */
+  .section-divider {
+    height: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-divider.cream-to-navy {
+    background: var(--cream);
+  }
+
+  .section-divider.cream-to-navy::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -5%;
+    width: 110%;
+    height: 100%;
+    background: var(--navy);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .section-divider.navy-to-cream {
+    background: var(--navy);
+  }
+
+  .section-divider.navy-to-cream::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -5%;
+    width: 110%;
+    height: 100%;
+    background: var(--cream);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .section-divider.navy-to-offwhite {
+    background: var(--navy);
+  }
+
+  .section-divider.navy-to-offwhite::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -5%;
+    width: 110%;
+    height: 100%;
+    background: var(--off-white);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  .section-divider.offwhite-to-navy {
+    background: var(--off-white);
+  }
+
+  .section-divider.offwhite-to-navy::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -5%;
+    width: 110%;
+    height: 100%;
+    background: var(--navy);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+
+  /* ─── MISSION SECTION ─── */
+  .mission {
+    padding: 7rem 2rem 5rem;
+    background: var(--cream);
+    position: relative;
+  }
+
+  .mission::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .mission-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .section-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .mission h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+  }
+
+  .mission h2 em {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .mission p {
+    font-size: 1.08rem;
+    line-height: 1.85;
+    color: var(--text-body);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    padding: 4rem 2rem;
+    background: var(--cream);
+    position: relative;
+  }
+
+  .stats-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    max-width: 500px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200, 164, 78, 0.3), transparent);
+  }
+
+  .stats-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .stat-item {
+    padding: 1.5rem;
+  }
+
+  .stat-number {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--gold);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 400;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ─── PILLARS ─── */
+  .pillars {
+    padding: 5rem 2rem 7rem;
+    background: var(--navy);
+    position: relative;
+  }
+
+  .pillars::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .pillars-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pillars .section-label {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .pillar {
+    padding: 3rem 2.5rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(200, 164, 78, 0.08);
+    transition: all 0.5s var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--transition-smooth);
+  }
+
+  .pillar:hover::before {
+    transform: scaleX(1);
+  }
+
+  .pillar:hover {
+    background: rgba(200, 164, 78, 0.05);
+    border-color: rgba(200, 164, 78, 0.18);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .pillar-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1.5rem;
+    color: var(--gold);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  .pillar:hover .pillar-icon {
+    opacity: 1;
+  }
+
+  .pillar-number {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: rgba(200, 164, 78, 0.12);
+    margin-bottom: 1.5rem;
+    line-height: 1;
+    transition: color 0.3s ease;
+  }
+
+  .pillar:hover .pillar-number {
+    color: rgba(200, 164, 78, 0.22);
+  }
+
+  .pillar h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--off-white);
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .pillar p {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(240, 239, 234, 0.55);
+    transition: color 0.3s ease;
+  }
+
+  .pillar:hover p {
+    color: rgba(240, 239, 234, 0.72);
+  }
+
+  /* ─── ABOUT / AUTHOR ─── */
+  .about {
+    padding: 7rem 2rem;
+    background: var(--cream);
+  }
+
+  .about-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-photo {
+    position: relative;
+  }
+
+  .about-photo-frame {
+    aspect-ratio: 3/4;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .about-photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(200, 164, 78, 0.1) 0%, transparent 50%),
+      linear-gradient(to bottom, transparent 60%, rgba(20, 30, 52, 0.8) 100%);
+    z-index: 1;
+  }
+
+  .about-photo-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .about-photo-placeholder svg {
+    width: 48px;
+    height: 48px;
+    opacity: 0.15;
+    fill: var(--off-white);
+  }
+
+  .about-photo-placeholder span {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(240, 239, 234, 0.2);
+  }
+
+  .about-photo-accent {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--gold);
+    opacity: 0.2;
+    pointer-events: none;
+    transition: all 0.5s ease;
+  }
+
+  .about-photo:hover .about-photo-accent {
+    top: -8px;
+    right: -8px;
+    opacity: 0.35;
+  }
+
+  .about-content .section-label {
+    margin-bottom: 1.5rem;
+  }
+
+  .about-content h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .about-content p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text-body);
+    margin-bottom: 1.25rem;
+  }
+
+  .about-content .about-motto {
+    color: var(--text-muted);
+    font-style: italic;
+    font-family: 'Lora', serif;
+  }
+
+  .about-credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  .credential-tag {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-dim);
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(200, 164, 78, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  .credential-tag:hover {
+    background: rgba(200, 164, 78, 0.22);
+    border-color: rgba(200, 164, 78, 0.3);
+  }
+
+  /* ─── LATEST POSTS ─── */
+  .latest {
+    padding: 5rem 2rem 7rem;
+    background: var(--off-white);
+  }
+
+  .latest-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .latest .section-label {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .post-card {
+    display: block;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-card:first-of-type {
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .post-card:hover {
+    padding-left: 1.5rem;
+  }
+
+  .post-card::after {
+    content: '\2192';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) translateX(-10px);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .post-card:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-date {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .post-tag {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-dim);
+    padding: 0.2rem 0.6rem;
+  }
+
+  .post-title {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+  }
+
+  .post-card:hover .post-title {
+    color: var(--gold);
+  }
+
+  .post-excerpt {
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    max-width: 620px;
+  }
+
+  /* ─── SUBSCRIBE / CTA ─── */
+  .subscribe {
+    padding: 7rem 2rem;
+    background: var(--navy);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .subscribe::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 50% 50% at 50% 50%, rgba(200, 164, 78, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .subscribe-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .subscribe h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    color: var(--off-white);
+    margin-bottom: 1.25rem;
+    line-height: 1.3;
+  }
+
+  .subscribe-description {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: rgba(240, 239, 234, 0.55);
+    margin-bottom: 2.5rem;
+  }
+
+  .subscribe-form {
+    display: flex;
+    max-width: 460px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  .subscribe-form input[type="email"] {
+    flex: 1;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    padding: 1rem 1.25rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(200, 164, 78, 0.2);
+    border-right: none;
+    color: var(--off-white);
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .subscribe-form input[type="email"]::placeholder {
+    color: rgba(240, 239, 234, 0.3);
+  }
+
+  .subscribe-form input[type="email"]:focus {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--gold);
+  }
+
+  .subscribe-form input[type="email"]:invalid:not(:placeholder-shown) {
+    border-color: rgb(192, 64, 64);
+  }
+
+  .subscribe-form button[type="submit"] {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .subscribe-form button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .subscribe-form button[type="submit"]:hover::before {
+    left: 100%;
+  }
+
+  .subscribe-form button[type="submit"]:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+  }
+
+  .subscribe-success {
+    display: none;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-top: 1.25rem;
+  }
+
+  .subscribe-success.visible {
+    display: block;
+  }
+
+  .subscribe-note {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(240, 239, 234, 0.3);
+    margin-top: 1.25rem;
+  }
+
+  .subscribe-social {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(200, 164, 78, 0.1);
+  }
+
+  .subscribe-social a {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(240, 239, 234, 0.35);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .subscribe-social a:hover {
+    color: var(--gold);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 3.5rem 2rem;
+    background: var(--navy-deep);
+    text-align: center;
+    position: relative;
+  }
+
+  footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    max-width: 400px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200, 164, 78, 0.15), transparent);
+  }
+
+  .footer-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .footer-logo {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--off-white);
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .footer-logo .amp {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--gold);
+  }
+
+  .footer-text {
+    font-size: 0.78rem;
+    color: rgba(240, 239, 234, 0.25);
+    line-height: 1.6;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(240, 239, 234, 0.3);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-copyright {
+    font-size: 0.7rem;
+    color: rgba(240, 239, 234, 0.15);
+    margin-top: 2rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes expandLine {
+    from { opacity: 0; width: 0; }
+    to { opacity: 1; width: 100px; }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s var(--transition-smooth);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+
+  /* ─── REDUCED MOTION ─── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    html { scroll-behavior: auto; }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .hero-badge,
+    .hero-title,
+    .hero-divider,
+    .hero-tagline,
+    .hero-description,
+    .hero-cta-group,
+    .scroll-indicator {
+      opacity: 1;
+      animation: none;
+    }
+
+    .oath-quote blockquote .oath-word {
+      opacity: 1;
+    }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .nav { padding: 1rem 1.5rem; }
+    .nav.scrolled { padding: 0.7rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .about-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .about-photo {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .stats-inner {
+      gap: 1rem;
+    }
+    .stat-number {
+      font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero-content { padding: 1.5rem; }
+    .hero-cta-group { flex-direction: column; gap: 0.75rem; }
+    .subscribe-form { flex-direction: column; }
+    .subscribe-form input[type="email"] {
+      border-right: 1px solid rgba(200, 164, 78, 0.2);
+    }
+    .pillar { padding: 2rem 1.5rem; }
+    .about-credentials { justify-content: center; }
+    .stats-inner { grid-template-columns: 1fr; gap: 0; }
+    .stat-item { padding: 1rem 1.5rem; }
+    .stat-item:not(:last-child) { border-bottom: 1px solid rgba(200, 164, 78, 0.1); }
+    .post-card::after { display: none; }
+    .subscribe-social { flex-direction: column; gap: 1rem; }
+    .section-divider { height: 50px; }
+  }
+
+  /* ─── PRINT ─── */
+  @media print {
+    .nav, .hero-stars, .scroll-indicator, .section-divider,
+    .subscribe, .nav-mobile-overlay, .nav-hamburger { display: none !important; }
+
+    body { background: white; color: black; }
+
+    .hero {
+      min-height: auto;
+      background: white;
+      padding: 2rem;
+    }
+
+    .hero-content * { color: black !important; opacity: 1 !important; animation: none !important; }
+    .hero-title { font-size: 2rem; }
+    .hero-title .amp, .hero-title .action { color: #333 !important; }
+
+    .reveal { opacity: 1 !important; transform: none !important; }
+
+    .pillars { background: white; }
+    .pillar { background: white; border: 1px solid #ddd; }
+    .pillar h3, .pillar p { color: black !important; }
+    .pillar-number { color: #999 !important; }
+
+    section { padding: 2rem 1rem !important; }
+    footer { background: white; }
+    footer * { color: #666 !important; }
+  }
 </style>
 </head>
 <body>
 
+<!-- SKIP NAV -->
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
 <!-- NAV -->
-<nav class="nav" id="nav">
-  <a href="#" class="nav-logo">Oath <span class="amp">&amp;</span> Action</a>
+<nav class="nav" id="nav" aria-label="Main navigation">
+  <a href="#" class="nav-logo">OATH <span class="amp">&amp;</span> ACTION</a>
   <ul class="nav-links">
-    <li><a href="#pillars">Pillars</a></li>
-    <li><a href="#threats">Threats</a></li>
-    <li><a href="#solutions">Solutions</a></li>
-    <li><a href="#reforms">Reforms</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#pillars">What We Cover</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#latest">Read</a></li>
+    <li><a href="#subscribe" class="nav-subscribe">Subscribe</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile overlay -->
+<div class="nav-mobile-overlay" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <a href="#mission" class="mobile-link">Mission</a>
+  <a href="#pillars" class="mobile-link">What We Cover</a>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#latest" class="mobile-link">Read</a>
+  <a href="#subscribe" class="mobile-link" style="color: var(--gold);">Subscribe</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
-  <canvas class="hero-stars" id="starCanvas"></canvas>
+  <canvas class="hero-stars" id="starCanvas" aria-hidden="true"></canvas>
   <div class="hero-content">
-    <div class="hero-badge">Democracy Health Monitor</div>
-    <h1 class="hero-title">
-      The State of<br><span class="gold">American Democracy</span>
-    </h1>
-    <div class="hero-divider"></div>
-    <p class="hero-tagline">An interactive assessment of democracy's vital signs</p>
+    <div class="hero-badge">A Nonpartisan Newsletter on Democracy Reform</div>
+    <h1 class="hero-title">OATH <span class="amp">&amp;</span> <span class="action">ACTION</span></h1>
+    <div class="hero-divider" aria-hidden="true"></div>
+    <p class="hero-tagline">Fighting for the republic we were promised.</p>
     <p class="hero-description">
-      Democracy is not a destination — it's a practice. Explore the pillars that sustain it, 
-      the threats eroding it, and the reforms that could restore it.
+      Ranked choice voting. Open primaries. The structural fixes that put voters back in charge. Written by a combat veteran who swore an oath and meant it.
     </p>
     <div class="hero-cta-group">
-      <a href="#pillars" class="btn-gold">Explore the Data ↓</a>
-      <a href="#threats" class="btn-outline">View Threats</a>
+      <a href="#subscribe" class="hero-cta">
+        Join the Formation
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#mission" class="hero-cta-secondary">
+        Learn more
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
     </div>
   </div>
-  <div class="scroll-indicator">
-    <span>Scroll</span>
-    <span class="scroll-line"></span>
+  <div class="scroll-indicator" aria-hidden="true"><span></span></div>
+</section>
+
+<main id="main-content">
+
+<!-- OATH QUOTE -->
+<section class="oath-quote" aria-label="The oath">
+  <blockquote class="reveal" id="oathQuote">
+    "I do solemnly swear that I will support and defend the Constitution of the United States against all enemies, foreign and domestic."
+  </blockquote>
+  <cite class="reveal reveal-delay-1">&mdash; The Oath of Commissioned Officers, U.S. Armed Forces</cite>
+</section>
+
+<!-- MISSION -->
+<section class="mission" id="mission">
+  <div class="mission-inner">
+    <div class="section-label reveal">The Mission</div>
+    <h2 class="reveal">Our democracy is broken &mdash; not because Americans disagree, but because the <em>system</em> rewards division over solutions. Oath &amp; Action is about fixing the machine, not picking a side.</h2>
+    <p class="reveal">Every issue explores the structural reforms &mdash; ranked choice voting, open primaries, independent redistricting &mdash; that can return power to voters and break the stranglehold of partisan extremes. No party. Just country.</p>
   </div>
 </section>
 
-<!-- OVERALL HEALTH GAUGE -->
-<section class="health-meter-section" id="health-meter">
-  <div class="section-container">
-    <div class="section-header">
-      <span class="section-label">Overall Assessment</span>
-      <h2 class="section-title" style="color: var(--off-white);">Democracy Health Score</h2>
-      <p class="section-intro">A composite index across seven core pillars of democratic health</p>
+<!-- STATS -->
+<section class="stats-bar" aria-label="Key statistics">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-number" data-target="50" data-suffix="%+" aria-label="Over 50 percent">0%</div>
+      <div class="stat-label">of Americans identify as<br>moderates or independents</div>
     </div>
-
-    <div class="gauge-wrapper" id="gauge-wrapper">
-      <div class="gauge-container">
-        <svg class="gauge-svg" viewBox="0 0 320 180">
-          <!-- Background arc -->
-          <path d="M 30 160 A 130 130 0 0 1 290 160" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="18" stroke-linecap="round"/>
-          <!-- Score segments -->
-          <path d="M 30 160 A 130 130 0 0 1 80 55" fill="none" stroke="rgba(192,64,64,0.6)" stroke-width="18" stroke-linecap="butt"/>
-          <path d="M 80 55 A 130 130 0 0 1 180 22" fill="none" stroke="rgba(210,140,40,0.6)" stroke-width="18" stroke-linecap="butt"/>
-          <path d="M 180 22 A 130 130 0 0 1 290 160" fill="none" stroke="rgba(72,140,96,0.6)" stroke-width="18" stroke-linecap="butt"/>
-          <!-- Progress arc (animated) -->
-          <path id="gaugeProgress" d="M 30 160 A 130 130 0 0 1 290 160" fill="none" 
-                stroke="url(#gaugeGrad)" stroke-width="6" stroke-linecap="round"
-                stroke-dasharray="408" stroke-dashoffset="408"
-                style="transition: stroke-dashoffset 2s var(--transition-smooth) 0.5s;"/>
-          <!-- Needle -->
-          <g id="gaugeNeedle" style="transform-origin: 160px 160px; transform: rotate(-90deg); transition: transform 2s var(--transition-smooth) 0.5s;">
-            <line x1="160" y1="160" x2="160" y2="50" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="160" cy="160" r="6" fill="var(--gold)"/>
-            <circle cx="160" cy="160" r="3" fill="var(--navy-deep)"/>
-          </g>
-          <!-- Labels -->
-          <text x="22" y="175" class="gauge-sublabel" font-size="9">CRITICAL</text>
-          <text x="280" y="175" class="gauge-sublabel" font-size="9" text-anchor="end">HEALTHY</text>
-          <!-- Center text -->
-          <text x="160" y="145" class="gauge-label" id="gaugeNum">--</text>
-          <text x="160" y="162" class="gauge-sublabel">/100</text>
-          <defs>
-            <linearGradient id="gaugeGrad" gradientUnits="userSpaceOnUse" x1="30" y1="160" x2="290" y2="160">
-              <stop offset="0%" stop-color="var(--red-warn)"/>
-              <stop offset="50%" stop-color="var(--amber)"/>
-              <stop offset="100%" stop-color="var(--green-good)"/>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-      <p class="gauge-status" id="gaugeStatus">Loading assessment…</p>
-      <p class="gauge-note">Score synthesizes political scientists' assessments, V-Dem indicators, Freedom House rankings, and independent research. This is a qualitative tool for civic education.</p>
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-number" data-target="83" data-suffix="%" aria-label="83 percent">0%</div>
+      <div class="stat-label">say the political system<br>needs major changes</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-number" data-target="10" data-suffix="%" aria-label="10 percent">0%</div>
+      <div class="stat-label">of voters decide<br>90% of elections in primaries</div>
     </div>
   </div>
 </section>
+
+<!-- DIVIDER -->
+<div class="section-divider cream-to-navy" aria-hidden="true"></div>
 
 <!-- PILLARS -->
-<section class="pillars-section" id="pillars">
-  <div class="section-container">
-    <div class="section-header" style="color: var(--text-dark);">
-      <span class="section-label" style="color: var(--navy);">Seven Pillars</span>
-      <h2 class="section-title" style="color: var(--text-dark);">What Democracy Requires</h2>
-      <p class="section-intro" style="color: var(--text-muted);">Click any pillar to explore indicators, warning signs, and current U.S. status</p>
-    </div>
-
-    <div class="pillars-grid" id="pillarsGrid">
-      <!-- Populated by JS -->
-    </div>
-  </div>
-</section>
-
-<!-- THREATS SECTION -->
-<section class="threats-section" id="threats">
-  <div class="section-container">
-    <div class="section-header">
-      <span class="section-label">Active Threats</span>
-      <h2 class="section-title" style="color: var(--off-white);">Warning Signs in American Democracy</h2>
-      <p class="section-intro">These are not hypothetical risks. They are documented, ongoing challenges requiring citizen attention.</p>
-    </div>
-
-    <div class="threats-grid" id="threatsGrid">
-      <!-- Populated by JS -->
+<section class="pillars" id="pillars">
+  <div class="pillars-inner">
+    <div class="section-label">What We Cover</div>
+    <div class="pillars-grid">
+      <div class="pillar reveal">
+        <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        <div class="pillar-number" aria-hidden="true">01</div>
+        <h3>Ranked Choice Voting</h3>
+        <p>How RCV eliminates the spoiler effect, rewards coalition-building, and lets you vote your conscience without wasting your vote. State-by-state progress, research, and the fights ahead.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-1">
+        <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        <div class="pillar-number" aria-hidden="true">02</div>
+        <h3>Open Primaries</h3>
+        <p>Why closed primaries disenfranchise millions of independent voters and produce candidates who answer to their base instead of their constituents. The case for opening the door.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="pillar-number" aria-hidden="true">03</div>
+        <h3>Veteran-Led Advocacy</h3>
+        <p>Veterans swore an oath to the Constitution, not a party. How former service members are leading the charge for nonpartisan reform &mdash; and why their credibility changes the conversation.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SOLUTIONS TIMELINE -->
-<section class="solutions-section" id="solutions">
-  <div class="section-container">
-    <div class="section-header" style="color: var(--text-dark);">
-      <span class="section-label" style="color: var(--navy);">What Must Change</span>
-      <h2 class="section-title" style="color: var(--text-dark);">Structural Reforms That Work</h2>
-      <p class="section-intro" style="color: var(--text-muted);">Evidence-based changes that strengthen democratic institutions and voter representation</p>
-    </div>
+<!-- DIVIDER -->
+<div class="section-divider navy-to-cream" aria-hidden="true"></div>
 
-    <div class="timeline" id="solutionsTimeline">
-      <!-- Populated by JS -->
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-photo reveal">
+      <div class="about-photo-frame">
+        <div class="about-photo-placeholder">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Author Photo</span>
+        </div>
+      </div>
+      <div class="about-photo-accent" aria-hidden="true"></div>
+    </div>
+    <div class="about-content">
+      <div class="section-label reveal">About the Author</div>
+      <h2 class="reveal">Dustin Cathcart</h2>
+      <p class="reveal">I led soldiers in Iraq, earned a Bronze Star, then got an MBA from Dartmouth and an MPA from Harvard. I built a business, raised two daughters with my wife in Massachusetts &mdash; and somewhere along the way realized the system we all swore to defend wasn't defending us back.</p>
+      <p class="reveal">Now I'm an entrepreneur turned democracy advocate, serving as Massachusetts State Lead for Veterans for All Voters. I write this newsletter because I want my girls to grow up in a country where your vote actually matters.</p>
+      <p class="reveal about-motto">No party. Just country.</p>
+      <div class="about-credentials reveal" aria-label="Credentials">
+        <span class="credential-tag">Iraq Combat Veteran</span>
+        <span class="credential-tag">Bronze Star Recipient</span>
+        <span class="credential-tag">Dartmouth Tuck MBA</span>
+        <span class="credential-tag">Harvard Kennedy MPA</span>
+        <span class="credential-tag">Veterans for All Voters</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- REFORM SPOTLIGHT -->
-<section class="reforms-section" id="reforms">
-  <div class="section-container">
-    <div class="section-header">
-      <span class="section-label">Reform Spotlight</span>
-      <h2 class="section-title" style="color: var(--off-white);">Deep Dives on Priority Reforms</h2>
-    </div>
+<!-- DIVIDER -->
+<div class="section-divider" style="height:0" aria-hidden="true"></div>
 
-    <div class="reform-tabs" id="reformTabs">
-      <!-- Populated by JS -->
-    </div>
+<!-- LATEST POSTS -->
+<section class="latest" id="latest">
+  <div class="latest-inner">
+    <div class="section-label">Latest Issues</div>
+    <a href="#" class="post-card reveal">
+      <div class="post-meta">
+        <span class="post-date">March 2026</span>
+        <span class="post-tag">Personal</span>
+      </div>
+      <div class="post-title">Why I Started This</div>
+      <div class="post-excerpt">I didn't leave the Army to become a political activist. But after watching our democracy get hijacked by a system designed to reward extremes, staying quiet felt like breaking the oath I took.</div>
+    </a>
+    <a href="#" class="post-card reveal reveal-delay-1">
+      <div class="post-meta">
+        <span class="post-date">March 2026</span>
+        <span class="post-tag">Policy</span>
+      </div>
+      <div class="post-title">Massachusetts Has a Chance to Lead &mdash; Again</div>
+      <div class="post-excerpt">Senate Bill S.531 could bring ranked choice voting to the Commonwealth. Here's what's in it, who's fighting it, and what you can do about it before the hearing.</div>
+    </a>
+    <a href="#" class="post-card reveal reveal-delay-2">
+      <div class="post-meta">
+        <span class="post-date">March 2026</span>
+        <span class="post-tag">Advocacy</span>
+      </div>
+      <div class="post-title">The Veteran Advantage: Why We're the Messengers Reform Needs</div>
+      <div class="post-excerpt">When a decorated combat veteran tells a room full of legislators that the system is broken, they listen differently. Here's how veteran-led advocacy is changing the game.</div>
+    </a>
+  </div>
+</section>
 
-    <div id="reformPanels">
-      <!-- Populated by JS -->
+<!-- DIVIDER -->
+<div class="section-divider offwhite-to-navy" aria-hidden="true"></div>
+
+<!-- SUBSCRIBE CTA -->
+<section class="subscribe" id="subscribe">
+  <div class="subscribe-inner">
+    <h2 class="reveal">Join the Formation</h2>
+    <p class="reveal subscribe-description">A free newsletter on the structural reforms that can fix American democracy. Written by a combat veteran, dad, and citizen who swore an oath and meant it. Delivered to your inbox.</p>
+    <form class="subscribe-form reveal" id="subscribeForm" action="#" method="post" novalidate>
+      <input type="email" name="email" placeholder="Your email address" aria-label="Email address for newsletter subscription" required autocomplete="email">
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="subscribe-success" id="subscribeSuccess" role="status">Thank you for subscribing! Check your inbox to confirm.</p>
+    <p class="subscribe-note reveal">Free. No spam. Unsubscribe anytime.</p>
+    <div class="subscribe-social reveal">
+      <a href="#" rel="noopener noreferrer">Substack</a>
+      <a href="#" rel="noopener noreferrer">LinkedIn</a>
+      <a href="#" rel="noopener noreferrer">Veterans for All Voters</a>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="section-container" style="position: relative; z-index: 1;">
-    <div class="section-header">
-      <span class="section-label">Get Involved</span>
-      <h2 class="section-title" style="color: var(--off-white);">Democracy Needs Your Voice</h2>
-      <p class="section-intro">
-        Veterans, citizens, and neighbors — join the effort to modernize elections and protect the republic we were promised.
-      </p>
-    </div>
-    <div class="hero-cta-group" style="opacity: 1; animation: none;">
-      <a href="https://oathandaction.substack.com" class="btn-gold" target="_blank">Read Oath &amp; Action</a>
-      <a href="https://veteransforallvoters.org" class="btn-outline" target="_blank">Join Veterans for All Voters</a>
-    </div>
-  </div>
-</section>
+</main>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <a href="#" class="footer-logo">Oath <span class="amp">&amp;</span> Action</a>
-  <span class="footer-copy">A civic education tool by Dustin Cathcart · Not affiliated with any party</span>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">OATH <span class="amp">&amp;</span> ACTION</div>
+    <p class="footer-text">A nonpartisan newsletter on democracy reform.<br>Written by Dustin Cathcart from Melrose, Massachusetts.</p>
+    <ul class="footer-links" aria-label="Footer navigation">
+      <li><a href="#" rel="noopener noreferrer">Substack</a></li>
+      <li><a href="#" rel="noopener noreferrer">Veterans for All Voters</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <p class="footer-copyright">&copy; 2026 Oath &amp; Action. All rights reserved.</p>
+  </div>
 </footer>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal" id="modal">
-    <div class="modal-header">
-      <div class="modal-title-group">
-        <span class="modal-label" id="modalLabel"></span>
-        <h3 class="modal-title" id="modalTitle"></h3>
-      </div>
-      <button class="modal-close" id="modalClose">✕</button>
-    </div>
-    <div class="modal-body" id="modalBody"></div>
-  </div>
-</div>
+<noscript>
+<style>
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .hero-badge, .hero-title, .hero-divider, .hero-tagline,
+  .hero-description, .hero-cta-group, .scroll-indicator { opacity: 1 !important; }
+  .oath-quote blockquote .oath-word { opacity: 1 !important; }
+  .stat-number[data-target="50"] { }
+  .stat-number[data-target="83"] { }
+  .stat-number[data-target="10"] { }
+</style>
+</noscript>
 
 <script>
-// DATA
+  // ─── Star Canvas Background ───
+  (function() {
+    const canvas = document.getElementById('starCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    let animId;
+    let isVisible = true;
 
-const PILLARS = [
-  {
-    id: 'elections',
-    icon: '\u{1F5F3}\uFE0F',
-    name: 'Free & Fair Elections',
-    status: 'warning',
-    score: 58,
-    description: 'The foundation of democracy: citizens choosing representatives through transparent, competitive, accessible elections.',
-    detail: {
-      label: 'Pillar 1 of 7',
-      overview: 'Elections are the core mechanism by which citizens exercise democratic authority. Free and fair elections require broad access, fair competition, transparent processes, and legitimate outcomes accepted by all parties.',
-      quote: 'The right to vote is the right preservative of all other rights. Without it, all others are hollow.',
-      healthy: ['Secret ballot protected and enforced', 'Independent election administration', 'Competitive multi-party contests', 'High and equal voter participation'],
-      warning: ['Voter ID laws that suppress minority turnout without fraud evidence', 'Gerrymandering that predetermines outcomes before votes are cast', 'Partisan control of election certification', 'Widespread false claims of fraud without evidence'],
-      critical: ['Refusal to accept legitimate election results', 'Intimidation of election officials', 'Legal schemes to override certified results'],
+    function resize() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      initStars();
     }
-  },
-  {
-    id: 'rule-of-law',
-    icon: '\u2696\uFE0F',
-    name: 'Rule of Law',
-    status: 'warning',
-    score: 55,
-    description: 'No person is above the law. Government operates within legal constraints and courts remain independent.',
-    detail: {
-      label: 'Pillar 2 of 7',
-      overview: 'Rule of law means that legal rules apply equally to everyone, including those in power. Courts must be independent, laws must be clear and stable, and no one \u2014 not even the president \u2014 is exempt from accountability.',
-      quote: 'The laws of a nation form the most instructive portion of its history. \u2014 Alexis de Tocqueville',
-      healthy: ['Independent judiciary insulated from political pressure', 'Equal application of law regardless of status', 'Transparent, accountable law enforcement', 'Peaceful transition of power under legal frameworks'],
-      warning: ['Executive pressure on prosecutors and judges', 'Selective enforcement targeting political opponents', 'Presidential pardons used to shield allies', 'Claims of absolute or near-unlimited executive immunity'],
-      critical: ['Refusal to comply with court orders', 'Dismantling of independent law enforcement oversight', 'Prosecution of political opponents on pretextual charges'],
-    }
-  },
-  {
-    id: 'civil-liberties',
-    icon: '\u{1F5FD}',
-    name: 'Civil Liberties',
-    status: 'warning',
-    score: 65,
-    description: 'Freedom of speech, press, assembly, and religion \u2014 the rights that allow democracy to self-correct.',
-    detail: {
-      label: 'Pillar 3 of 7',
-      overview: 'Civil liberties are the guardrails that allow citizens to hold government accountable. A free press investigates power. Free speech allows dissent. Freedom of assembly lets citizens organize. Without these, democratic self-correction becomes impossible.',
-      quote: 'Freedom of the press is not just important to democracy, it is democracy. \u2014 Walter Cronkite',
-      healthy: ['Robust, independent press with legal protections', 'Strong free speech protections including dissent', 'Protected right to peaceful protest', 'Religious pluralism and freedom of conscience'],
-      warning: ['Concentrated media ownership undermining editorial independence', 'Government labeling of journalists as "enemies"', 'Chilling effect on speech through litigation threats', 'Surveillance programs expanding beyond legal authority'],
-      critical: ['Physical targeting of journalists', 'Criminalization of protected speech or assembly', 'Government control of media messaging'],
-    }
-  },
-  {
-    id: 'checks-balances',
-    icon: '\u{1F3DB}\uFE0F',
-    name: 'Checks & Balances',
-    status: 'critical',
-    score: 42,
-    description: 'Separation of powers, congressional oversight, judicial review \u2014 the system designed to prevent any single actor from seizing control.',
-    detail: {
-      label: 'Pillar 4 of 7',
-      overview: 'The Founders built a government of competing powers deliberately. Congress legislates and checks the executive. Courts interpret and limit both. States check the federal government. This system was designed to fail slowly, allowing correction before catastrophe.',
-      quote: 'Ambition must be made to counteract ambition. \u2014 James Madison, Federalist No. 51',
-      healthy: ['Congress actively exercises oversight authority', 'Courts regularly constrain executive overreach', 'Independent agencies function free of direct political control', 'Norms and laws both constrain executive power'],
-      warning: ['Congressional deference enabling executive power accumulation', 'Politicization of inspectors general and watchdog offices', 'Use of executive orders to circumvent legislative process', 'Courts packed with ideologically vetted judges on fast timelines'],
-      critical: ['Impoundment of congressionally appropriated funds', 'Defiance of congressional subpoenas without legal challenge', 'Removal of inspectors general en masse', 'Assertion that one branch may act unilaterally without review'],
-    }
-  },
-  {
-    id: 'civic-participation',
-    icon: '\u{1F91D}',
-    name: 'Civic Participation',
-    status: 'warning',
-    score: 52,
-    description: 'An informed, engaged citizenry that participates in democratic life beyond just voting every four years.',
-    detail: {
-      label: 'Pillar 5 of 7',
-      overview: 'Democracy requires active citizens \u2014 people who vote, organize, deliberate, and hold leaders accountable. Low turnout, civic disengagement, and political polarization are not just symptoms; they are threats that weaken democratic resilience.',
-      quote: 'The ballot is stronger than the bullet. \u2014 Abraham Lincoln',
-      healthy: ['High and broadly representative voter turnout', 'Trust in democratic institutions above crisis threshold', 'Cross-partisan civic organizations and deliberation', 'Robust local government engagement'],
-      warning: ['Widening partisan polarization and social sorting', 'Declining trust in elections, courts, and media', 'Youth disengagement from civic life', 'Winner-take-all voting discouraging participation'],
-      critical: ['Widespread belief that elections cannot change outcomes', 'Violence as a substitute for democratic contestation', 'Mass rejection of political legitimacy by large groups'],
-    }
-  },
-  {
-    id: 'independent-institutions',
-    icon: '\u{1F3D7}\uFE0F',
-    name: 'Independent Institutions',
-    status: 'critical',
-    score: 38,
-    description: 'Bureaucracies, agencies, and civil service that operate on law and expertise, not personal loyalty to leaders.',
-    detail: {
-      label: 'Pillar 6 of 7',
-      overview: 'Democratic governance requires professional institutions \u2014 civil servants, regulators, military officers, and agency staff \u2014 who serve the rule of law rather than the person currently in power. The erosion of institutional independence is a hallmark of democratic backsliding worldwide.',
-      quote: 'Institutions are the structures and mechanisms of social order governing the behavior of a set of individuals within a given community.',
-      healthy: ['Professional civil service protected from political dismissal', 'Military under civilian authority without political roles', 'Independent regulatory agencies free from White House directives', 'Academic and scientific institutions free from political pressure'],
-      warning: ['Mass firing of career civil servants and replacement with political loyalists', 'Use of military or National Guard for domestic political purposes', 'Political interference in regulatory decision-making', 'Attacks on university research and academic independence'],
-      critical: ['Abolition of merit-based civil service protections', 'Requiring personal loyalty oaths to an individual rather than the Constitution', 'Deployment of military against civilian protests', 'Elimination of independent watchdog bodies'],
-    }
-  },
-  {
-    id: 'peaceful-transfer',
-    icon: '\u{1F54A}\uFE0F',
-    name: 'Peaceful Transfer of Power',
-    status: 'critical',
-    score: 45,
-    description: 'The democratic norm above all others: losers accept results, winners respect limits, and power changes hands without violence.',
-    detail: {
-      label: 'Pillar 7 of 7',
-      overview: 'Perhaps no norm is more essential to democracy than the peaceful transfer of power. It is so fundamental that we rarely examine it \u2014 until it fails. January 6, 2021 was the first time in American history that this norm was violated. The rupture revealed that norms alone are insufficient without legal enforcement.',
-      quote: 'What distinguishes a democracy from other systems of governance is not just who votes, but whether those who lose power actually give it up.',
-      healthy: ['Incumbent accepts and certifies election results regardless of outcome', 'Transition process is cooperative, transparent, and institution-preserving', 'No violence associated with transfer of power', 'Losing party continues as loyal democratic opposition'],
-      warning: ['Contested certification processes', 'Slowdown or obstruction of transition protocols', 'Rhetoric delegitimizing future election results in advance', 'Continued false claims of stolen elections years after resolution'],
-      critical: ['Coordinated effort to overturn a legitimate election', 'Violence targeting election officials or legislators', 'Legal schemes to appoint alternative slates of electors', 'Refusal by incumbent or allies to acknowledge defeat'],
-    }
-  },
-];
 
-const THREATS = [
-  {
-    icon: '\u{1F5FA}\uFE0F',
-    title: 'Gerrymandering Locks In Minority Rule',
-    severity: 'critical',
-    excerpt: 'In states where one party controls redistricting, districts are drawn to guarantee outcomes regardless of vote share \u2014 making elections a formality rather than a choice.',
-    detail: {
-      overview: 'Partisan gerrymandering has become so sophisticated \u2014 using voter data at the census block level \u2014 that mapmakers can reliably predict outcomes years in advance. In Wisconsin in 2018, Democrats won 54% of the state assembly vote but only 36% of seats. This is not representative democracy.',
-      indicators: [
-        { type: 'red', text: 'Efficiency gaps of 10\u201315% in key swing states favor one party by structural design' },
-        { type: 'red', text: 'Alabama and Louisiana redistricting cases showed courts struggling to police racial gerrymandering' },
-        { type: 'gold', text: 'Independent redistricting commissions in California and Michigan have produced fairer maps' },
-        { type: 'green', text: "Alaska and Maine's ranked choice voting makes gerrymandering less effective" },
-      ]
+    function initStars() {
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 8000);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.2 + 0.3,
+          phase: Math.random() * Math.PI * 2,
+          twinkleSpeed: Math.random() * 0.02 + 0.005
+        });
+      }
     }
-  },
-  {
-    icon: '\u{1F4B0}',
-    title: 'Dark Money Has Captured Democratic Politics',
-    severity: 'critical',
-    excerpt: 'After Citizens United, billions in anonymous money flow into elections with no disclosure. Voters cannot know who is funding the campaigns trying to influence them.',
-    detail: {
-      overview: "The Supreme Court's 2010 Citizens United decision opened the floodgates for unlimited corporate political spending. Combined with 501(c)(4) \"social welfare\" organizations that can spend on elections without donor disclosure, American campaigns are now saturated with money that cannot be traced to its source.",
-      indicators: [
-        { type: 'red', text: '$1.5+ billion in dark money spent in 2020 election cycle \u2014 triple the 2016 total' },
-        { type: 'red', text: 'Super PACs allow billionaires to spend unlimited amounts coordinating closely with campaigns' },
-        { type: 'gold', text: 'DISCLOSE Act would require disclosure of donors above $10,000 \u2014 stalled repeatedly in Senate' },
-        { type: 'green', text: 'State-level disclosure laws in 26 states provide more transparency than federal law' },
-      ]
+
+    function draw() {
+      if (!isVisible) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const goldR = 200, goldG = 164, goldB = 78;
+      const whiteR = 220, whiteG = 218, whiteB = 215;
+
+      for (let i = 0; i < stars.length; i++) {
+        const star = stars[i];
+        star.phase += star.twinkleSpeed;
+        const brightness = 0.15 + Math.sin(star.phase) * 0.15 + 0.15;
+        const isGold = star.r > 1;
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fillStyle = isGold
+          ? 'rgba(' + goldR + ',' + goldG + ',' + goldB + ',' + brightness + ')'
+          : 'rgba(' + whiteR + ',' + whiteG + ',' + whiteB + ',' + brightness + ')';
+        ctx.fill();
+      }
+
+      animId = requestAnimationFrame(draw);
     }
-  },
-  {
-    icon: '\u{1F4F1}',
-    title: 'Disinformation Undermines Shared Reality',
-    severity: 'high',
-    excerpt: 'Social media algorithms optimized for engagement amplify outrage and falsehood. Without a shared factual basis, democratic deliberation becomes impossible.',
-    detail: {
-      overview: 'Democracy requires that citizens share a common understanding of basic facts even when they disagree on values and policy. When a significant portion of the electorate believes demonstrably false claims \u2014 about election fraud, vaccines, or political opponents \u2014 the deliberative process breaks down fundamentally.',
-      indicators: [
-        { type: 'red', text: 'Polling shows 60%+ of Republicans still believe 2020 election was stolen despite 60+ failed legal challenges' },
-        { type: 'red', text: 'Algorithm-driven media bubbles mean citizens increasingly consume incompatible information realities' },
-        { type: 'gold', text: 'Media literacy education is underfunded and not systematically taught in most school systems' },
-        { type: 'green', text: 'European countries with stronger media regulation show lower disinformation spread rates' },
-      ]
-    }
-  },
-  {
-    icon: '\u{1F4C9}',
-    title: 'Voter Turnout Remains Structurally Suppressed',
-    severity: 'high',
-    excerpt: 'Compared to peer democracies, American voter participation is persistently low \u2014 a structural outcome of registration barriers, limited voting windows, and polling place access.',
-    detail: {
-      overview: 'The United States ranks 31st among 35 OECD democracies in voter turnout. This is not a cultural inevitability \u2014 it is the result of specific policy choices: requiring voter registration separate from government processes, holding elections on a working Tuesday, limiting early voting, and closing polling places in minority-heavy areas.',
-      indicators: [
-        { type: 'red', text: '30+ states passed voting restrictions between 2020 and 2023, often targeting methods used by minority voters' },
-        { type: 'red', text: 'Polling place closures disproportionately affect Black and Latino communities' },
-        { type: 'gold', text: 'Automatic voter registration adopted in 21 states shows modest but real turnout increases' },
-        { type: 'green', text: '2020 saw record 66% turnout \u2014 highest in 120 years \u2014 showing suppression is not destiny' },
-      ]
-    }
-  },
-  {
-    icon: '\u{1F3DB}\uFE0F',
-    title: 'Senate Malapportionment Distorts Representation',
-    severity: 'high',
-    excerpt: "Wyoming's 580,000 residents get the same Senate representation as California's 39 million. Two senators from Wyoming have 68x the per-capita power of California senators.",
-    detail: {
-      overview: 'The constitutional structure of the Senate \u2014 two senators per state regardless of population \u2014 was a compromise for a different era. Today, it produces systematic over-representation of rural, predominantly white, conservative states and under-representation of urban, diverse, and more populous states. This structural bias increasingly determines which party controls government.',
-      indicators: [
-        { type: 'red', text: 'The Senate majority often represents fewer total voters than the Senate minority' },
-        { type: 'red', text: '50 Republican senators can represent 40M fewer Americans than 50 Democratic senators' },
-        { type: 'gold', text: 'DC and Puerto Rico statehood would add more representative balance \u2014 blocked repeatedly' },
-        { type: 'green', text: 'Senate filibuster reform could at minimum allow majority will to govern on basic legislation' },
-      ]
-    }
-  },
-  {
-    icon: '\u2696\uFE0F',
-    title: 'Politicized Courts Threaten Independent Judiciary',
-    severity: 'critical',
-    excerpt: "The Supreme Court's conservative supermajority was achieved through norm-breaking \u2014 a stolen seat and rushed confirmation \u2014 raising legitimacy questions that won't go away.",
-    detail: {
-      overview: "An independent judiciary is essential to democracy. When courts are seen as \u2014 or actually function as \u2014 extensions of partisan political agendas, they lose their legitimating role. The Senate's refusal to hold hearings for Merrick Garland (2016) and rushed confirmation of Amy Coney Barrett eight days before an election broke longstanding norms with lasting consequences.",
-      indicators: [
-        { type: 'red', text: 'Supreme Court approval ratings hit historic lows following Dobbs and ethics revelations' },
-        { type: 'red', text: 'No binding ethics code governed Supreme Court justices until 2023 \u2014 and enforcement remains weak' },
-        { type: 'gold', text: 'Term limits and ethics reform legislation has bipartisan public support but not Senate majority' },
-        { type: 'green', text: 'Lower courts have regularly checked executive overreach, demonstrating institutional resilience' },
-      ]
-    }
-  },
-  {
-    icon: '\u{1F512}',
-    title: 'Executive Power Is Accumulating Unchecked',
-    severity: 'critical',
-    excerpt: 'Claims of near-unlimited executive authority, the gutting of inspectors general, and impoundment of congressional appropriations represent an unprecedented consolidation of power.',
-    detail: {
-      overview: 'The presidency has been expanding in power for decades, but recent years have seen claims of executive authority that go far beyond historical precedent. When a president asserts immunity from criminal prosecution, fires independent watchdogs, refuses congressional oversight, and impounds congressionally appropriated funds, the constitutional balance is in serious jeopardy.',
-      indicators: [
-        { type: 'red', text: 'Dozens of inspectors general fired en masse in apparent violation of congressional notification requirements' },
-        { type: 'red', text: 'Impoundment of congressionally appropriated foreign aid without legal authority in 2025' },
-        { type: 'red', text: 'Supreme Court granted expanded immunity for presidential "official acts" with no clear limits' },
-        { type: 'gold', text: 'Courts have blocked multiple executive actions on constitutional grounds \u2014 checks still functioning unevenly' },
-      ]
-    }
-  },
-  {
-    icon: '\u{1F4CA}',
-    title: 'Winner-Take-All Voting Produces Extremism',
-    severity: 'medium',
-    excerpt: 'Plurality voting in party primaries \u2014 where small, ideologically extreme bases choose nominees \u2014 has driven partisan polarization and made moderation politically costly.',
-    detail: {
-      overview: 'The way we vote shapes who runs, who wins, and how they govern. Our current system \u2014 plurality primaries, winner-take-all generals \u2014 rewards ideological intensity over broad appeal. A candidate can win a competitive primary with 30% of the vote. Third party and independent voices are systematically excluded. Moderate voters feel abandoned.',
-      indicators: [
-        { type: 'red', text: 'Primary turnout averages 15\u201320%, meaning a tiny ideological base picks most nominees' },
-        { type: 'red', text: 'Politicians who compromise face primary challengers from their own party as punishment' },
-        { type: 'gold', text: 'Alaska and Maine show ranked choice voting produces more moderate, broadly appealing winners' },
-        { type: 'green', text: 'Open primaries in 18 states allow more voters to participate in the most decisive stage of elections' },
-      ]
-    }
-  },
-];
 
-const SOLUTIONS = [
-  {
-    num: '01',
-    title: 'Ranked Choice Voting',
-    body: "Replace plurality voting with ranked preference systems that ensure winners have broad support, reduce spoiler effects, and make extreme candidates unviable. Alaska and Maine demonstrate it works at scale. Massachusetts could be next.",
-  },
-  {
-    num: '02',
-    title: 'Independent Redistricting',
-    body: 'Remove partisan politicians from the mapmaking process entirely. Citizen-controlled redistricting commissions \u2014 like those in California, Michigan, and Colorado \u2014 produce maps that reflect voters, not politicians.',
-  },
-  {
-    num: '03',
-    title: 'Automatic Voter Registration',
-    body: 'When a citizen interacts with any government agency, register them to vote by default. This eliminates the arbitrary registration barrier without compromising election integrity. 21 states have adopted it.',
-  },
-  {
-    num: '04',
-    title: 'Campaign Finance Transparency',
-    body: 'Require full disclosure of all donors above a reasonable threshold, close LLC and PAC loopholes, and establish real-time reporting. Citizens deserve to know who is funding the campaigns influencing their votes.',
-  },
-  {
-    num: '05',
-    title: 'Supreme Court Reform',
-    body: 'Establish binding ethics rules with real enforcement, move toward fixed 18-year terms to reduce the stakes of any single vacancy, and expand the court to restore its depleted legitimacy.',
-  },
-  {
-    num: '06',
-    title: 'Restore and Reinforce Congressional Oversight',
-    body: 'Pass legislation strengthening the Impoundment Control Act, codify inspector general independence, require congressional approval for emergency power uses, and establish automatic legal standing to challenge executive overreach.',
-  },
-  {
-    num: '07',
-    title: 'Media Literacy Education',
-    body: "Integrate critical information literacy into K\u201312 curricula nationwide. Citizens who can evaluate sources, identify manipulation, and distinguish news from opinion are more resilient to disinformation.",
-  },
-];
+    // Pause animation when hero is not visible
+    const heroObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !animId) draw();
+      });
+    }, { threshold: 0 });
+    heroObserver.observe(canvas.closest('.hero'));
 
-const REFORMS = [
-  {
-    id: 'rcv',
-    label: 'Ranked Choice Voting',
-    title: 'Ranked Choice Voting',
-    desc: "Voters rank candidates by preference. If no one wins a majority, the last-place candidate is eliminated and those votes are redistributed. This continues until one candidate has a majority. The result: winners who broadly represent their constituents.",
-    quote: "With RCV, voters can vote for who they actually want without fear of \"wasting\" their vote. It's democracy without the spoiler problem.",
-    stats: [
-      { num: '50+', label: 'US cities and states using RCV' },
-      { num: '90%', label: 'Alaska voters said RCV was easy to use' },
-      { num: '2x', label: 'More candidates of color win with RCV' },
-      { num: '48', label: 'Countries use preferential voting systems' },
-    ]
-  },
-  {
-    id: 'open-primaries',
-    label: 'Open Primaries',
-    title: 'Open & Top-Four Primaries',
-    desc: "Instead of separate party primaries where only registered partisans vote, all candidates run in a single primary open to all voters. The top two, four, or more advance to the general election regardless of party. Alaska's model pairs this with ranked choice voting for the general.",
-    quote: 'The most consequential election in most districts is the primary \u2014 and most voters are locked out of it entirely. Open primaries fix that.',
-    stats: [
-      { num: '18', label: 'States with some form of open or nonpartisan primary' },
-      { num: '8%', label: 'Typical competitive primary turnout' },
-      { num: '48%', label: "Alaska's open primary participation rate" },
-      { num: '60%', label: 'Americans support open primaries across parties' },
-    ]
-  },
-  {
-    id: 'independent-maps',
-    label: 'Independent Maps',
-    title: 'Independent Redistricting',
-    desc: 'Citizens \u2014 not politicians \u2014 draw the district lines. Commissioners are selected through application processes designed to exclude party officials and lobbyists. They are required to follow criteria prioritizing equal population, compliance with Voting Rights Act, geographic compactness, and community preservation.',
-    quote: "Politicians should not be able to choose their own voters. It's that simple.",
-    stats: [
-      { num: '13', label: 'States with independent redistricting commissions' },
-      { num: '10%', label: 'Average efficiency gap improvement vs. partisan maps' },
-      { num: '0', label: 'Federal court strikes of CA commission maps since 2011' },
-      { num: '42', label: 'Seats flipped from safe to competitive after MI reforms' },
-    ]
-  },
-  {
-    id: 'campaign-finance',
-    label: 'Campaign Finance',
-    title: 'Campaign Finance Reform',
-    desc: 'The DISCLOSE Act would require all organizations spending on elections to publicly disclose donors above $10,000. Combined with small-dollar matching programs and corporate contribution limits, this would meaningfully reduce the role of anonymous wealth in determining election outcomes.',
-    quote: "When money speaks louder than citizens, government responds to money. That's not a theory \u2014 it's documented by decades of policy research.",
-    stats: [
-      { num: '$16B', label: 'Spent in 2024 election cycle' },
-      { num: '$1.5B', label: 'Dark money in 2020 \u2014 untraceable' },
-      { num: '72%', label: 'Americans across parties support more disclosure' },
-      { num: '60+', label: 'Failed Senate DISCLOSE Act votes since 2010' },
-    ]
-  },
-];
-
-// STARS
-function initStars() {
-  const canvas = document.getElementById('starCanvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const stars = Array.from({ length: 200 }, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 1.2 + 0.2,
-    opacity: Math.random() * 0.7 + 0.1,
-    twinkle: Math.random() * Math.PI * 2,
-  }));
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    stars.forEach(s => {
-      s.twinkle += 0.01;
-      const o = s.opacity + Math.sin(s.twinkle) * 0.15;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(240, 239, 234, ${Math.max(0, Math.min(1, o))})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
-}
-
-// NAV
-function initNav() {
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
-}
-
-// GAUGE
-function initGauge() {
-  const score = 51;
-  const gaugeProgress = document.getElementById('gaugeProgress');
-  const gaugeNeedle = document.getElementById('gaugeNeedle');
-  const gaugeNum = document.getElementById('gaugeNum');
-  const gaugeStatus = document.getElementById('gaugeStatus');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        const totalLength = 408;
-        const offset = totalLength - (score / 100) * totalLength;
-        gaugeProgress.style.strokeDashoffset = offset;
-        const needleDeg = -90 + (score / 100) * 180;
-        gaugeNeedle.style.transform = `rotate(${needleDeg}deg)`;
-        let current = 0;
-        const interval = setInterval(() => {
-          current = Math.min(current + 1, score);
-          gaugeNum.textContent = current;
-          if (current >= score) clearInterval(interval);
-        }, 25);
-        gaugeStatus.textContent = '\u201CBacksliding Democracy\u201D \u2014 Warning-Level Stress on Multiple Pillars';
-        observer.unobserve(entry.target);
+    // Pause when tab is hidden
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        isVisible = false;
+      } else if (canvas.closest('.hero')) {
+        isVisible = true;
+        draw();
       }
     });
-  }, { threshold: 0.3 });
 
-  observer.observe(document.getElementById('gauge-wrapper'));
-}
+    window.addEventListener('resize', resize);
+    resize();
 
-// PILLARS
-function renderPillars() {
-  const grid = document.getElementById('pillarsGrid');
-  grid.innerHTML = PILLARS.map((p, i) => `
-    <div class="pillar-card status-${p.status}" 
-         data-pillar="${p.id}" 
-         style="transition-delay: ${i * 60}ms"
-         onclick="openPillarModal('${p.id}')">
-      <span class="pillar-icon">${p.icon}</span>
-      <div class="pillar-name">${p.name}</div>
-      <span class="pillar-status-badge">
-        <span>${p.status === 'critical' ? '\u26A0' : p.status === 'warning' ? '\u25B3' : '\u2713'}</span>
-        ${p.status}
-      </span>
-      <div class="pillar-score-bar">
-        <div class="pillar-score-fill" data-score="${p.score}"></div>
-      </div>
-      <div class="pillar-score-label">${p.score}/100 \u2014 ${p.status === 'critical' ? 'Critical concern requiring urgent attention' : p.status === 'warning' ? 'Under stress \u2014 active warning signs present' : 'Functioning with room for improvement'}</div>
-      <p class="pillar-description">${p.description}</p>
-      <button class="pillar-expand-btn" aria-label="Explore ${p.name}">
-        Learn more
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <path d="M6 2L6 10M2 6L6 10L10 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </div>
-  `).join('');
+    // Skip animation entirely if user prefers reduced motion
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      draw();
+    }
+  })();
 
-  const cards = grid.querySelectorAll('.pillar-card');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        const bar = e.target.querySelector('.pillar-score-fill');
-        if (bar) {
-          setTimeout(() => { bar.style.width = bar.dataset.score + '%'; }, 200);
+  // ─── Scroll-triggered Reveals ───
+  (function() {
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
         }
-        observer.unobserve(e.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function(el) { observer.observe(el); });
+  })();
+
+  // ─── Oath Quote Word-by-Word Reveal ───
+  (function() {
+    var oathEl = document.getElementById('oathQuote');
+    if (!oathEl) return;
+    var oathText = oathEl.textContent.trim();
+    var oathWords = oathText.split(/(\s+)/);
+    oathEl.innerHTML = oathWords.map(function(w) {
+      return w.trim() ? '<span class="oath-word">' + w + '</span>' : w;
+    }).join('');
+
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      oathEl.querySelectorAll('.oath-word').forEach(function(word) {
+        word.classList.add('visible');
+      });
+      return;
+    }
+
+    var oathObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var words = oathEl.querySelectorAll('.oath-word');
+          words.forEach(function(word, i) {
+            setTimeout(function() { word.classList.add('visible'); }, i * 65);
+          });
+          oathObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    oathObserver.observe(oathEl);
+  })();
+
+  // ─── Animated Stat Counters ───
+  (function() {
+    var statNumbers = document.querySelectorAll('.stat-number[data-target]');
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      statNumbers.forEach(function(el) {
+        el.textContent = el.dataset.target + (el.dataset.suffix || '');
+      });
+      return;
+    }
+
+    var statObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var target = parseInt(el.dataset.target);
+          var suffix = el.dataset.suffix || '';
+          var current = 0;
+          var step = Math.max(1, Math.floor(target / 40));
+          var interval = setInterval(function() {
+            current += step;
+            if (current >= target) {
+              current = target;
+              clearInterval(interval);
+            }
+            el.textContent = current + suffix;
+          }, 30);
+          statObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    statNumbers.forEach(function(el) { statObserver.observe(el); });
+  })();
+
+  // ─── Nav Scroll Effect ───
+  (function() {
+    var nav = document.getElementById('nav');
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(function() {
+          nav.classList.toggle('scrolled', window.scrollY > 80);
+          ticking = false;
+        });
+        ticking = true;
       }
     });
-  }, { threshold: 0.1 });
+  })();
 
-  cards.forEach(c => observer.observe(c));
-}
+  // ─── Hamburger Menu ───
+  (function() {
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobileMenu');
 
-// PILLAR MODAL
-function openPillarModal(id) {
-  const p = PILLARS.find(x => x.id === id);
-  if (!p) return;
-  const d = p.detail;
+    function closeMenu() {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      hamburger.focus();
+    }
 
-  document.getElementById('modalLabel').textContent = d.label;
-  document.getElementById('modalTitle').textContent = `${p.icon} ${p.name}`;
-  
-  const statusColor = p.status === 'critical' ? 'var(--red-warn)' : p.status === 'warning' ? 'var(--amber)' : 'var(--green-good)';
-  
-  document.getElementById('modalBody').innerHTML = `
-    <div style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.35rem 1rem; margin-bottom:1.5rem; font-family:'Source Sans 3',sans-serif; font-weight:600; font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; background:rgba(200,164,78,0.1); color:${statusColor}; border-left: 2px solid ${statusColor};">
-      Score: ${p.score}/100 \u00B7 Status: ${p.status.toUpperCase()}
-    </div>
-    <p class="modal-text">${d.overview}</p>
-    <blockquote class="modal-quote">"${d.quote}"</blockquote>
+    function openMenu() {
+      hamburger.classList.add('active');
+      mobileMenu.classList.add('active');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      // Focus first link in menu
+      var firstLink = mobileMenu.querySelector('a');
+      if (firstLink) firstLink.focus();
+    }
 
-    <div class="modal-section-title">Healthy Indicators</div>
-    <ul class="indicator-list">
-      ${d.healthy.map(item => `<li class="indicator-item"><span class="indicator-dot dot-green"></span>${item}</li>`).join('')}
-    </ul>
-
-    <div class="modal-section-title">Warning Signs</div>
-    <ul class="indicator-list">
-      ${d.warning.map(item => `<li class="indicator-item"><span class="indicator-dot dot-gold"></span>${item}</li>`).join('')}
-    </ul>
-
-    <div class="modal-section-title">Critical Failures</div>
-    <ul class="indicator-list">
-      ${d.critical.map(item => `<li class="indicator-item"><span class="indicator-dot dot-red"></span>${item}</li>`).join('')}
-    </ul>
-
-    <a href="https://oathandaction.substack.com" class="modal-cta" target="_blank">Read More on Oath &amp; Action \u2192</a>
-  `;
-
-  openModal();
-}
-
-// THREATS
-function renderThreats() {
-  const grid = document.getElementById('threatsGrid');
-  grid.innerHTML = THREATS.map((t, i) => `
-    <div class="threat-card severity-${t.severity}" 
-         style="transition-delay: ${i * 70}ms"
-         onclick="openThreatModal(${i})">
-      <div class="threat-severity"></div>
-      <div class="threat-sev-label">${t.severity}</div>
-      <span class="threat-icon">${t.icon}</span>
-      <div class="threat-title">${t.title}</div>
-      <p class="threat-excerpt">${t.excerpt}</p>
-      <button class="threat-read-more" aria-label="Read more">
-        Explore indicators
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M7 3L11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-    </div>
-  `).join('');
-
-  const cards = grid.querySelectorAll('.threat-card');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
+    hamburger.addEventListener('click', function() {
+      var isActive = hamburger.classList.contains('active');
+      if (isActive) {
+        closeMenu();
+      } else {
+        openMenu();
       }
     });
-  }, { threshold: 0.1 });
-  cards.forEach(c => observer.observe(c));
-}
 
-function openThreatModal(i) {
-  const t = THREATS[i];
-  const severityColor = { critical: 'var(--red-warn)', high: 'var(--amber)', medium: 'var(--gold)' }[t.severity];
-
-  document.getElementById('modalLabel').textContent = `Threat Assessment \u00B7 Severity: ${t.severity.toUpperCase()}`;
-  document.getElementById('modalTitle').textContent = `${t.icon} ${t.title}`;
-
-  document.getElementById('modalBody').innerHTML = `
-    <p class="modal-text">${t.detail.overview}</p>
-
-    <div class="modal-section-title">Indicators & Evidence</div>
-    <ul class="indicator-list">
-      ${t.detail.indicators.map(item => `
-        <li class="indicator-item">
-          <span class="indicator-dot dot-${item.type}"></span>
-          ${item.text}
-        </li>
-      `).join('')}
-    </ul>
-
-    <a href="https://oathandaction.substack.com" class="modal-cta" target="_blank">Subscribe for Analysis \u2192</a>
-  `;
-
-  openModal();
-}
-
-// SOLUTIONS
-function renderSolutions() {
-  const container = document.getElementById('solutionsTimeline');
-  container.innerHTML = SOLUTIONS.map((s, i) => `
-    <div class="timeline-item" style="transition-delay: ${i * 80}ms">
-      <div class="timeline-dot"></div>
-      <div class="timeline-num">Reform ${s.num}</div>
-      <div class="timeline-title">${s.title}</div>
-      <p class="timeline-body">${s.body}</p>
-    </div>
-  `).join('');
-
-  const items = container.querySelectorAll('.timeline-item');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+        closeMenu();
+      }
     });
-  }, { threshold: 0.15 });
-  items.forEach(i => observer.observe(i));
-}
 
-// REFORMS
-function renderReforms() {
-  const tabsEl = document.getElementById('reformTabs');
-  const panelsEl = document.getElementById('reformPanels');
+    // Focus trap within mobile menu
+    mobileMenu.addEventListener('keydown', function(e) {
+      if (e.key !== 'Tab') return;
+      var links = mobileMenu.querySelectorAll('a');
+      var firstLink = links[0];
+      var lastLink = links[links.length - 1];
 
-  tabsEl.innerHTML = REFORMS.map((r, i) => `
-    <button class="reform-tab ${i === 0 ? 'active' : ''}" onclick="switchTab(${i})">${r.label}</button>
-  `).join('');
+      if (e.shiftKey && document.activeElement === firstLink) {
+        e.preventDefault();
+        hamburger.focus();
+      } else if (!e.shiftKey && document.activeElement === lastLink) {
+        e.preventDefault();
+        hamburger.focus();
+      }
+    });
 
-  panelsEl.innerHTML = REFORMS.map((r, i) => `
-    <div class="reform-panel ${i === 0 ? 'active' : ''}" id="reform-panel-${i}">
-      <div>
-        <h3 class="reform-panel-title">${r.title}</h3>
-        <p class="reform-panel-desc">${r.desc}</p>
-        <blockquote class="reform-panel-quote">"${r.quote}"</blockquote>
-        <a href="https://oathandaction.substack.com" class="modal-cta" target="_blank">Read More \u2192</a>
-      </div>
-      <div class="reform-stat-grid">
-        ${r.stats.map(s => `
-          <div class="reform-stat">
-            <div class="reform-stat-num">${s.num}</div>
-            <div class="reform-stat-label">${s.label}</div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `).join('');
-}
+    document.querySelectorAll('.mobile-link').forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
+  })();
 
-function switchTab(index) {
-  document.querySelectorAll('.reform-tab').forEach((t, i) => {
-    t.classList.toggle('active', i === index);
+  // ─── Smooth Scroll ───
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (href === '#') return;
+      var target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   });
-  document.querySelectorAll('.reform-panel').forEach((p, i) => {
-    p.classList.toggle('active', i === index);
-  });
-}
 
-// MODAL CONTROLS
-function openModal() {
-  const overlay = document.getElementById('modalOverlay');
-  overlay.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
+  // ─── Subscribe Form ───
+  (function() {
+    var form = document.getElementById('subscribeForm');
+    if (!form) return;
+    var successMsg = document.getElementById('subscribeSuccess');
 
-function closeModal() {
-  const overlay = document.getElementById('modalOverlay');
-  overlay.classList.remove('active');
-  document.body.style.overflow = '';
-}
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var emailInput = form.querySelector('input[type="email"]');
+      var email = emailInput.value.trim();
 
-document.getElementById('modalClose').addEventListener('click', closeModal);
-document.getElementById('modalOverlay').addEventListener('click', (e) => {
-  if (e.target === e.currentTarget) closeModal();
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeModal();
-});
+      if (!email || !emailInput.validity.valid) {
+        emailInput.focus();
+        return;
+      }
 
-// INIT
-initStars();
-initNav();
-initGauge();
-renderPillars();
-renderThreats();
-renderSolutions();
-renderReforms();
+      // Show success message (replace with actual Substack/API integration)
+      form.style.display = 'none';
+      if (successMsg) successMsg.classList.add('visible');
+      var noteEl = form.parentElement.querySelector('.subscribe-note');
+      if (noteEl) noteEl.style.display = 'none';
+    });
+  })();
 </script>
-
 </body>
 </html>
