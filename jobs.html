@@ -435,18 +435,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   background: white;
   padding: 2rem 2.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   border-left: 3px solid transparent;
   opacity: 0;
   transform: translateY(15px);
+  transition: opacity 0.4s ease, transform 0.4s ease, background 0.3s ease, border-color 0.3s ease;
 }
 
 .job-card.visible {
   opacity: 1;
   transform: none;
-  transition: opacity 0.4s ease, transform 0.4s ease, background 0.3s ease, border-color 0.3s ease;
 }
 
 .job-card:hover {
@@ -813,7 +812,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   background: rgba(30,42,68,0.5);
   border: 1px solid rgba(200,164,78,0.1);
   padding: 2rem;
-  transition: all 0.3s ease;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s ease, border-color 0.3s ease;
@@ -1346,7 +1344,7 @@ const JOBS = [
       'Cultural competency and understanding of Latino communities',
       'Bilingual (English/Spanish) strongly preferred'
     ],
-    url: 'https://vfrfrr.org/careers/',
+    url: 'https://votolatino.org/about/',
     tags: ['Digital', 'Latino Civic Engagement', 'Remote']
   },
   {
@@ -1723,17 +1721,21 @@ function renderJobs() {
     </div>
   `).join('');
 
-  // Animate cards in
-  const cards = grid.querySelectorAll('.job-card');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
+  // Animate cards in after layout completes
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const cards = grid.querySelectorAll('.job-card');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '50px' });
+      cards.forEach(c => observer.observe(c));
     });
-  }, { threshold: 0.05 });
-  cards.forEach(c => observer.observe(c));
+  });
 }
 
 function formatDate(dateStr) {
@@ -1819,16 +1821,20 @@ function renderResources() {
     </div>
   `).join('');
 
-  const cards = grid.querySelectorAll('.resource-card');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const cards = grid.querySelectorAll('.resource-card');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '50px' });
+      cards.forEach(c => observer.observe(c));
     });
-  }, { threshold: 0.1 });
-  cards.forEach(c => observer.observe(c));
+  });
 }
 
 // MODAL CONTROLS
@@ -1849,7 +1855,11 @@ function closeModal() {
 }
 
 // GO
-init();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 </script>
 
 </body>
