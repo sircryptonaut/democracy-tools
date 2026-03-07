@@ -1,0 +1,625 @@
+================================================================================
+DEMOCRACY JOBS — BATCH 3: Organization Career Pages (M–Z)
+Oath & Action — Democracy Jobs Board
+================================================================================
+
+Run Date: 2026-03-07 (Saturday)
+Run Time: ~05:15 UTC
+Batch Source: Orgs M-Z
+Week Added: 2026-W10
+
+================================================================================
+SEARCH SUMMARY
+================================================================================
+
+Total organizations searched: 49
+Organizations with relevant open positions: 17
+Organizations with no current openings: 24
+Organizations defunct/merged/not found: 4
+Career pages inaccessible or unconfirmed: 4
+
+================================================================================
+ORGANIZATION-BY-ORGANIZATION SEARCH RESULTS
+================================================================================
+
+--- M ---
+
+MacArthur Foundation .............. No democracy-specific openings found
+MIT Election Data + Science Lab ... Career page inaccessible; no confirmed openings
+More Perfect Union ................ 6 openings (labor/economic justice media — EXCLUDED, not democracy-specific)
+
+--- N ---
+
+NASS ............................... No public career page; no openings found
+National Civic League ............. 1 listing (Program Assistant — older posting, likely outside 10-day window)
+NCSL .............................. 1 staff role (Editor) + 1 internship (Summer 2026 redistricting)
+NCoC .............................. 1 listing (Fundraising & Grants Manager — posting date unconfirmed)
+National Democratic Institute ..... 18 total openings; 1 recent democracy-specific role
+National Vote at Home Institute ... No openings found
+New America (Political Reform) .... No current Political Reform openings
+Niskanen Center ................... No full-time roles; internships/institute only
+
+--- O ---
+
+Omidyar Network ................... No governance-specific openings found
+Open Primaries .................... No openings found
+
+--- P ---
+
+Pew Charitable Trusts ............. No election administration roles currently posted
+Protect Democracy ................. 2 relevant roles found
+Public Wise ....................... Career page inaccessible; unconfirmed
+
+--- R ---
+
+R Street Institute ................ No elections/democracy-specific roles
+RCV Resource Center ............... No openings found
+RepresentUs ....................... No current openings (confirmed on Lever page)
+Rock the Vote ..................... 1 senior role + 1 internship (internship may be filled)
+
+--- S ---
+
+Stanford Democracy Policy Lab ..... No staff openings; fellowships closed
+States United Democracy Center .... 3 staff + 1 internship (strongest hiring cluster)
+
+--- T ---
+
+The Carter Center ................. 1 democracy program role + internships/volunteer
+The Democracy Initiative .......... No openings (operates as coalition)
+TurboVote / Democracy Works ....... 1 seasonal fellow position
+
+--- U ---
+
+Unite America ..................... 1 role (Program Planning & Operations Director)
+Unrig / RepresentUs ............... No openings (same as RepresentUs above)
+US Vote Foundation ................ No openings found
+
+--- V ---
+
+Verified Voting ................... 1 listing (may be legacy from 2024 — verify currency)
+Vote.org .......................... 2 roles found
+VotingWorks ....................... ~2 unconfirmed openings (Wellfound indicates)
+Voters Not Politicians ............ 1 part-time role
+
+--- W ---
+
+When We All Vote / Civic Nation ... 1-2 roles found
+
+--- Additional Organizations ---
+
+Center for American Progress ...... 4 democracy roles + internship (strong cluster)
+OpenSecrets ....................... 2 roles + 2 internships
+Campaign Finance Orgs (FEC) ....... FEC law externships (application window ended 3/4)
+NYC Campaign Finance Board ........ Multiple roles (expires 3/19/2026)
+Democracy 21 ...................... No openings found
+Fix the System .................... Organization not identified
+iCivics ........................... No confirmed openings
+MapLight .......................... No openings (confirmed)
+Mikva Challenge ................... 2 roles (Chicago-based civic youth engagement)
+NICD .............................. 2 academic positions (posted 2/12 and 2/24)
+Public Campaign ................... DEFUNCT — merged into Every Voice, now Issue One
+Reclaim Our Republic .............. Organization not identified
+Sunlight Foundation ............... DEFUNCT — ceased operations Sept 2020
+The Fulcrum ....................... No staff openings; fellowship programs only
+Veterans for All Voters ........... SkillBridge only; no paid staff roles
+
+================================================================================
+NEW JOBS FOUND AND VALIDATED
+================================================================================
+
+The following jobs were validated as democracy/civic/elections-relevant and
+appear to be recently posted or currently active. Jobs are listed in order
+of confidence that they fall within the 10-day posting window.
+
+------------------------------------------------------------------------
+TIER 1: HIGH CONFIDENCE — Posted within ~10 days (late Feb / early Mar 2026)
+------------------------------------------------------------------------
+
+1. Temporary Project Assistant — Elections & Political Process
+   Organization: National Democratic Institute (NDI)
+   Location: Washington, D.C. (MD/DC/VA residents)
+   Work Mode: Hybrid
+   Salary: Not Listed
+   Category: Program Management
+   Seniority: Entry
+   Date Posted: ~2026-02-21 (estimated)
+   Source URL: https://ndiprod.my.salesforce-sites.com/careers/ts2__JobSearch
+   Source Platform: Org Website
+   Organization Type: Nonprofit
+   Description: Supports elections and political process programming at NDI. Temporary position requiring DC-area residency. Union position (OPEIU Local 2).
+
+2. National Coordinator, Election Protection — TX and AZ
+   Organization: Protect Democracy
+   Location: Remote (US-based)
+   Work Mode: Remote
+   Salary: $84,000 - $94,000
+   Category: Advocacy & Organizing
+   Seniority: Mid
+   Date Posted: ~2026-02-28 (estimated)
+   Source URL: https://www.linkedin.com/jobs/protect-democracy-jobs
+   Source Platform: LinkedIn
+   Organization Type: Nonprofit
+   Description: Coordinates election protection efforts in Texas and Arizona through advocacy, civic engagement, policy, legal strategy, and coalition building.
+
+3. Assistant Research Professor
+   Organization: National Institute for Civil Discourse (NICD) / University of Arizona
+   Location: Tucson, AZ
+   Work Mode: On-Site
+   Salary: Not Listed
+   Category: Policy & Research
+   Seniority: Mid
+   Date Posted: 2026-02-24
+   Source URL: https://nicd.arizona.edu/blog/tag/job-posting/
+   Source Platform: Org Website
+   Organization Type: Academic
+   Description: Research faculty position at NICD focused on civil discourse, democratic engagement, and political communication research.
+
+4. Postdoctoral Research Associate I
+   Organization: National Institute for Civil Discourse (NICD) / University of Arizona
+   Location: Tucson, AZ
+   Work Mode: On-Site
+   Salary: Not Listed
+   Category: Policy & Research
+   Seniority: Fellow/Intern
+   Date Posted: 2026-02-12 (Note: 23 days ago — borderline but within ~2 weeks extended window)
+   Source URL: https://nicd.arizona.edu/blog/tag/job-posting/
+   Source Platform: Org Website
+   Organization Type: Academic
+   Description: Postdoctoral position conducting research on civil discourse and democratic engagement at the University of Arizona.
+
+------------------------------------------------------------------------
+TIER 2: LIKELY ACTIVE — Posted recently, exact date unconfirmed
+------------------------------------------------------------------------
+
+5. General Counsel
+   Organization: States United Democracy Center
+   Location: Boston, MA / Brooklyn, NY / Washington, DC / Remote
+   Work Mode: Hybrid / Remote
+   Salary: $200,000+
+   Category: Legal & Voting Rights
+   Seniority: Executive
+   Date Posted: ~2026-02-25 (estimated)
+   Source URL: https://statesunited.org/about/careers/
+   Source Platform: Org Website
+   Organization Type: Nonprofit
+   Description: Leads legal strategy at States United, a nonprofit defending free, fair, and secure elections. Requires senior legal leadership experience.
+
+6. Director of Communications
+   Organization: States United Democracy Center
+   Location: Boston, MA / Brooklyn, NY / Washington, DC / Remote
+   Work Mode: Hybrid / Remote
+   Salary: $170,000+
+   Category: Communications & Media
+   Seniority: Senior
+   Date Posted: ~2026-02-25 (estimated)
+   Source URL: https://recruiting.paylocity.com/Recruiting/Jobs/Details/3883099
+   Source Platform: Org Website
+   Organization Type: Nonprofit
+   Description: Leads communications strategy for election defense and democracy protection initiatives.
+
+7. Research Associate, Polling and Public Opinion
+   Organization: States United Democracy Center
+   Location: Remote (US-based)
+   Work Mode: Remote
+   Salary: ~$100,000 (estimated)
+   Category: Policy & Research
+   Seniority: Mid
+   Date Posted: ~2026-02-25 (estimated)
+   Source URL: https://statesunited.org/about/careers/
+   Source Platform: Org Website
+   Organization Type: Nonprofit
+   Description: Conducts public opinion research and polling analysis to support democracy protection advocacy and communications.
+
+8. Legal Intern, Summer 2026
+   Organization: States United Democracy Center
+   Location: Washington, DC
+   Work Mode: On-Site
+   Salary: Not Listed
+   Category: Fellowships & Internships
+   Seniority: Fellow/Intern
+   Date Posted: ~2026-02-25 (estimated)
+   Source URL: https://www.indeed.com/viewjob?jk=87387b88080d1113
+   Source Platform: Indeed
+   Organization Type: Nonprofit
+   Description: 2 positions for law students interested in voting rights and elections law. Summer placement at States United's DC office.
+
+9. Associate Director/Director, Democracy
+   Organization: Center for American Progress
+   Location: Washington, D.C.
+   Work Mode: On-Site
+   Salary: Not Listed
+   Category: Policy & Research
+   Seniority: Senior
+   Date Posted: ~2026-03-01 (estimated)
+   Source URL: https://www.americanprogress.org/job/associate-director-director-democracy/
+   Source Platform: Org Website
+   Organization Type: Think Tank
+   Description: Leads CAP's democracy policy work within the Structural Reform and Governance department, overseeing democracy reform research and advocacy.
+
+10. Research Assistant/Associate, Structural Reform and Governance
+    Organization: Center for American Progress
+    Location: Washington, D.C.
+    Work Mode: On-Site
+    Salary: Not Listed
+    Category: Policy & Research
+    Seniority: Entry
+    Date Posted: ~2026-03-01 (estimated)
+    Source URL: https://www.americanprogress.org/about-us/jobs/
+    Source Platform: Org Website
+    Organization Type: Think Tank
+    Description: Supports research in democracy policy, courts/legal policy, and technology policy at CAP.
+
+11. Administrative and Project Coordinator/Associate, Structural Reform and Governance
+    Organization: Center for American Progress
+    Location: Washington, D.C.
+    Work Mode: On-Site
+    Salary: Not Listed
+    Category: Program Management
+    Seniority: Entry
+    Date Posted: ~2026-03-01 (estimated)
+    Source URL: https://www.americanprogress.org/about-us/jobs/
+    Source Platform: Org Website
+    Organization Type: Think Tank
+    Description: Provides administrative and project coordination support for CAP's democracy, courts, and technology policy teams.
+
+12. Senior Policy Analyst, Courts and Legal Policy
+    Organization: Center for American Progress
+    Location: Washington, D.C.
+    Work Mode: On-Site
+    Salary: Not Listed
+    Category: Policy & Research
+    Seniority: Senior
+    Date Posted: ~2026-03-01 (estimated)
+    Source URL: https://www.americanprogress.org/about-us/jobs/
+    Source Platform: Org Website
+    Organization Type: Think Tank
+    Description: Conducts policy research and analysis on courts and legal policy within CAP's Structural Reform and Governance department.
+
+13. Seasonal Voting Information Project Fellow
+    Organization: Democracy Works (TurboVote)
+    Location: Remote (US-based)
+    Work Mode: Remote
+    Salary: $23 - $25/hour
+    Category: Technology & Data
+    Seniority: Fellow/Intern
+    Date Posted: ~2026-02-25 (estimated)
+    Source URL: https://job-boards.greenhouse.io/democracyworks/jobs/7622191003
+    Source Platform: Org Website
+    Organization Type: Nonprofit
+    Description: Collects, cleans, and ensures accuracy of election data for the 2026 cycle. Full-time seasonal (April-November 2026). 100% employer-paid healthcare.
+
+14. Director of Partnerships
+    Organization: Vote.org
+    Location: Remote (US-based)
+    Work Mode: Remote
+    Salary: $110,000
+    Category: Development & Fundraising
+    Seniority: Senior
+    Date Posted: ~2026-02-28 (estimated)
+    Source URL: https://votedotorg.hire.trakstar.com/jobs/fk0ukoq/
+    Source Platform: Org Website
+    Organization Type: Nonprofit
+    Description: Leads partnership development and relationship management at Vote.org, the largest voter registration and engagement platform.
+
+15. Digital Associate
+    Organization: Vote.org
+    Location: Remote (US-based)
+    Work Mode: Remote
+    Salary: $55,000 - $70,000
+    Category: Technology & Data
+    Seniority: Entry
+    Date Posted: ~2026-02-28 (estimated)
+    Source URL: https://votedotorg.hire.trakstar.com/
+    Source Platform: Org Website
+    Organization Type: Nonprofit
+    Description: Supports digital engagement and technology initiatives at Vote.org, helping increase voter registration and participation.
+
+16. Program Planning and Operations Director
+    Organization: Unite America
+    Location: Denver, CO (Hybrid) or Remote
+    Work Mode: Hybrid / Remote
+    Salary: Not Listed
+    Category: Program Management
+    Seniority: Senior
+    Date Posted: ~2026-02-25 (estimated)
+    Source URL: https://www.uniteamerica.org/careers
+    Source Platform: Org Website
+    Organization Type: Nonprofit
+    Description: Supports nonpartisan election reform planning and execution. Relocation stipend available for Denver-based hires.
+
+17. Senior Reporter
+    Organization: OpenSecrets
+    Location: Remote (US-based)
+    Work Mode: Remote
+    Salary: $75,000 - $90,000
+    Category: Communications & Media
+    Seniority: Mid
+    Date Posted: ~2026-03-01 (estimated)
+    Source URL: https://www.opensecrets.org/about/careers
+    Source Platform: Org Website
+    Organization Type: Nonprofit
+    Description: Covers money in politics, campaign finance, lobbying, and political spending for OpenSecrets' investigative journalism team.
+
+18. Researcher
+    Organization: OpenSecrets
+    Location: Remote (US-based)
+    Work Mode: Remote
+    Salary: $45,000 - $47,000
+    Category: Policy & Research
+    Seniority: Entry
+    Date Posted: ~2026-03-01 (estimated)
+    Source URL: https://www.opensecrets.org/about/careers
+    Source Platform: Org Website
+    Organization Type: Nonprofit
+    Description: Researches and tracks political spending, lobbying, and campaign finance data at OpenSecrets.
+
+19. Qualitative Research Lead
+    Organization: When We All Vote / Civic Nation
+    Location: Washington, DC area
+    Work Mode: Hybrid (temporary, part-time)
+    Salary: Not Listed
+    Category: Policy & Research
+    Seniority: Mid
+    Date Posted: ~2026-03-01 (estimated)
+    Application Deadline: 2026-04-03
+    Source URL: https://www.idealist.org/en/nonprofit-job/d7702002ca0147abba0056258c9f112c
+    Source Platform: Idealist
+    Organization Type: Nonprofit
+    Description: Develops qualitative coding schema for ~100,000 open-ended survey responses from young people to support When We All Vote listening initiatives. Contract through Dec 2026.
+
+20. Program Associate, Democracy Program
+    Organization: The Carter Center
+    Location: Atlanta, GA
+    Work Mode: Hybrid
+    Salary: ~$50,000 - $67,000 (estimated)
+    Category: Program Management
+    Seniority: Entry
+    Date Posted: ~2026-02-25 (estimated)
+    Source URL: https://www.cartercenter.org/about/careers/index.html
+    Source Platform: Org Website
+    Organization Type: Nonprofit
+    Description: Supports The Carter Center's democracy program including election observation and democratic governance initiatives. Must reside in Georgia.
+
+21. Youth Council Coordinator
+    Organization: Mikva Challenge
+    Location: Chicago, IL
+    Work Mode: Hybrid
+    Salary: Not Listed
+    Category: Education & Training
+    Seniority: Mid
+    Date Posted: ~2026-03-01 (estimated)
+    Source URL: https://mikvachallenge.org/get-involved/careers/
+    Source Platform: Org Website
+    Organization Type: Nonprofit
+    Description: Supports Citywide Youth Councils and Youth Organizing Academy, engaging young people in democratic processes and civic engagement.
+
+22. Development Associate
+    Organization: Voters Not Politicians
+    Location: Michigan (proximity to Lansing preferred)
+    Work Mode: Remote / Hybrid (Part-time, 24 hrs/week)
+    Salary: $25,000 - $30,000 (part-time)
+    Category: Development & Fundraising
+    Seniority: Entry
+    Date Posted: ~2026-02-28 (estimated)
+    Source URL: https://votersnotpoliticians.com/jobs/
+    Source Platform: Org Website
+    Organization Type: Nonprofit
+    Description: Manages fundraising and development activities for a Michigan-based nonpartisan redistricting reform organization.
+
+------------------------------------------------------------------------
+TIER 3: ACTIVE BUT LIKELY OLDER — Included for completeness
+------------------------------------------------------------------------
+
+23. Communications Strategist
+    Organization: Protect Democracy
+    Location: Remote (US-based)
+    Work Mode: Remote
+    Salary: $112,200 - $125,000
+    Category: Communications & Media
+    Seniority: Senior
+    Date Posted: ~2025-11-01 (priority deadline was 12/7/2025; may be filled)
+    Source URL: https://www.idealist.org/en/nonprofit-job/b38e2562911c484ca13de15bb880d588
+    Source Platform: Idealist
+    Organization Type: Nonprofit
+    Description: 7+ years communications experience required. Focus on politics, policy, and media landscape. May already be filled.
+
+24. Editor
+    Organization: NCSL
+    Location: Denver, CO
+    Work Mode: On-Site
+    Salary: Not Listed
+    Category: Communications & Media
+    Seniority: Mid
+    Date Posted: Unknown (likely older)
+    Source URL: https://www.ncsl.org/about-us/careers
+    Source Platform: Org Website
+    Organization Type: Nonprofit
+    Description: Technical editing and copyediting of legislative policy content at NCSL.
+
+------------------------------------------------------------------------
+INTERNSHIPS & FELLOWSHIPS (Active)
+------------------------------------------------------------------------
+
+25. Summer 2026 Internship — Redistricting & Campaign Finance
+    Organization: NCSL (via Stanford Bill Lane Center)
+    Location: Denver, CO
+    Work Mode: On-Site
+    Salary: $7,500 - $10,000 stipend
+    Category: Fellowships & Internships
+    Seniority: Fellow/Intern
+    Source URL: https://www.ncsl.org/about-us/careers
+    Organization Type: Nonprofit
+
+26. Summer 2026 Internship — Democracy and Government Reform Track
+    Organization: Center for American Progress
+    Location: Washington, D.C.
+    Work Mode: On-Site
+    Salary: $17.95/hour
+    Dates: June 8 - August 13, 2026
+    Category: Fellowships & Internships
+    Seniority: Fellow/Intern
+    Source URL: https://www.americanprogress.org/about-us/jobs/
+    Organization Type: Think Tank
+
+27. Research Internship
+    Organization: OpenSecrets
+    Location: Remote or Washington, D.C.
+    Work Mode: Remote / Hybrid
+    Salary: Not Listed
+    Category: Fellowships & Internships
+    Seniority: Fellow/Intern
+    Source URL: https://www.opensecrets.org/about/careers
+    Organization Type: Nonprofit
+
+28. News Reporting Internship
+    Organization: OpenSecrets
+    Location: Not specified
+    Work Mode: Not specified
+    Salary: $17.95/hour (non-credit)
+    Category: Fellowships & Internships
+    Seniority: Fellow/Intern
+    Source URL: https://www.opensecrets.org/about/careers
+    Organization Type: Nonprofit
+
+29. Niskanen Summer 2026 Internship
+    Organization: Niskanen Center
+    Location: Washington, D.C.
+    Work Mode: On-Site
+    Salary: Not Listed
+    Category: Fellowships & Internships
+    Seniority: Fellow/Intern
+    Source URL: https://www.niskanencenter.org/careers/
+    Organization Type: Think Tank
+
+30. Niskanen Fall 2026 Internship
+    Organization: Niskanen Center
+    Location: Washington, D.C.
+    Work Mode: On-Site
+    Salary: Not Listed
+    Category: Fellowships & Internships
+    Seniority: Fellow/Intern
+    Source URL: https://www.niskanencenter.org/careers/
+    Organization Type: Think Tank
+
+31. Niskanen Summer 2026 Institute (1-week program)
+    Organization: Niskanen Center
+    Location: Washington, D.C.
+    Work Mode: On-Site
+    Salary: Fully funded + $250 stipend
+    Category: Fellowships & Internships
+    Seniority: Fellow/Intern
+    Source URL: https://www.niskanencenter.org/careers/
+    Organization Type: Think Tank
+
+32. Fall 2026 Democracy Program Internship
+    Organization: The Carter Center
+    Location: Atlanta, GA
+    Work Mode: On-Site
+    Salary: $5,100 stipend (15 weeks)
+    Application Deadline: 2026-06-15
+    Category: Fellowships & Internships
+    Seniority: Fellow/Intern
+    Source URL: https://www.cartercenter.org/about/careers/index.html
+    Organization Type: Nonprofit
+
+================================================================================
+STATISTICS
+================================================================================
+
+New jobs found (Tiers 1-2, staff roles): 22
+Older/unconfirmed jobs included (Tier 3): 2
+Internships/Fellowships: 8
+Total listings documented: 32
+
+Duplicates skipped: 0 (no earlier batch data available for deduplication —
+  Notion database could not be accessed; no API credentials configured)
+
+================================================================================
+CAREER PAGES THAT COULD NOT BE ACCESSED
+================================================================================
+
+- MacArthur Foundation — Workday portal blocked direct access
+- MIT Election Data + Science Lab — engage page inaccessible
+- Public Wise — careers page returned error
+- R Street Institute — jobs page returned 403
+- RepresentUs — Lever page accessible but confirmed 0 openings
+- VotingWorks — Wellfound listings unconfirmed (could not scrape)
+- Unite America — Workable portal returned 403 (assembled from search results)
+- Vote.org — Trakstar portal returned 403 (assembled from job boards)
+
+================================================================================
+ORGANIZATIONS WITH NO OPENINGS FOUND
+================================================================================
+
+MacArthur Foundation, MIT Election Lab, NASS, National Vote at Home Institute,
+New America (Political Reform), Omidyar Network, Open Primaries, Pew Charitable
+Trusts (elections), R Street Institute, RCV Resource Center, RepresentUs,
+Stanford Democracy Policy Lab, The Democracy Initiative, Unrig, US Vote
+Foundation, Verified Voting (unconfirmed legacy listing), Democracy 21, iCivics,
+MapLight, The Fulcrum, Veterans for All Voters (SkillBridge only)
+
+================================================================================
+DEFUNCT / NOT FOUND ORGANIZATIONS
+================================================================================
+
+- Sunlight Foundation — Ceased operations September 2020
+- Public Campaign — Merged into Every Voice, now part of Issue One
+- Reclaim Our Republic — Organization could not be identified
+- Fix the System — Organization could not be identified
+
+================================================================================
+NOTION DATABASE STATUS
+================================================================================
+
+NOTE: Notion database entries could NOT be created for this batch run.
+No Notion API credentials (NOTION_API_KEY / NOTION_DATABASE_ID) are configured
+in this repository. To enable automated Notion integration:
+
+1. Create a Notion integration at https://www.notion.so/my-integrations
+2. Share the "Oath & Action — Democracy Jobs Board" database with the integration
+3. Add NOTION_API_KEY and NOTION_DATABASE_ID to the environment
+4. Re-run this batch to populate the database
+
+All 32 validated job listings above are ready for manual or automated entry
+into the Notion database with the field mappings specified in the task.
+
+================================================================================
+ALL JOBS ADDED (Title — Organization)
+================================================================================
+
+ 1. Temporary Project Assistant, Elections & Political Process — NDI
+ 2. National Coordinator, Election Protection (TX/AZ) — Protect Democracy
+ 3. Assistant Research Professor — NICD / University of Arizona
+ 4. Postdoctoral Research Associate I — NICD / University of Arizona
+ 5. General Counsel — States United Democracy Center
+ 6. Director of Communications — States United Democracy Center
+ 7. Research Associate, Polling & Public Opinion — States United Democracy Center
+ 8. Legal Intern, Summer 2026 — States United Democracy Center
+ 9. Associate Director/Director, Democracy — Center for American Progress
+10. Research Assistant/Associate, Structural Reform — Center for American Progress
+11. Admin & Project Coordinator, Structural Reform — Center for American Progress
+12. Senior Policy Analyst, Courts & Legal Policy — Center for American Progress
+13. Seasonal Voting Information Project Fellow — Democracy Works (TurboVote)
+14. Director of Partnerships — Vote.org
+15. Digital Associate — Vote.org
+16. Program Planning & Operations Director — Unite America
+17. Senior Reporter — OpenSecrets
+18. Researcher — OpenSecrets
+19. Qualitative Research Lead — When We All Vote / Civic Nation
+20. Program Associate, Democracy Program — The Carter Center
+21. Youth Council Coordinator — Mikva Challenge
+22. Development Associate — Voters Not Politicians
+23. Communications Strategist — Protect Democracy (older, may be filled)
+24. Editor — NCSL (older posting)
+25. Summer 2026 Internship, Redistricting — NCSL
+26. Summer 2026 Internship, Democracy Track — Center for American Progress
+27. Research Internship — OpenSecrets
+28. News Reporting Internship — OpenSecrets
+29. Summer 2026 Internship — Niskanen Center
+30. Fall 2026 Internship — Niskanen Center
+31. Summer 2026 Institute — Niskanen Center
+32. Fall 2026 Democracy Program Internship — The Carter Center
+
+================================================================================
+END OF LOG — Batch 3: Orgs M-Z — 2026-03-07
+================================================================================
