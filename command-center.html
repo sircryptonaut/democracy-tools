@@ -1,0 +1,2811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hybrid Command Center — Build Spec v1.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: rgb(20, 30, 52);
+      --navy-deep: rgb(12, 18, 35);
+      --navy-light: rgb(30, 42, 68);
+      --navy-mid: rgb(25, 36, 60);
+      --gold: rgb(200, 164, 78);
+      --gold-light: rgb(220, 190, 120);
+      --gold-dim: rgba(200, 164, 78, 0.15);
+      --gold-border: rgba(200, 164, 78, 0.25);
+      --warm-gray: rgb(160, 155, 145);
+      --off-white: rgb(240, 239, 234);
+      --cream: rgb(248, 246, 240);
+      --text-dark: rgb(35, 35, 40);
+      --text-body: rgb(55, 55, 60);
+      --text-muted: rgb(120, 118, 112);
+      --red-warn: rgb(192, 64, 64);
+      --red-dim: rgba(192, 64, 64, 0.12);
+      --green-good: rgb(72, 140, 96);
+      --green-dim: rgba(72, 140, 96, 0.12);
+      --amber: rgb(210, 140, 40);
+      --amber-dim: rgba(210, 140, 40, 0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--navy-deep);
+      color: var(--text-body);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ========== TOP HEADER ========== */
+    #top-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 58px;
+      background: var(--navy-deep);
+      border-bottom: 1px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      padding: 0 24px 0 284px;
+      z-index: 1000;
+      gap: 16px;
+    }
+    #top-header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.4;
+    }
+    .header-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+    .header-tagline {
+      font-size: 0.8rem;
+      color: var(--warm-gray);
+      flex: 1;
+    }
+    .header-badge {
+      font-size: 0.7rem;
+      color: var(--gold-light);
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    /* ========== LAYOUT ========== */
+    #layout {
+      display: flex;
+      padding-top: 58px;
+      min-height: 100vh;
+    }
+
+    /* ========== SIDEBAR ========== */
+    #sidebar {
+      position: fixed;
+      top: 58px;
+      left: 0;
+      width: 260px;
+      height: calc(100vh - 58px);
+      background: var(--navy-deep);
+      border-right: 1px solid var(--gold-border);
+      overflow-y: auto;
+      z-index: 900;
+      padding: 20px 0;
+    }
+    #sidebar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .sidebar-logo {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid var(--gold-border);
+      margin-bottom: 12px;
+    }
+    .sidebar-logo-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .sidebar-logo-sub {
+      font-size: 0.7rem;
+      color: var(--warm-gray);
+      margin-top: 3px;
+    }
+    .sidebar-section-label {
+      font-size: 0.65rem;
+      color: var(--warm-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 8px 20px 4px;
+      font-weight: 600;
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 20px;
+      color: var(--off-white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      transition: all 0.15s ease;
+      border-left: 3px solid transparent;
+      position: relative;
+    }
+    .sidebar-link:hover {
+      background: var(--gold-dim);
+      color: var(--gold-light);
+      border-left-color: var(--gold-border);
+    }
+    .sidebar-link.active {
+      background: var(--gold-dim);
+      color: var(--gold);
+      border-left-color: var(--gold);
+      font-weight: 600;
+    }
+    .sidebar-link .link-num {
+      font-size: 0.7rem;
+      color: var(--warm-gray);
+      min-width: 18px;
+    }
+    .sidebar-link.active .link-num { color: var(--gold-light); }
+
+    /* ========== MAIN CONTENT ========== */
+    #main {
+      margin-left: 260px;
+      flex: 1;
+      background: var(--cream);
+      min-height: calc(100vh - 58px);
+    }
+
+    .content-section {
+      padding: 56px 56px 72px;
+      border-bottom: 1px solid rgba(200,164,78,0.1);
+    }
+    .content-section:last-child { border-bottom: none; }
+
+    /* ========== SECTION HEADERS ========== */
+    .section-header {
+      margin-bottom: 36px;
+    }
+    .section-eyebrow {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2rem;
+      color: var(--text-dark);
+      line-height: 1.2;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--gold-border);
+    }
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    /* ========== CARDS ========== */
+    .card {
+      background: white;
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(12,18,35,0.07);
+    }
+    .card-grid {
+      display: grid;
+      gap: 20px;
+    }
+    .card-grid-2 { grid-template-columns: 1fr 1fr; }
+    .card-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+    /* ========== TABLES ========== */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    .data-table th {
+      background: var(--navy);
+      color: var(--gold);
+      padding: 11px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .data-table th:first-child { border-radius: 8px 0 0 0; }
+    .data-table th:last-child { border-radius: 0 8px 0 0; }
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--off-white);
+      vertical-align: top;
+      color: var(--text-body);
+      line-height: 1.5;
+    }
+    .data-table tr:nth-child(even) td { background: rgba(248,246,240,0.8); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+    .data-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+    .table-wrap {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--gold-border);
+      margin: 20px 0;
+    }
+
+    /* ========== CODE BLOCKS ========== */
+    .code-block {
+      position: relative;
+      background: #0d1117;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 20px 20px 24px;
+      margin: 16px 0;
+      overflow-x: auto;
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: #e6edf3;
+    }
+    .code-block pre { margin: 0; white-space: pre; }
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 600;
+      transition: all 0.15s;
+      letter-spacing: 0.03em;
+    }
+    .copy-btn:hover { background: var(--gold); color: var(--navy-deep); }
+
+    /* Syntax colors */
+    .kw { color: #ff7b72; }     /* keywords */
+    .fn { color: #d2a8ff; }     /* functions */
+    .str { color: #a5d6ff; }    /* strings */
+    .cm { color: #8b949e; font-style: italic; } /* comments */
+    .num { color: #f2cc60; }    /* numbers */
+    .vr { color: #ffa657; }     /* variables */
+    .op { color: #79c0ff; }     /* operators/methods */
+    .py-kw { color: #ff7b72; }
+    .py-str { color: #a5d6ff; }
+    .py-cm { color: #8b949e; font-style: italic; }
+    .py-fn { color: #d2a8ff; }
+    .py-num { color: #f2cc60; }
+
+    /* ========== BADGES ========== */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .badge-gold {
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+    }
+    .badge-green {
+      background: var(--green-dim);
+      color: var(--green-good);
+      border: 1px solid rgba(72,140,96,0.25);
+    }
+    .badge-red {
+      background: var(--red-dim);
+      color: var(--red-warn);
+      border: 1px solid rgba(192,64,64,0.2);
+    }
+    .badge-amber {
+      background: var(--amber-dim);
+      color: var(--amber);
+      border: 1px solid rgba(210,140,40,0.25);
+    }
+    .badge-navy {
+      background: var(--navy-deep);
+      color: var(--gold-light);
+      border: 1px solid var(--gold-border);
+    }
+
+    /* ========== ARCHITECTURE DIAGRAM ========== */
+    .arch-diagram {
+      padding: 32px;
+      background: var(--navy);
+      border-radius: 12px;
+      margin-bottom: 36px;
+      border: 1px solid var(--gold-border);
+    }
+    .arch-center {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .arch-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .arch-node-box {
+      background: var(--navy-light);
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      padding: 14px 24px;
+      text-align: center;
+      min-width: 160px;
+    }
+    .arch-node-box .node-icon { font-size: 1.6rem; margin-bottom: 4px; }
+    .arch-node-box .node-name {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--gold);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .arch-node-box .node-sub {
+      font-size: 0.72rem;
+      color: var(--warm-gray);
+      margin-top: 2px;
+    }
+    .arch-connector-v {
+      width: 2px;
+      height: 28px;
+      background: var(--gold-border);
+      margin: 0 auto;
+    }
+    .arch-connector-h-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 0;
+    }
+    .arch-branches {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .arch-branch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .arch-branch-line-v {
+      width: 2px;
+      height: 20px;
+      background: var(--gold-border);
+    }
+    .arch-branch-box {
+      background: var(--navy-mid);
+      border: 1px solid var(--gold-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      width: 100%;
+      text-align: center;
+    }
+    .arch-branch-box .branch-icon { font-size: 1.2rem; }
+    .arch-branch-box .branch-name {
+      font-size: 0.8rem;
+      color: var(--gold-light);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .arch-sub-nodes {
+      width: 100%;
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .arch-sub-node {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(12,18,35,0.5);
+      border: 1px solid rgba(200,164,78,0.12);
+      border-radius: 5px;
+      padding: 6px 10px;
+      font-size: 0.73rem;
+      color: var(--off-white);
+    }
+    .arch-sub-node .sub-icon { font-size: 0.95rem; }
+    .arch-connector-h-top {
+      display: flex;
+      justify-content: center;
+      padding: 0 24px;
+      margin-bottom: 0;
+    }
+    .arch-h-line {
+      height: 2px;
+      background: var(--gold-border);
+      flex: 1;
+      margin-top: -1px;
+      margin-bottom: 0;
+      align-self: center;
+    }
+    .arch-h-line-wrap {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      height: 20px;
+    }
+
+    /* Horizontal line connecting branches */
+    .arch-cross-bar {
+      height: 2px;
+      background: var(--gold-border);
+      margin: 0 48px;
+      position: relative;
+    }
+    .arch-cross-bar::before,
+    .arch-cross-bar::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+    .arch-cross-bar::before { left: -3px; }
+    .arch-cross-bar::after { right: -3px; }
+
+    /* ========== SIX LANES ========== */
+    .lane-card {
+      background: white;
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(12,18,35,0.07);
+    }
+    .lane-header {
+      background: var(--navy);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .lane-number {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      font-weight: 700;
+      min-width: 32px;
+    }
+    .lane-icon { font-size: 1.5rem; }
+    .lane-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .lane-body { padding: 18px 20px; }
+    .lane-purpose {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .lane-list {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+    .lane-list li {
+      font-size: 0.85rem;
+      color: var(--text-body);
+      padding: 3px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+    .lane-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.75rem;
+    }
+    .lane-io {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .lane-io-box {
+      background: var(--cream);
+      border: 1px solid var(--gold-border);
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+    .lane-io-label {
+      font-size: 0.67rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--warm-gray);
+      margin-bottom: 5px;
+    }
+    .lane-io-content {
+      font-size: 0.78rem;
+      color: var(--text-body);
+      line-height: 1.5;
+    }
+    .lane-commands {
+      border-left: 4px solid var(--gold);
+      background: #0d1117;
+      border-radius: 0 6px 6px 0;
+      padding: 12px 16px;
+      margin-top: 14px;
+    }
+    .lane-commands-label {
+      font-size: 0.67rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .lane-cmd {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: 0.78rem;
+      color: #a5d6ff;
+      padding: 4px 0;
+      line-height: 1.5;
+    }
+    .lane-cmd::before {
+      content: '> ';
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ========== SKILL CARDS ========== */
+    .skill-card {
+      background: white;
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      box-shadow: 0 2px 16px rgba(12,18,35,0.08);
+    }
+    .skill-header {
+      background: var(--navy);
+      padding: 20px 28px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .skill-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .skill-trigger {
+      font-size: 0.82rem;
+      color: var(--warm-gray);
+      margin-top: 4px;
+      font-style: italic;
+    }
+    .skill-body { padding: 24px 28px; }
+    .skill-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .skill-meta-item {
+      background: var(--cream);
+      border: 1px solid var(--gold-border);
+      border-radius: 6px;
+      padding: 10px 14px;
+    }
+    .skill-meta-label {
+      font-size: 0.67rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--warm-gray);
+      margin-bottom: 4px;
+    }
+    .skill-meta-value {
+      font-size: 0.85rem;
+      color: var(--text-body);
+    }
+    .skill-prompt-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    /* ========== TODOIST TREE ========== */
+    .file-tree {
+      background: var(--navy);
+      border: 1px solid var(--gold-border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: 0.85rem;
+      line-height: 2;
+    }
+    .tree-root {
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .tree-child {
+      color: var(--off-white);
+      padding-left: 20px;
+    }
+    .tree-grandchild {
+      color: var(--warm-gray);
+      padding-left: 40px;
+    }
+    .tree-folder-icon { color: var(--gold); }
+    .tree-section {
+      color: var(--gold-light);
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    /* ========== PHASE ROADMAP ========== */
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .phase-card {
+      background: white;
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(12,18,35,0.07);
+    }
+    .phase-header {
+      padding: 18px 20px;
+      background: var(--navy);
+    }
+    .phase-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .phase-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      color: var(--off-white);
+    }
+    .phase-range {
+      font-size: 0.75rem;
+      color: var(--warm-gray);
+      margin-top: 3px;
+    }
+    .phase-body { padding: 18px 20px; }
+    .phase-checklist { list-style: none; }
+    .phase-checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 5px 0;
+      font-size: 0.84rem;
+      color: var(--text-body);
+      line-height: 1.4;
+      border-bottom: 1px solid var(--off-white);
+    }
+    .phase-checklist li:last-child { border-bottom: none; }
+    .phase-checkbox {
+      width: 17px;
+      height: 17px;
+      border: 2px solid var(--gold-border);
+      border-radius: 3px;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: all 0.15s;
+      position: relative;
+      background: white;
+    }
+    .phase-checkbox:checked {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+    .phase-checkbox:checked::after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 4px;
+      width: 5px;
+      height: 9px;
+      border: 2px solid var(--navy-deep);
+      border-top: none;
+      border-left: none;
+      transform: rotate(40deg);
+    }
+    .phase-checklist li.checked-item > span { text-decoration: line-through; color: var(--text-muted); }
+
+    /* ========== COMMAND CARDS ========== */
+    .command-card {
+      background: white;
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(12,18,35,0.07);
+    }
+    .command-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 22px;
+      background: var(--navy);
+      border-bottom: 1px solid var(--gold-border);
+    }
+    .command-num {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      font-weight: 700;
+      min-width: 44px;
+      line-height: 1;
+    }
+    .command-header-text { flex: 1; }
+    .command-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      color: var(--off-white);
+      font-weight: 700;
+    }
+    .command-skill-badge { margin-top: 4px; }
+    .command-body { padding: 20px 22px; }
+    .command-prompt-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .command-output {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .command-output strong { color: var(--green-good); }
+    .command-prompt-box {
+      background: #0d1117;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 6px 6px 0;
+      padding: 14px 18px;
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: 0.83rem;
+      color: #e6edf3;
+      line-height: 1.65;
+      position: relative;
+    }
+
+    /* ========== NOTE CARDS ========== */
+    .note-card {
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 0.85rem;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+    .note-card strong { color: var(--text-dark); }
+    .note-card .note-label {
+      font-size: 0.67rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .rule-card {
+      background: var(--red-dim);
+      border: 1px solid rgba(192,64,64,0.2);
+      border-left: 4px solid var(--red-warn);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 0.85rem;
+      color: var(--text-body);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ========== LABEL TABLE ========== */
+    .label-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .label-chip {
+      background: var(--navy);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-light);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    /* Priority box */
+    .priority-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .priority-item {
+      background: white;
+      border: 1px solid var(--gold-border);
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+    }
+    .priority-badge {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+    .p1 { color: var(--red-warn); }
+    .p2 { color: var(--amber); }
+    .p3 { color: var(--green-good); }
+    .p4 { color: var(--text-muted); }
+    .priority-desc { font-size: 0.78rem; color: var(--text-body); line-height: 1.4; }
+
+    /* ========== ZAPIER TABLE ========== */
+    .zapier-table-wrap {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--gold-border);
+    }
+
+    /* ========== MOBILE ========== */
+    @media (max-width: 900px) {
+      #sidebar {
+        position: fixed;
+        top: 58px;
+        left: -260px;
+        transition: left 0.3s ease;
+      }
+      #sidebar.open { left: 0; }
+      #main { margin-left: 0; }
+      #top-header { padding-left: 24px; }
+      .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px; height: 36px;
+        background: var(--gold-dim);
+        border: 1px solid var(--gold-border);
+        border-radius: 6px;
+        cursor: pointer;
+        margin-right: 8px;
+        color: var(--gold);
+        font-size: 1rem;
+      }
+      .content-section { padding: 32px 24px 48px; }
+      .phase-grid { grid-template-columns: 1fr; }
+      .card-grid-2 { grid-template-columns: 1fr; }
+      .card-grid-3 { grid-template-columns: 1fr; }
+      .arch-branches { grid-template-columns: 1fr 1fr; }
+      .lane-io { grid-template-columns: 1fr; }
+      .skill-meta { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 901px) {
+      .mobile-menu-btn { display: none; }
+    }
+
+    /* ========== UTILITIES ========== */
+    .mb-4 { margin-bottom: 16px; }
+    .mb-6 { margin-bottom: 24px; }
+    .mb-8 { margin-bottom: 32px; }
+    .mt-4 { margin-top: 16px; }
+    .mt-6 { margin-top: 24px; }
+    .text-gold { color: var(--gold); }
+    .text-muted { color: var(--text-muted); }
+    .bold { font-weight: 700; }
+    .font-serif { font-family: 'Libre Baskerville', serif; }
+    hr.gold-rule {
+      border: none;
+      border-top: 1px solid var(--gold-border);
+      margin: 28px 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP HEADER -->
+<header id="top-header">
+  <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">&#9776;</button>
+  <span class="header-title">&#9881; Hybrid Command Center</span>
+  <span class="header-tagline">Claude-Centered Productivity Stack &mdash; Build Spec &amp; Reference</span>
+  <span class="header-badge">Build Spec v1.0 &middot; March 2026</span>
+</header>
+
+<!-- LAYOUT -->
+<div id="layout">
+
+  <!-- SIDEBAR -->
+  <nav id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-title">Command Center</div>
+      <div class="sidebar-logo-sub">Claude-Centered Hybrid Stack</div>
+    </div>
+    <div class="sidebar-section-label">Sections</div>
+    <a href="#architecture" class="sidebar-link active">
+      <span class="link-num">01</span> Architecture
+    </a>
+    <a href="#six-lanes" class="sidebar-link">
+      <span class="link-num">02</span> Six Lanes UI
+    </a>
+    <a href="#notion-dbs" class="sidebar-link">
+      <span class="link-num">03</span> Notion Databases
+    </a>
+    <a href="#todoist" class="sidebar-link">
+      <span class="link-num">04</span> Todoist Structure
+    </a>
+    <a href="#claude-skills" class="sidebar-link">
+      <span class="link-num">05</span> Claude Skills
+    </a>
+    <a href="#zapier-mcp" class="sidebar-link">
+      <span class="link-num">06</span> Zapier MCP Actions
+    </a>
+    <a href="#apps-script" class="sidebar-link">
+      <span class="link-num">07</span> Apps Script
+    </a>
+    <a href="#phase-roadmap" class="sidebar-link">
+      <span class="link-num">08</span> Phase Roadmap
+    </a>
+    <a href="#first-commands" class="sidebar-link">
+      <span class="link-num">09</span> First 10 Commands
+    </a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main id="main">
+
+    <!-- ========================================
+         SECTION 1: ARCHITECTURE
+    ========================================= -->
+    <section class="content-section" id="architecture" data-section="architecture">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 01</div>
+        <h2 class="section-title">&#127760; System Architecture</h2>
+        <p class="section-subtitle">How all tools connect through Claude as the central intelligence layer. Every system routes through a single interface — no app-hopping, no context switching.</p>
+      </div>
+
+      <!-- Architecture Diagram -->
+      <div class="arch-diagram">
+        <!-- Claude Center Node -->
+        <div class="arch-center">
+          <div class="arch-node">
+            <div class="arch-node-box">
+              <div class="node-icon">&#129504;</div>
+              <div class="node-name">Claude</div>
+              <div class="node-sub">web &bull; desktop &bull; mobile &bull; Chrome &bull; Claude Code</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vertical connector down from Claude -->
+        <div style="display:flex;justify-content:center;">
+          <div class="arch-connector-v"></div>
+        </div>
+
+        <!-- Horizontal cross bar -->
+        <div style="margin: 0 40px;">
+          <div style="height:2px;background:rgba(200,164,78,0.25);position:relative;">
+            <div style="position:absolute;left:12.5%;top:-4px;width:8px;height:8px;background:rgb(200,164,78);border-radius:50%;"></div>
+            <div style="position:absolute;left:37.5%;top:-4px;width:8px;height:8px;background:rgb(200,164,78);border-radius:50%;"></div>
+            <div style="position:absolute;left:62.5%;top:-4px;width:8px;height:8px;background:rgb(200,164,78);border-radius:50%;"></div>
+            <div style="position:absolute;left:87.5%;top:-4px;width:8px;height:8px;background:rgb(200,164,78);border-radius:50%;"></div>
+          </div>
+        </div>
+
+        <!-- Four branch columns -->
+        <div class="arch-branches">
+
+          <!-- Branch 1: Google Workspace -->
+          <div class="arch-branch">
+            <div class="arch-branch-line-v"></div>
+            <div class="arch-branch-box">
+              <div class="branch-icon">&#9729;</div>
+              <div class="branch-name">Google Workspace<br>Connectors</div>
+            </div>
+            <div class="arch-sub-nodes">
+              <div class="arch-sub-node"><span class="sub-icon">&#128231;</span> Gmail</div>
+              <div class="arch-sub-node"><span class="sub-icon">&#128197;</span> Calendar</div>
+              <div class="arch-sub-node"><span class="sub-icon">&#128190;</span> Drive</div>
+            </div>
+          </div>
+
+          <!-- Branch 2: Zapier MCP -->
+          <div class="arch-branch">
+            <div class="arch-branch-line-v"></div>
+            <div class="arch-branch-box">
+              <div class="branch-icon">&#9889;</div>
+              <div class="branch-name">Zapier MCP</div>
+            </div>
+            <div class="arch-sub-nodes">
+              <div class="arch-sub-node"><span class="sub-icon">&#128221;</span> Notion</div>
+              <div class="arch-sub-node"><span class="sub-icon">&#9989;</span> Todoist</div>
+              <div class="arch-sub-node"><span class="sub-icon">&#127912;</span> Canva</div>
+              <div class="arch-sub-node"><span class="sub-icon">&#8901;</span> Misc Automations</div>
+            </div>
+          </div>
+
+          <!-- Branch 3: Apps Script -->
+          <div class="arch-branch">
+            <div class="arch-branch-line-v"></div>
+            <div class="arch-branch-box">
+              <div class="branch-icon">&#128196;</div>
+              <div class="branch-name">Google Apps Script</div>
+            </div>
+            <div class="arch-sub-nodes">
+              <div class="arch-sub-node"><span class="sub-icon">&#128231;</span> Gmail Triage</div>
+              <div class="arch-sub-node"><span class="sub-icon">&#128197;</span> Calendar Prep</div>
+              <div class="arch-sub-node"><span class="sub-icon">&#128190;</span> Drive Org</div>
+            </div>
+          </div>
+
+          <!-- Branch 4: Obsidian -->
+          <div class="arch-branch">
+            <div class="arch-branch-line-v"></div>
+            <div class="arch-branch-box">
+              <div class="branch-icon">&#128218;</div>
+              <div class="branch-name">Obsidian</div>
+            </div>
+            <div class="arch-sub-nodes">
+              <div class="arch-sub-node"><span class="sub-icon">&#128203;</span> Web Clipper</div>
+              <div class="arch-sub-node"><span class="sub-icon">&#128394;</span> Daily Notes</div>
+              <div class="arch-sub-node"><span class="sub-icon">&#128279;</span> Local REST API</div>
+            </div>
+          </div>
+
+        </div><!-- /arch-branches -->
+      </div><!-- /arch-diagram -->
+
+      <!-- Role Table -->
+      <h3 style="font-family:'Libre Baskerville',serif;font-size:1.25rem;color:var(--text-dark);margin-bottom:16px;">System Role Table</h3>
+      <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:20px;">Every tool has one job. Discipline about what lives where is what makes the system work. When in doubt, use this table.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>App</th>
+              <th>Role</th>
+              <th>What Lives Here</th>
+              <th>What Does NOT Live Here</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>&#128231; Gmail</strong></td>
+              <td>Inbox + external comms</td>
+              <td>Leads, relationships, opportunities, approvals</td>
+              <td>Tasks, notes, strategy</td>
+            </tr>
+            <tr>
+              <td><strong>&#128197; Google Calendar</strong></td>
+              <td>Time commitments</td>
+              <td>Meetings, blocks, deadlines with time</td>
+              <td>Standalone tasks, notes</td>
+            </tr>
+            <tr>
+              <td><strong>&#9989; Todoist</strong></td>
+              <td>Action execution</td>
+              <td>Next steps only</td>
+              <td>Strategy, CRM, long memos</td>
+            </tr>
+            <tr>
+              <td><strong>&#128221; Notion</strong></td>
+              <td>Operational database</td>
+              <td>Projects, CRM, content pipeline, SOPs</td>
+              <td>Raw thinking, drafts</td>
+            </tr>
+            <tr>
+              <td><strong>&#128218; Obsidian</strong></td>
+              <td>Private brain</td>
+              <td>Synthesis, reflection, frameworks, research</td>
+              <td>Active tasks, shared files</td>
+            </tr>
+            <tr>
+              <td><strong>&#128190; Google Drive</strong></td>
+              <td>Canonical file store</td>
+              <td>Shareable docs, decks, exports, assets</td>
+              <td>Thinking notes, tasks</td>
+            </tr>
+            <tr>
+              <td><strong>&#127912; Canva / Excel / PPT</strong></td>
+              <td>Output packaging</td>
+              <td>Final deliverables</td>
+              <td>Source of truth for anything</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========================================
+         SECTION 2: SIX LANES UI
+    ========================================= -->
+    <section class="content-section" id="six-lanes" data-section="six-lanes">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 02</div>
+        <h2 class="section-title">&#9776; Six Lanes UI</h2>
+        <p class="section-subtitle">The command center presents six persistent lanes. Each lane has a dedicated purpose, data source, and set of Claude commands. Think of these as tabs you never close.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+
+        <!-- Lane 1: Today -->
+        <div class="lane-card">
+          <div class="lane-header">
+            <div class="lane-number">1</div>
+            <div class="lane-icon">&#9728;</div>
+            <div class="lane-title">Today</div>
+          </div>
+          <div class="lane-body">
+            <p class="lane-purpose">Your daily operating picture. Synthesized from Calendar, Todoist, and Gmail into a single scannable view of what matters right now.</p>
+            <ul class="lane-list">
+              <li>Calendar events with time blocks</li>
+              <li>Tasks due today or overdue</li>
+              <li>Email hotspots from last 18 hours</li>
+              <li>Follow-ups due today</li>
+              <li>Recommended first 90-min focus block</li>
+              <li>Active project pulses (top 3)</li>
+            </ul>
+            <div class="lane-io">
+              <div class="lane-io-box">
+                <div class="lane-io-label">Key Inputs</div>
+                <div class="lane-io-content">Google Calendar &bull; Todoist (today/overdue) &bull; Gmail (last 18h) &bull; Notion projects</div>
+              </div>
+              <div class="lane-io-box">
+                <div class="lane-io-label">Key Outputs</div>
+                <div class="lane-io-content">Morning Brief &bull; Focus block recommendation &bull; Email action list</div>
+              </div>
+            </div>
+            <div class="lane-commands">
+              <div class="lane-commands-label">Example Claude Commands</div>
+              <div class="lane-cmd">Run Morning Brief for today.</div>
+              <div class="lane-cmd">What's on my calendar this afternoon?</div>
+              <div class="lane-cmd">What are my overdue tasks and what should I tackle first?</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lane 2: Inbox / Triage -->
+        <div class="lane-card">
+          <div class="lane-header">
+            <div class="lane-number">2</div>
+            <div class="lane-icon">&#128229;</div>
+            <div class="lane-title">Inbox / Triage</div>
+          </div>
+          <div class="lane-body">
+            <p class="lane-purpose">Universal input zone. Drop anything here — email, note, article, idea, screenshot, link — and Claude routes it to the right system automatically.</p>
+            <ul class="lane-list">
+              <li>Email pastes and forwarded threads</li>
+              <li>Voice note transcripts and brain dumps</li>
+              <li>Articles, links, and web clips</li>
+              <li>Meeting notes and transcripts</li>
+              <li>Ideas, tasks, and random thoughts</li>
+              <li>Screenshots and images with context</li>
+            </ul>
+            <div class="lane-io">
+              <div class="lane-io-box">
+                <div class="lane-io-label">Key Inputs</div>
+                <div class="lane-io-content">Anything dropped in &mdash; email, note, article, idea, link, screenshot</div>
+              </div>
+              <div class="lane-io-box">
+                <div class="lane-io-label">Key Outputs</div>
+                <div class="lane-io-content">Routed to Todoist / Calendar / Notion / Obsidian / Drive with confirmation</div>
+              </div>
+            </div>
+            <div class="lane-commands">
+              <div class="lane-commands-label">Example Claude Commands</div>
+              <div class="lane-cmd">Triage this email: [paste]. Route it.</div>
+              <div class="lane-cmd">Brain dump: [list]. Extract tasks and create them in Todoist.</div>
+              <div class="lane-cmd">Clip this article to Obsidian: [URL].</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lane 3: Projects -->
+        <div class="lane-card">
+          <div class="lane-header">
+            <div class="lane-number">3</div>
+            <div class="lane-icon">&#128203;</div>
+            <div class="lane-title">Projects</div>
+          </div>
+          <div class="lane-body">
+            <p class="lane-purpose">Notion-backed project dashboard. Every active initiative, its next milestone, blockers, linked tasks, and next review date — in one place.</p>
+            <ul class="lane-list">
+              <li>All active projects with status indicators</li>
+              <li>Next milestone and milestone date</li>
+              <li>Blockers flagged prominently</li>
+              <li>Linked Todoist tasks + key Drive docs</li>
+              <li>Owner and next review date</li>
+              <li>Stalled / at-risk project warnings</li>
+            </ul>
+            <div class="lane-io">
+              <div class="lane-io-box">
+                <div class="lane-io-label">Key Inputs</div>
+                <div class="lane-io-content">Notion Projects DB &bull; Todoist linked tasks &bull; Drive doc links</div>
+              </div>
+              <div class="lane-io-box">
+                <div class="lane-io-label">Key Outputs</div>
+                <div class="lane-io-content">Updated Notion records &bull; New milestones &bull; Blocker notes &bull; Review reminders</div>
+              </div>
+            </div>
+            <div class="lane-commands">
+              <div class="lane-commands-label">Example Claude Commands</div>
+              <div class="lane-cmd">Update Big Bear project: status Stalled, blocker waiting on county.</div>
+              <div class="lane-cmd">What are my active projects and their next milestones?</div>
+              <div class="lane-cmd">Create a new project: [Name], Civic domain, milestone [X] by [date].</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lane 4: Research / Thinking -->
+        <div class="lane-card">
+          <div class="lane-header">
+            <div class="lane-number">4</div>
+            <div class="lane-icon">&#129504;</div>
+            <div class="lane-title">Research / Thinking</div>
+          </div>
+          <div class="lane-body">
+            <p class="lane-purpose">Obsidian-backed private brain. Where synthesis happens. Clipped sources, strategy memos, quote libraries, frameworks, and daily reflections.</p>
+            <ul class="lane-list">
+              <li>Clipped articles and annotated sources</li>
+              <li>Synthesis memos and strategy notes</li>
+              <li>Quote library and reference material</li>
+              <li>Daily reflections and honest assessments</li>
+              <li>Frameworks and mental models</li>
+              <li>Research threads linked to projects</li>
+            </ul>
+            <div class="lane-io">
+              <div class="lane-io-box">
+                <div class="lane-io-label">Key Inputs</div>
+                <div class="lane-io-content">Obsidian notes &bull; Web clips &bull; Transcripts &bull; Voice note summaries</div>
+              </div>
+              <div class="lane-io-box">
+                <div class="lane-io-label">Key Outputs</div>
+                <div class="lane-io-content">Synthesis memos &bull; Obsidian notes &bull; Tagged research &bull; Strategy briefs</div>
+              </div>
+            </div>
+            <div class="lane-commands">
+              <div class="lane-commands-label">Example Claude Commands</div>
+              <div class="lane-cmd">Write an Obsidian memo on [topic] from these notes: [paste].</div>
+              <div class="lane-cmd">Search my Obsidian notes for everything on [topic].</div>
+              <div class="lane-cmd">Synthesize these 3 articles into a strategy brief.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lane 5: Outreach / Publishing -->
+        <div class="lane-card">
+          <div class="lane-header">
+            <div class="lane-number">5</div>
+            <div class="lane-icon">&#128226;</div>
+            <div class="lane-title">Outreach / Publishing</div>
+          </div>
+          <div class="lane-body">
+            <p class="lane-purpose">Content creation and distribution hub. Draft emails, build Substack pipeline, develop LinkedIn and X content, package outreach for media and partners.</p>
+            <ul class="lane-list">
+              <li>Draft outreach emails and pitches</li>
+              <li>Substack articles in pipeline</li>
+              <li>LinkedIn posts and X thread drafts</li>
+              <li>Media pitch packages</li>
+              <li>One-pagers and Canva deck exports</li>
+              <li>Content calendar with publish dates</li>
+            </ul>
+            <div class="lane-io">
+              <div class="lane-io-box">
+                <div class="lane-io-label">Key Inputs</div>
+                <div class="lane-io-content">Memos &bull; Transcripts &bull; Notion Content Pipeline &bull; Obsidian sources</div>
+              </div>
+              <div class="lane-io-box">
+                <div class="lane-io-label">Key Outputs</div>
+                <div class="lane-io-content">Substack draft &bull; LinkedIn post &bull; X threads &bull; Email pitch &bull; One-pager &bull; Deck outline</div>
+              </div>
+            </div>
+            <div class="lane-commands">
+              <div class="lane-commands-label">Example Claude Commands</div>
+              <div class="lane-cmd">Run Publish Pack on this memo: [paste].</div>
+              <div class="lane-cmd">Draft a media pitch email to [outlet] about [topic].</div>
+              <div class="lane-cmd">Write 5 X posts from this Substack draft.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lane 6: Admin / Ops -->
+        <div class="lane-card">
+          <div class="lane-header">
+            <div class="lane-number">6</div>
+            <div class="lane-icon">&#9881;</div>
+            <div class="lane-title">Admin / Ops</div>
+          </div>
+          <div class="lane-body">
+            <p class="lane-purpose">The unsexy stuff that keeps everything running. Finance, compliance, recurring reviews, business ops, and the items that fall through the cracks of every other system.</p>
+            <ul class="lane-list">
+              <li>Finance and invoicing tasks</li>
+              <li>Compliance and legal documents</li>
+              <li>Business wind-down or transition items</li>
+              <li>Recurring weekly and monthly reviews</li>
+              <li>System maintenance and tool audits</li>
+              <li>Admin tasks that don't fit elsewhere</li>
+            </ul>
+            <div class="lane-io">
+              <div class="lane-io-box">
+                <div class="lane-io-label">Key Inputs</div>
+                <div class="lane-io-content">Todoist Admin project &bull; Calendar recurring events &bull; Gmail admin threads</div>
+              </div>
+              <div class="lane-io-box">
+                <div class="lane-io-label">Key Outputs</div>
+                <div class="lane-io-content">Completed admin tasks &bull; Weekly review brief &bull; System health report</div>
+              </div>
+            </div>
+            <div class="lane-commands">
+              <div class="lane-commands-label">Example Claude Commands</div>
+              <div class="lane-cmd">Run the weekly executive review.</div>
+              <div class="lane-cmd">What admin tasks are overdue or blocked?</div>
+              <div class="lane-cmd">Audit my system: what tools am I not using? What's creating friction?</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /grid -->
+    </section>
+
+    <!-- ========================================
+         SECTION 3: NOTION DATABASES
+    ========================================= -->
+    <section class="content-section" id="notion-dbs" data-section="notion-dbs">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 03</div>
+        <h2 class="section-title">&#128221; Notion Databases</h2>
+        <p class="section-subtitle">Four core databases form the operational backbone. Every project, contact, piece of content, and opportunity lives in one of these four places — nowhere else.</p>
+      </div>
+
+      <!-- DB 1: Projects -->
+      <div class="card mb-8" style="border-left:4px solid var(--gold);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <span style="font-size:1.4rem;">&#128203;</span>
+          <div>
+            <h3 style="font-family:'Libre Baskerville',serif;font-size:1.15rem;color:var(--text-dark);">Database 1: Projects</h3>
+            <p style="font-size:0.8rem;color:var(--text-muted);">Every active initiative. The single source of truth for what you're working on and where it stands.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Field</th><th>Type</th><th>Purpose</th><th>Example Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Name</strong></td><td><span class="badge badge-navy">Title</span></td><td>Project name — unique identifier</td><td>Big Bear Community Water Initiative</td></tr>
+              <tr><td><strong>Status</strong></td><td><span class="badge badge-amber">Select</span></td><td>Current state of the project</td><td>Active / Stalled / Complete / Archived</td></tr>
+              <tr><td><strong>Domain</strong></td><td><span class="badge badge-amber">Select</span></td><td>Which area of life/work this belongs to</td><td>Civic / Business / Content / Finance / Personal</td></tr>
+              <tr><td><strong>Owner</strong></td><td><span class="badge badge-green">Person</span></td><td>Who is responsible</td><td>You or team member</td></tr>
+              <tr><td><strong>Next Milestone</strong></td><td><span class="badge badge-navy">Text</span></td><td>Single next deliverable or gate</td><td>Submit county permit application</td></tr>
+              <tr><td><strong>Milestone Date</strong></td><td><span class="badge badge-red">Date</span></td><td>When that milestone is due</td><td>March 22, 2026</td></tr>
+              <tr><td><strong>Blockers</strong></td><td><span class="badge badge-navy">Text</span></td><td>What is preventing progress</td><td>Waiting on county approval from Dept of Water</td></tr>
+              <tr><td><strong>Linked Tasks</strong></td><td><span class="badge badge-gold">Relation</span></td><td>Reference to Todoist tasks (via note)</td><td>todoist://task/12345</td></tr>
+              <tr><td><strong>Key Doc URL</strong></td><td><span class="badge badge-navy">URL</span></td><td>Primary Google Drive document</td><td>drive.google.com/...</td></tr>
+              <tr><td><strong>Next Review</strong></td><td><span class="badge badge-red">Date</span></td><td>When to revisit this project</td><td>March 15, 2026</td></tr>
+              <tr><td><strong>Notes</strong></td><td><span class="badge badge-navy">Text</span></td><td>Free-form context</td><td>County contact is Maria Torres, ext 4412</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note-card">
+          <div class="note-label">&#129504; Claude command to use this database</div>
+          <em>"Update the Big Bear project status to Stalled, set the blocker to 'waiting on county approval', and schedule a review for March 15."</em>
+        </div>
+      </div>
+
+      <!-- DB 2: CRM -->
+      <div class="card mb-8" style="border-left:4px solid var(--gold);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <span style="font-size:1.4rem;">&#128101;</span>
+          <div>
+            <h3 style="font-family:'Libre Baskerville',serif;font-size:1.15rem;color:var(--text-dark);">Database 2: CRM / Relationships</h3>
+            <p style="font-size:0.8rem;color:var(--text-muted);">Every meaningful relationship. Not a full CRM — a lightweight contact intelligence layer that tells you who to call and when.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Field</th><th>Type</th><th>Purpose</th><th>Example Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Name</strong></td><td><span class="badge badge-navy">Title</span></td><td>Full name of contact</td><td>Maria Torres</td></tr>
+              <tr><td><strong>Organization</strong></td><td><span class="badge badge-navy">Text</span></td><td>Where they work or what they represent</td><td>San Bernardino County Water Dept</td></tr>
+              <tr><td><strong>Relationship Type</strong></td><td><span class="badge badge-amber">Select</span></td><td>Nature of the relationship</td><td>Lead / Partner / Media / Advisor / Personal</td></tr>
+              <tr><td><strong>Last Contact</strong></td><td><span class="badge badge-red">Date</span></td><td>When you last spoke or emailed</td><td>Feb 28, 2026</td></tr>
+              <tr><td><strong>Next Follow-up</strong></td><td><span class="badge badge-red">Date</span></td><td>When to reach out next</td><td>March 10, 2026</td></tr>
+              <tr><td><strong>Status</strong></td><td><span class="badge badge-amber">Select</span></td><td>Relationship health / temperature</td><td>Active / Warm / Cold / Closed</td></tr>
+              <tr><td><strong>Thread Link</strong></td><td><span class="badge badge-navy">URL</span></td><td>Link to primary Gmail thread</td><td>mail.google.com/...</td></tr>
+              <tr><td><strong>Notes</strong></td><td><span class="badge badge-navy">Text</span></td><td>Key context, preferences, history</td><td>Prefers text. Connected via Oath &amp; Action intro.</td></tr>
+              <tr><td><strong>Opportunities</strong></td><td><span class="badge badge-gold">Relation</span></td><td>Linked opportunities from Opportunities DB</td><td>&rarr; Water Project Consulting</td></tr>
+              <tr><td><strong>Priority</strong></td><td><span class="badge badge-amber">Select</span></td><td>Relationship priority level</td><td>High / Medium / Low</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note-card">
+          <div class="note-label">&#129504; Claude command to use this database</div>
+          <em>"Show me all CRM contacts where Last Contact is more than 14 days ago and Status is Active or Warm. List them with their organization and what we last discussed."</em>
+        </div>
+      </div>
+
+      <!-- DB 3: Content Pipeline -->
+      <div class="card mb-8" style="border-left:4px solid var(--gold);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <span style="font-size:1.4rem;">&#128195;</span>
+          <div>
+            <h3 style="font-family:'Libre Baskerville',serif;font-size:1.15rem;color:var(--text-dark);">Database 3: Content Pipeline</h3>
+            <p style="font-size:0.8rem;color:var(--text-muted);">Everything you publish, from idea to live. Substack, LinkedIn, X threads, pitches, decks, and one-pagers — all in one pipeline.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Field</th><th>Type</th><th>Purpose</th><th>Example Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Title</strong></td><td><span class="badge badge-navy">Title</span></td><td>Working title of the piece</td><td>Why Local Water Policy Is National Policy</td></tr>
+              <tr><td><strong>Format</strong></td><td><span class="badge badge-amber">Select</span></td><td>Output format</td><td>Substack / LinkedIn / X Thread / Email Pitch / One-Pager / Slide Deck / Video Script</td></tr>
+              <tr><td><strong>Status</strong></td><td><span class="badge badge-amber">Select</span></td><td>Where it is in the pipeline</td><td>Idea / Drafting / Review / Scheduled / Published</td></tr>
+              <tr><td><strong>Domain</strong></td><td><span class="badge badge-amber">Select</span></td><td>Which area this content serves</td><td>Civic / Business / Personal</td></tr>
+              <tr><td><strong>Source Memo</strong></td><td><span class="badge badge-navy">URL/Relation</span></td><td>Obsidian note or Drive doc it came from</td><td>obsidian://open?vault=Brain&amp;file=Water+Policy</td></tr>
+              <tr><td><strong>Publish Date</strong></td><td><span class="badge badge-red">Date</span></td><td>Target or actual publish date</td><td>March 18, 2026</td></tr>
+              <tr><td><strong>Platform</strong></td><td><span class="badge badge-navy">Text</span></td><td>Where it publishes</td><td>Substack (Oath &amp; Action), LinkedIn</td></tr>
+              <tr><td><strong>Drive Link</strong></td><td><span class="badge badge-navy">URL</span></td><td>Google Drive draft or final file</td><td>drive.google.com/...</td></tr>
+              <tr><td><strong>Canva Link</strong></td><td><span class="badge badge-navy">URL</span></td><td>Canva design if applicable</td><td>canva.com/design/...</td></tr>
+              <tr><td><strong>Notes</strong></td><td><span class="badge badge-navy">Text</span></td><td>Angle, audience, key point</td><td>Lead with the Big Bear case study</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note-card">
+          <div class="note-label">&#129504; Claude command to use this database</div>
+          <em>"Show me all content that's in Drafting or Review status. For each one, tell me the format, domain, and publish date. Flag anything overdue."</em>
+        </div>
+      </div>
+
+      <!-- DB 4: Opportunities -->
+      <div class="card" style="border-left:4px solid var(--gold);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <span style="font-size:1.4rem;">&#128200;</span>
+          <div>
+            <h3 style="font-family:'Libre Baskerville',serif;font-size:1.15rem;color:var(--text-dark);">Database 4: Opportunities</h3>
+            <p style="font-size:0.8rem;color:var(--text-muted);">Revenue, partnerships, media, speaking, and grants. Every opportunity with a clear next step and owner — so nothing falls through the cracks.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Field</th><th>Type</th><th>Purpose</th><th>Example Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Name</strong></td><td><span class="badge badge-navy">Title</span></td><td>Name of the opportunity</td><td>Water Policy Consulting — San Bernardino</td></tr>
+              <tr><td><strong>Type</strong></td><td><span class="badge badge-amber">Select</span></td><td>Category of opportunity</td><td>Revenue / Partnership / Media / Speaking / Consulting / Grant</td></tr>
+              <tr><td><strong>Source</strong></td><td><span class="badge badge-navy">Text</span></td><td>Where this came from</td><td>Inbound referral via Maria Torres</td></tr>
+              <tr><td><strong>Status</strong></td><td><span class="badge badge-amber">Select</span></td><td>Pipeline stage</td><td>New / Qualifying / Pursuing / Closed-Won / Closed-Lost</td></tr>
+              <tr><td><strong>Value Est.</strong></td><td><span class="badge badge-green">Number</span></td><td>Estimated value in dollars</td><td>$18,000</td></tr>
+              <tr><td><strong>Deadline</strong></td><td><span class="badge badge-red">Date</span></td><td>When the opportunity closes or expires</td><td>April 1, 2026</td></tr>
+              <tr><td><strong>Owner</strong></td><td><span class="badge badge-green">Person</span></td><td>Who is driving this</td><td>You</td></tr>
+              <tr><td><strong>Next Step</strong></td><td><span class="badge badge-navy">Text</span></td><td>The single next action to move forward</td><td>Send proposal draft by March 12</td></tr>
+              <tr><td><strong>Related Project</strong></td><td><span class="badge badge-gold">Relation</span></td><td>Linked project in Projects DB</td><td>&rarr; Big Bear Water Initiative</td></tr>
+              <tr><td><strong>Contact</strong></td><td><span class="badge badge-gold">Relation</span></td><td>Primary contact in CRM DB</td><td>&rarr; Maria Torres</td></tr>
+              <tr><td><strong>Notes</strong></td><td><span class="badge badge-navy">Text</span></td><td>Key context and history</td><td>Decision by county board in April session</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note-card">
+          <div class="note-label">&#129504; Claude command to use this database</div>
+          <em>"Show me all Opportunities in Pursuing status with a deadline in the next 30 days. Include the estimated value, next step, and primary contact for each. Sort by deadline."</em>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================
+         SECTION 4: TODOIST STRUCTURE
+    ========================================= -->
+    <section class="content-section" id="todoist" data-section="todoist">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 04</div>
+        <h2 class="section-title">&#9989; Todoist Structure</h2>
+        <p class="section-subtitle">A clean, opinionated project tree. Every action has a home. No strategy, no CRM, no meeting notes — only discrete, checkable next steps.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;">
+
+        <!-- Left: Project Tree -->
+        <div>
+          <h3 style="font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--text-dark);margin-bottom:14px;">Project Tree</h3>
+          <div class="file-tree">
+            <div class="tree-root">&#128193; Inbox &nbsp;<span style="color:var(--warm-gray);font-size:0.75rem;font-weight:400;">(default capture)</span></div>
+            <div class="tree-root">&#128193; Today &nbsp;<span style="color:var(--warm-gray);font-size:0.75rem;font-weight:400;">(manual pulls from all projects)</span></div>
+            <br>
+            <div class="tree-section">&#128193; CIVIC</div>
+            <div class="tree-child">&#128193; Oath &amp; Action</div>
+            <div class="tree-child">&#128193; Big Bear / Local</div>
+            <div class="tree-child">&#128193; Advocacy &amp; Policy</div>
+            <br>
+            <div class="tree-section">&#128193; BUSINESS</div>
+            <div class="tree-child">&#128193; Revenue / Consulting</div>
+            <div class="tree-child">&#128193; Partnerships</div>
+            <div class="tree-child">&#128193; Admin / Legal / Finance</div>
+            <br>
+            <div class="tree-section">&#128193; CONTENT</div>
+            <div class="tree-child">&#128193; Substack</div>
+            <div class="tree-child">&#128193; Social / Outreach</div>
+            <div class="tree-child">&#128193; Media &amp; Press</div>
+            <br>
+            <div class="tree-section">&#128193; PERSONAL</div>
+            <div class="tree-child">&#128193; Family</div>
+            <div class="tree-child">&#128193; Health</div>
+            <div class="tree-child">&#128193; Learning</div>
+            <br>
+            <div class="tree-section">&#128193; RECURRING</div>
+            <div class="tree-child">&#128193; Weekly Review</div>
+            <div class="tree-child">&#128193; Monthly Review</div>
+            <div class="tree-child">&#128193; Daily Ops</div>
+          </div>
+        </div>
+
+        <!-- Right: Labels + Priority -->
+        <div>
+          <h3 style="font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--text-dark);margin-bottom:14px;">Label System</h3>
+          <div class="card mb-6">
+            <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px;">Apply labels to give tasks context beyond their project. A task in Revenue/Consulting tagged <code style="background:var(--cream);padding:1px 5px;border-radius:3px;font-size:0.78rem;">@phone</code> tells you to call, not email.</p>
+            <div class="label-grid">
+              <span class="label-chip">@waiting</span>
+              <span class="label-chip">@2min</span>
+              <span class="label-chip">@phone</span>
+              <span class="label-chip">@computer</span>
+              <span class="label-chip">@deep-work</span>
+              <span class="label-chip">@errand</span>
+              <span class="label-chip">@draft-needed</span>
+              <span class="label-chip">@blocked</span>
+              <span class="label-chip">@high-stakes</span>
+              <span class="label-chip">@revenue</span>
+            </div>
+          </div>
+
+          <h3 style="font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--text-dark);margin-bottom:14px;">Priority Convention</h3>
+          <div class="priority-grid">
+            <div class="priority-item">
+              <div class="priority-badge p1">P1</div>
+              <div class="priority-desc">Due today, high stakes, or blocks others</div>
+            </div>
+            <div class="priority-item">
+              <div class="priority-badge p2">P2</div>
+              <div class="priority-desc">Due this week, important but not urgent</div>
+            </div>
+            <div class="priority-item">
+              <div class="priority-badge p3">P3</div>
+              <div class="priority-desc">Due this month or ongoing, lower urgency</div>
+            </div>
+            <div class="priority-item">
+              <div class="priority-badge p4">P4</div>
+              <div class="priority-desc">Someday / low priority / nice to have</div>
+            </div>
+          </div>
+
+          <div class="rule-card" style="margin-top:20px;">
+            <strong style="color:var(--red-warn);font-style:normal;">The Todoist Rule:</strong> Only actionable next steps live in Todoist. No strategy. No CRM. No meeting notes. If it's not a discrete action you can check off, it doesn't belong here.
+          </div>
+
+          <div class="note-card" style="margin-top:14px;">
+            <div class="note-label">&#129504; Claude command for Todoist</div>
+            <em>"Add a P2 task to Business / Revenue called 'Send proposal to Maria Torres' with label @computer and due date March 12. Link it to the Water Policy opportunity in Notion."</em>
+          </div>
+        </div>
+
+      </div><!-- /grid -->
+    </section>
+
+    <!-- ========================================
+         SECTION 5: CLAUDE SKILLS
+    ========================================= -->
+    <section class="content-section" id="claude-skills" data-section="claude-skills">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 05</div>
+        <h2 class="section-title">&#129504; Claude Skills</h2>
+        <p class="section-subtitle">Five saved system prompts that give Claude a specific role and operating mode. Load a skill to shift Claude's behavior for a defined task. Each skill has a precise instruction set and expected output format.</p>
+      </div>
+
+      <!-- Skill 1: Morning Brief -->
+      <div class="skill-card">
+        <div class="skill-header">
+          <div>
+            <div class="skill-name">&#9728; Morning Brief</div>
+            <div class="skill-trigger">Trigger: Every morning, before starting work</div>
+          </div>
+          <span class="badge badge-gold">Skill 1 of 5</span>
+        </div>
+        <div class="skill-body">
+          <div class="skill-meta">
+            <div class="skill-meta-item">
+              <div class="skill-meta-label">Expected Output</div>
+              <div class="skill-meta-value">Formatted daily operating brief with schedule, email hotspots, project pulses, and first focus block</div>
+            </div>
+            <div class="skill-meta-item">
+              <div class="skill-meta-label">Recommended Frequency</div>
+              <div class="skill-meta-value">Daily — every morning before opening email or Todoist</div>
+            </div>
+          </div>
+          <div class="skill-prompt-label">System Prompt / Instruction Block</div>
+          <div class="code-block" id="code-skill-1">
+            <button class="copy-btn" onclick="copyCode('code-skill-1', this)">Copy</button>
+            <pre><span class="cm">You are my personal chief of staff. Every morning, pull the following</span>
+<span class="cm">and synthesize into a crisp daily operating brief:</span>
+
+<span class="num">1.</span> Today's calendar events (from Google Calendar connector)
+<span class="num">2.</span> Tasks due today or overdue (from Todoist via Zapier MCP)
+<span class="num">3.</span> High-signal emails from the last 18 hours (from Gmail connector)
+   — flag leads, urgent requests, and relationship threads
+<span class="num">4.</span> Top 3 active projects with next milestones (from Notion via Zapier MCP)
+<span class="num">5.</span> Yesterday's reflection note if it exists (from Obsidian if available)
+
+<span class="kw">Output format:</span>
+<span class="str">## Morning Brief — [DATE]</span>
+<span class="str">### Today's Shape</span>
+[2-3 sentence summary of the day]
+
+<span class="str">### Top 3 Outcomes</span>
+1. [Most important thing to accomplish]
+2.
+3.
+
+<span class="str">### Schedule</span>
+[Time-blocked summary of calendar]
+
+<span class="str">### Email Hotspots</span>
+[3-5 flagged emails with one-line summary and recommended action]
+
+<span class="str">### Active Project Pulses</span>
+[One line per top project: status + next action]
+
+<span class="str">### Repair Needed</span>
+[Anything overdue, conflicting, or at risk]
+
+<span class="str">### First Focus Block</span>
+[Recommended first 90-minute block and why]
+
+Keep it scannable. Use bullets. No fluff.</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skill 2: Inbox Triage -->
+      <div class="skill-card">
+        <div class="skill-header">
+          <div>
+            <div class="skill-name">&#128229; Inbox Triage</div>
+            <div class="skill-trigger">Trigger: Any time you receive something that needs routing</div>
+          </div>
+          <span class="badge badge-gold">Skill 2 of 5</span>
+        </div>
+        <div class="skill-body">
+          <div class="skill-meta">
+            <div class="skill-meta-item">
+              <div class="skill-meta-label">Expected Output</div>
+              <div class="skill-meta-value">Routing confirmation — one line saying what was routed where, plus action taken in the relevant system</div>
+            </div>
+            <div class="skill-meta-item">
+              <div class="skill-meta-label">Recommended Frequency</div>
+              <div class="skill-meta-value">On demand — any time something lands in your world and needs a home</div>
+            </div>
+          </div>
+          <div class="skill-prompt-label">System Prompt / Instruction Block</div>
+          <div class="code-block" id="code-skill-2">
+            <button class="copy-btn" onclick="copyCode('code-skill-2', this)">Copy</button>
+            <pre><span class="cm">You are my routing intelligence. When I send you any piece of content</span>
+<span class="cm">— an email, a note, an idea, a link, a screenshot, a meeting note —</span>
+<span class="cm">your job is to:</span>
+
+<span class="num">1.</span> Identify what it is
+<span class="num">2.</span> Decide where it belongs:
+   - Actionable next step → Todoist
+     (specify project + label + priority)
+   - Scheduled commitment → Google Calendar
+     (specify date/time/title)
+   - Project update or structured info → Notion
+     (specify database + fields to fill)
+   - Deep thinking, source material, or reflection → Obsidian
+     (suggest note title + tags)
+   - File or deliverable → Google Drive
+     (suggest folder path)
+   - Draft needed → flag as @draft-needed
+     and route to Content Pipeline in Notion
+<span class="num">3.</span> Execute the routing action via the appropriate connector/MCP
+<span class="num">4.</span> Confirm what you did in one line
+
+If something could go to multiple places, pick the primary home
+and add a reference link in the secondary location.
+
+<span class="kw">Never ask me where something goes unless it is genuinely ambiguous.</span>
+<span class="kw">Make the call.</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skill 3: Meeting Prep -->
+      <div class="skill-card">
+        <div class="skill-header">
+          <div>
+            <div class="skill-name">&#128203; Meeting Prep</div>
+            <div class="skill-trigger">Trigger: ~60 minutes before any significant meeting; also post-meeting for after-action</div>
+          </div>
+          <span class="badge badge-gold">Skill 3 of 5</span>
+        </div>
+        <div class="skill-body">
+          <div class="skill-meta">
+            <div class="skill-meta-item">
+              <div class="skill-meta-label">Expected Output</div>
+              <div class="skill-meta-value">Pre-meeting: context brief, goal, agenda, 3 questions, 2 reminders. Post-meeting: action items, follow-up email, Todoist tasks, Notion update, Obsidian memo</div>
+            </div>
+            <div class="skill-meta-item">
+              <div class="skill-meta-label">Recommended Frequency</div>
+              <div class="skill-meta-value">Before every high-stakes meeting; after any meeting with action items</div>
+            </div>
+          </div>
+          <div class="skill-prompt-label">System Prompt / Instruction Block</div>
+          <div class="code-block" id="code-skill-3">
+            <button class="copy-btn" onclick="copyCode('code-skill-3', this)">Copy</button>
+            <pre><span class="cm">You are my meeting intelligence. Given a calendar event title</span>
+<span class="cm">and/or attendees, prepare me for the meeting:</span>
+
+<span class="kw">BEFORE THE MEETING:</span>
+<span class="num">1.</span> Pull the email thread with these contacts (Gmail connector)
+<span class="num">2.</span> Pull any Notion project or CRM record linked to them
+<span class="num">3.</span> Pull any Obsidian notes tagged with their name or project
+<span class="num">4.</span> Generate:
+   - Context summary (who they are, what we've discussed, where things stand)
+   - My goal for this meeting (inferred from context, ask me to confirm)
+   - Suggested agenda (3-5 items)
+   - 3 questions I should ask
+   - 2 things I should not forget to mention
+   - Any prep actions needed before the call
+
+<span class="cm">After I paste in meeting notes or a transcript,</span>
+<span class="cm">shift to AFTER THE MEETING mode:</span>
+
+<span class="kw">AFTER THE MEETING:</span>
+<span class="num">1.</span> Extract all action items (mine and theirs)
+<span class="num">2.</span> Draft follow-up email
+<span class="num">3.</span> Create Todoist tasks for my action items
+<span class="num">4.</span> Update Notion CRM/Project record
+<span class="num">5.</span> Write a 3-sentence Obsidian memo summarizing the meeting
+<span class="num">6.</span> Schedule any follow-up events</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skill 4: Day Close -->
+      <div class="skill-card">
+        <div class="skill-header">
+          <div>
+            <div class="skill-name">&#127748; Day Close</div>
+            <div class="skill-trigger">Trigger: End of each workday, before shutting down</div>
+          </div>
+          <span class="badge badge-gold">Skill 4 of 5</span>
+        </div>
+        <div class="skill-body">
+          <div class="skill-meta">
+            <div class="skill-meta-item">
+              <div class="skill-meta-label">Expected Output</div>
+              <div class="skill-meta-value">Day close brief: wins, incomplete items, carry-forwards in Todoist, revenue/relationship moves, honest sentence, tomorrow's top 3 + first block</div>
+            </div>
+            <div class="skill-meta-item">
+              <div class="skill-meta-label">Recommended Frequency</div>
+              <div class="skill-meta-value">Daily — every evening, takes 10 minutes, saves hours of recovery the next morning</div>
+            </div>
+          </div>
+          <div class="skill-prompt-label">System Prompt / Instruction Block</div>
+          <div class="code-block" id="code-skill-4">
+            <button class="copy-btn" onclick="copyCode('code-skill-4', this)">Copy</button>
+            <pre><span class="cm">You are my end-of-day debrief partner. At day's end, help me close out cleanly:</span>
+
+<span class="num">1.</span> Pull today's completed tasks from Todoist
+<span class="num">2.</span> Pull today's calendar events
+<span class="num">3.</span> Ask me: "What actually happened today?"
+   (I'll reply with a voice note or text)
+
+Then produce:
+<span class="str">## Day Close — [DATE]</span>
+
+<span class="str">### What Got Done</span>
+[Completed tasks + any unplanned wins]
+
+<span class="str">### What Didn't Happen</span>
+[Incomplete items + brief note on why]
+
+<span class="str">### Carry-Forward</span>
+[Tasks to move to tomorrow — add to Todoist with P1/P2]
+
+<span class="str">### Revenue / Relationship Moves</span>
+[Any leads, conversations, or opportunities that need follow-up]
+
+<span class="str">### One Honest Sentence</span>
+[My assessment of today in one sentence — I'll provide this]
+
+<span class="str">### Tomorrow's Setup</span>
+[Top 3 outcomes for tomorrow, first calendar event, first focus block]
+
+Write the honest version to Obsidian daily note.
+Write carry-forward tasks to Todoist.</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skill 5: Publish Pack -->
+      <div class="skill-card">
+        <div class="skill-header">
+          <div>
+            <div class="skill-name">&#128226; Publish Pack</div>
+            <div class="skill-trigger">Trigger: Whenever a memo, idea, or rough draft is ready to become publishable content</div>
+          </div>
+          <span class="badge badge-gold">Skill 5 of 5</span>
+        </div>
+        <div class="skill-body">
+          <div class="skill-meta">
+            <div class="skill-meta-item">
+              <div class="skill-meta-label">Expected Output</div>
+              <div class="skill-meta-value">Full content suite: Substack draft, LinkedIn post, 5 X posts, email pitch, one-pager outline, slide deck outline — plus Notion record and Drive folder</div>
+            </div>
+            <div class="skill-meta-item">
+              <div class="skill-meta-label">Recommended Frequency</div>
+              <div class="skill-meta-value">Whenever significant thinking needs to be packaged and distributed across channels</div>
+            </div>
+          </div>
+          <div class="skill-prompt-label">System Prompt / Instruction Block</div>
+          <div class="code-block" id="code-skill-5">
+            <button class="copy-btn" onclick="copyCode('code-skill-5', this)">Copy</button>
+            <pre><span class="cm">You are my content packaging engine. When I give you a memo,</span>
+<span class="cm">transcript, idea, or rough draft, turn it into a full publishing pack:</span>
+
+<span class="num">1.</span> <span class="kw">Substack draft</span> — 600-1000 words, my voice (direct, evidence-based,
+   civic-minded), headline + subhead + body + CTA
+
+<span class="num">2.</span> <span class="kw">LinkedIn post</span> — 150-250 words, professional but personal,
+   3-5 paragraphs, no hashtag spam
+
+<span class="num">3.</span> <span class="kw">5 X posts</span> — standalone punchy takes, each under 280 characters,
+   varied angles
+
+<span class="num">4.</span> <span class="kw">Email pitch</span> (if applicable) — subject line + 4-paragraph email
+   for media or partnership outreach
+
+<span class="num">5.</span> <span class="kw">One-pager outline</span> — headline, problem, solution, 3 key points,
+   call to action, contact
+
+<span class="num">6.</span> <span class="kw">Slide deck outline</span> — title slide + 6-8 content slides
+   with bullet points
+
+Format each section clearly with headers. Flag any claims that
+need fact-checking. Note where a Canva design or Excel data viz
+would strengthen the piece.
+
+After I approve, create a Notion record in Content Pipeline
+and a Google Drive folder for this content.</pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================
+         SECTION 6: ZAPIER MCP ACTIONS
+    ========================================= -->
+    <section class="content-section" id="zapier-mcp" data-section="zapier-mcp">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 06</div>
+        <h2 class="section-title">&#9889; Zapier MCP Actions</h2>
+        <p class="section-subtitle">The 12 approved MCP actions that Claude can execute. These are the verbs of the system — how Claude reaches into your tools and takes real action. Configure as a named action set in Zapier MCP.</p>
+      </div>
+
+      <div class="table-wrap zapier-table-wrap mb-6">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Action Name</th>
+              <th>App</th>
+              <th>Trigger / Input</th>
+              <th>What It Does</th>
+              <th>Output</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:var(--gold);font-weight:700;font-family:'Libre Baskerville',serif;">01</td>
+              <td><strong>Create Todoist Task</strong></td>
+              <td><span class="badge badge-green">Todoist</span></td>
+              <td>Task title, project, labels, due date, priority</td>
+              <td>Creates task in the correct project with all metadata</td>
+              <td>Task ID + URL</td>
+            </tr>
+            <tr>
+              <td style="color:var(--gold);font-weight:700;font-family:'Libre Baskerville',serif;">02</td>
+              <td><strong>Update Notion Record</strong></td>
+              <td><span class="badge badge-amber">Notion</span></td>
+              <td>Database ID, record ID, field updates (key-value pairs)</td>
+              <td>Updates one or more fields in any Notion database record</td>
+              <td>Confirmation + updated fields</td>
+            </tr>
+            <tr>
+              <td style="color:var(--gold);font-weight:700;font-family:'Libre Baskerville',serif;">03</td>
+              <td><strong>Create Notion Record</strong></td>
+              <td><span class="badge badge-amber">Notion</span></td>
+              <td>Database ID, field values for new record</td>
+              <td>Creates a new row in any Notion database</td>
+              <td>New record ID + URL</td>
+            </tr>
+            <tr>
+              <td style="color:var(--gold);font-weight:700;font-family:'Libre Baskerville',serif;">04</td>
+              <td><strong>Query Notion Database</strong></td>
+              <td><span class="badge badge-amber">Notion</span></td>
+              <td>Database ID, filter criteria, sort order, limit</td>
+              <td>Returns matching records as structured JSON</td>
+              <td>JSON list of matching records</td>
+            </tr>
+            <tr>
+              <td style="color:var(--gold);font-weight:700;font-family:'Libre Baskerville',serif;">05</td>
+              <td><strong>Get Todoist Tasks</strong></td>
+              <td><span class="badge badge-green">Todoist</span></td>
+              <td>Project name, filter (today / overdue / label)</td>
+              <td>Returns a filtered list of tasks matching the criteria</td>
+              <td>Task list with metadata</td>
+            </tr>
+            <tr>
+              <td style="color:var(--gold);font-weight:700;font-family:'Libre Baskerville',serif;">06</td>
+              <td><strong>Complete Todoist Task</strong></td>
+              <td><span class="badge badge-green">Todoist</span></td>
+              <td>Task ID</td>
+              <td>Marks the specified task as complete in Todoist</td>
+              <td>Confirmation</td>
+            </tr>
+            <tr>
+              <td style="color:var(--gold);font-weight:700;font-family:'Libre Baskerville',serif;">07</td>
+              <td><strong>Get Gmail Messages</strong></td>
+              <td><span class="badge badge-red">Gmail</span></td>
+              <td>Search query (Gmail syntax), max results</td>
+              <td>Returns matching emails with sender, subject, snippet, date</td>
+              <td>Email list with metadata</td>
+            </tr>
+            <tr>
+              <td style="color:var(--gold);font-weight:700;font-family:'Libre Baskerville',serif;">08</td>
+              <td><strong>Create Gmail Draft</strong></td>
+              <td><span class="badge badge-red">Gmail</span></td>
+              <td>To, subject, body (plain text or HTML)</td>
+              <td>Creates a draft email in Gmail ready for review and send</td>
+              <td>Draft ID + link</td>
+            </tr>
+            <tr>
+              <td style="color:var(--gold);font-weight:700;font-family:'Libre Baskerville',serif;">09</td>
+              <td><strong>Create Calendar Event</strong></td>
+              <td><span class="badge badge-navy">Calendar</span></td>
+              <td>Title, date, time, duration, attendees, description</td>
+              <td>Creates a Google Calendar event with all details</td>
+              <td>Event ID + Google Calendar link</td>
+            </tr>
+            <tr>
+              <td style="color:var(--gold);font-weight:700;font-family:'Libre Baskerville',serif;">10</td>
+              <td><strong>Add to Google Drive</strong></td>
+              <td><span class="badge badge-navy">Drive</span></td>
+              <td>File name, content or URL, folder path</td>
+              <td>Creates or uploads a file to the specified Drive folder</td>
+              <td>File URL + Drive ID</td>
+            </tr>
+            <tr>
+              <td style="color:var(--gold);font-weight:700;font-family:'Libre Baskerville',serif;">11</td>
+              <td><strong>Get Canva Design</strong></td>
+              <td><span class="badge badge-amber">Canva</span></td>
+              <td>Design ID or design name</td>
+              <td>Returns design link and available export options</td>
+              <td>Design URL + export formats</td>
+            </tr>
+            <tr>
+              <td style="color:var(--gold);font-weight:700;font-family:'Libre Baskerville',serif;">12</td>
+              <td><strong>Search Notion</strong></td>
+              <td><span class="badge badge-amber">Notion</span></td>
+              <td>Search query string</td>
+              <td>Full-text search across all Notion pages and databases</td>
+              <td>Results list with titles, URLs, and snippets</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="rule-card" style="background:var(--amber-dim);border-left-color:var(--amber);">
+        <strong style="color:var(--amber);font-style:normal;">Deployment Rule:</strong> Configure these as a named action set in Zapier MCP. Limit the first deployment to these 12 actions — do not expose all of Zapier to Claude. Expand deliberately, only when a specific use case demands it. Every new action is a new attack surface and a new cognitive load.
+      </div>
+
+      <div class="note-card" style="margin-top:16px;">
+        <div class="note-label">&#129504; How Claude uses these actions</div>
+        When you use a Skill (e.g. Morning Brief or Inbox Triage), Claude orchestrates multiple MCP actions behind the scenes in sequence — e.g. <em>Query Notion Database</em> + <em>Get Todoist Tasks</em> + <em>Get Gmail Messages</em> — and synthesizes the results. You never need to call these actions manually. They are Claude's hands.
+      </div>
+    </section>
+
+    <!-- ========================================
+         SECTION 7: APPS SCRIPT AUTOMATIONS
+    ========================================= -->
+    <section class="content-section" id="apps-script" data-section="apps-script">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 07</div>
+        <h2 class="section-title">&#128196; Apps Script Automations</h2>
+        <p class="section-subtitle">Three production-ready Google Apps Script automations. These run on time-based triggers, preparing context that feeds into Claude's morning brief, meeting prep, and weekly review workflows.</p>
+      </div>
+
+      <!-- Script 1 -->
+      <div class="card mb-8">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <h3 style="font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--text-dark);">&#128231; Script 1: Gmail Morning Digest</h3>
+          <div style="display:flex;gap:8px;">
+            <span class="badge badge-gold">Daily &bull; 6:30 AM</span>
+            <span class="badge badge-navy">Gmail + Drive</span>
+          </div>
+        </div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Scans your inbox for high-signal emails using three query patterns, deduplicates results, and writes a structured digest file to Google Drive. Claude picks this up in the Morning Brief.</p>
+        <div class="code-block" id="code-script-1">
+          <button class="copy-btn" onclick="copyCode('code-script-1', this)">Copy</button>
+          <pre><span class="cm">// Gmail Morning Digest — runs daily at 6:30 AM via Apps Script trigger</span>
+<span class="cm">// Scans inbox for high-signal emails and writes a digest to Drive</span>
+
+<span class="kw">function</span> <span class="fn">gmailMorningDigest</span>() {
+  <span class="kw">const</span> <span class="vr">cutoff</span> = <span class="kw">new</span> <span class="fn">Date</span>();
+  cutoff.<span class="op">setHours</span>(cutoff.<span class="op">getHours</span>() - <span class="num">18</span>);
+  
+  <span class="kw">const</span> <span class="vr">signals</span> = [
+    <span class="str">'label:inbox is:unread'</span>,
+    <span class="str">'label:inbox subject:(opportunity OR partnership OR media OR consulting OR urgent)'</span>,
+    <span class="str">'label:inbox from:(*.gov OR *.org)'</span>,
+  ];
+  
+  <span class="kw">const</span> <span class="vr">flagged</span> = [];
+  
+  signals.<span class="op">forEach</span>(<span class="vr">query</span> <span class="kw">=></span> {
+    <span class="kw">const</span> <span class="vr">threads</span> = GmailApp.<span class="op">search</span>(query + <span class="str">' after:'</span> + <span class="fn">formatDate</span>(cutoff), <span class="num">0</span>, <span class="num">10</span>);
+    threads.<span class="op">forEach</span>(<span class="vr">thread</span> <span class="kw">=></span> {
+      <span class="kw">const</span> <span class="vr">msg</span> = thread.<span class="op">getMessages</span>()[thread.<span class="op">getMessageCount</span>() - <span class="num">1</span>];
+      flagged.<span class="op">push</span>({
+        from:    msg.<span class="op">getFrom</span>(),
+        subject: msg.<span class="op">getSubject</span>(),
+        snippet: msg.<span class="op">getPlainBody</span>().<span class="op">substring</span>(<span class="num">0</span>, <span class="num">200</span>),
+        date:    msg.<span class="op">getDate</span>(),
+        url:     <span class="str">'https://mail.google.com/mail/u/0/#inbox/'</span> + thread.<span class="op">getId</span>()
+      });
+    });
+  });
+  
+  <span class="cm">// Deduplicate by subject line</span>
+  <span class="kw">const</span> <span class="vr">seen</span> = <span class="kw">new</span> <span class="fn">Set</span>();
+  <span class="kw">const</span> <span class="vr">unique</span> = flagged.<span class="op">filter</span>(<span class="vr">e</span> <span class="kw">=></span> {
+    <span class="kw">if</span> (seen.<span class="op">has</span>(e.subject)) <span class="kw">return</span> <span class="kw">false</span>;
+    seen.<span class="op">add</span>(e.subject);
+    <span class="kw">return</span> <span class="kw">true</span>;
+  });
+  
+  <span class="cm">// Write digest to Drive</span>
+  <span class="kw">const</span> <span class="vr">digest</span> = unique.<span class="op">map</span>(<span class="vr">e</span> <span class="kw">=></span> 
+    <span class="str">`FROM: <span class="vr">${e.from}</span>\nSUBJECT: <span class="vr">${e.subject}</span>\nSNIPPET: <span class="vr">${e.snippet}</span>\nURL: <span class="vr">${e.url}</span>\n`</span>
+  ).<span class="op">join</span>(<span class="str">'\n---\n'</span>);
+  
+  <span class="kw">const</span> <span class="vr">file</span> = DriveApp.<span class="op">getFolderById</span>(<span class="str">'YOUR_BRIEFING_FOLDER_ID'</span>)
+    .<span class="op">createFile</span>(
+      <span class="str">'Morning Digest '</span> + Utilities.<span class="op">formatDate</span>(<span class="kw">new</span> <span class="fn">Date</span>(), <span class="str">'America/Los_Angeles'</span>, <span class="str">'yyyy-MM-dd'</span>) + <span class="str">'.txt'</span>,
+      digest
+    );
+  
+  Logger.<span class="op">log</span>(<span class="str">'Digest created: '</span> + file.<span class="op">getUrl</span>());
+}
+
+<span class="kw">function</span> <span class="fn">formatDate</span>(<span class="vr">date</span>) {
+  <span class="kw">return</span> Utilities.<span class="op">formatDate</span>(date, <span class="str">'America/Los_Angeles'</span>, <span class="str">'yyyy/MM/dd'</span>);
+}</pre>
+        </div>
+        <div class="note-card" style="margin-top:12px;">
+          <div class="note-label">Setup</div>
+          In Apps Script, go to Triggers &rarr; Add Trigger &rarr; <code>gmailMorningDigest</code> &rarr; Time-driven &rarr; Day timer &rarr; 6–7 AM. Replace <code>YOUR_BRIEFING_FOLDER_ID</code> with your Drive folder ID (from the URL of the folder).
+        </div>
+      </div>
+
+      <!-- Script 2 -->
+      <div class="card mb-8">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <h3 style="font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--text-dark);">&#128197; Script 2: Calendar Meeting Prep Trigger</h3>
+          <div style="display:flex;gap:8px;">
+            <span class="badge badge-gold">Every 30 min</span>
+            <span class="badge badge-navy">Calendar + Gmail</span>
+          </div>
+        </div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Checks for meetings starting in ~60 minutes that haven't been prepped. Sends an email to yourself with meeting context and a pre-built Claude prompt to trigger Meeting Prep.</p>
+        <div class="code-block" id="code-script-2">
+          <button class="copy-btn" onclick="copyCode('code-script-2', this)">Copy</button>
+          <pre><span class="cm">// Calendar Meeting Prep — runs every 30 min, triggers prep for meetings starting in 60 min</span>
+<span class="cm">// Sends a prep reminder with meeting context to your email</span>
+
+<span class="kw">function</span> <span class="fn">checkUpcomingMeetings</span>() {
+  <span class="kw">const</span> <span class="vr">now</span> = <span class="kw">new</span> <span class="fn">Date</span>();
+  <span class="kw">const</span> <span class="vr">oneHourLater</span>  = <span class="kw">new</span> <span class="fn">Date</span>(now.<span class="op">getTime</span>() + <span class="num">60</span> * <span class="num">60</span> * <span class="num">1000</span>);
+  <span class="kw">const</span> <span class="vr">twoHoursLater</span> = <span class="kw">new</span> <span class="fn">Date</span>(now.<span class="op">getTime</span>() + <span class="num">120</span> * <span class="num">60</span> * <span class="num">1000</span>);
+  
+  <span class="kw">const</span> <span class="vr">calendar</span> = CalendarApp.<span class="op">getDefaultCalendar</span>();
+  <span class="kw">const</span> <span class="vr">events</span> = calendar.<span class="op">getEvents</span>(oneHourLater, twoHoursLater);
+  
+  events.<span class="op">forEach</span>(<span class="vr">event</span> <span class="kw">=></span> {
+    <span class="kw">if</span> (event.<span class="op">getTitle</span>().<span class="op">includes</span>(<span class="str">'[prepped]'</span>)) <span class="kw">return</span>; <span class="cm">// skip already prepped</span>
+    
+    <span class="kw">const</span> <span class="vr">attendees</span> = event.<span class="op">getGuestList</span>().<span class="op">map</span>(<span class="vr">g</span> <span class="kw">=></span> g.<span class="op">getEmail</span>()).<span class="op">join</span>(<span class="str">', '</span>);
+    <span class="kw">const</span> <span class="vr">duration</span> = Math.<span class="op">round</span>((event.<span class="op">getEndTime</span>() - event.<span class="op">getStartTime</span>()) / <span class="num">60000</span>);
+    
+    <span class="kw">const</span> <span class="vr">prompt</span> = <span class="str">`Meeting in ~60 minutes: "<span class="vr">${event.getTitle()}</span>"
+Duration: <span class="vr">${duration}</span> minutes
+Attendees: <span class="vr">${attendees || 'none listed'}</span>
+Description: <span class="vr">${event.getDescription() || 'none'}</span>
+
+Use the Meeting Prep skill to prepare me for this meeting.`</span>;
+    
+    GmailApp.<span class="op">sendEmail</span>(
+      Session.<span class="op">getActiveUser</span>().<span class="op">getEmail</span>(),
+      <span class="str">'&#9889; Meeting Prep: '</span> + event.<span class="op">getTitle</span>(),
+      prompt,
+      { name: <span class="str">'Command Center Prep Bot'</span> }
+    );
+    
+    <span class="cm">// Tag the event as prepped so we don't send again</span>
+    event.<span class="op">setTitle</span>(event.<span class="op">getTitle</span>() + <span class="str">' [prepped]'</span>);
+  });
+}</pre>
+        </div>
+        <div class="note-card" style="margin-top:12px;">
+          <div class="note-label">Setup</div>
+          Add Trigger &rarr; <code>checkUpcomingMeetings</code> &rarr; Time-driven &rarr; Minutes timer &rarr; Every 30 minutes. The script tags prepped events to prevent duplicate emails.
+        </div>
+      </div>
+
+      <!-- Script 3 -->
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <h3 style="font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--text-dark);">&#128203; Script 3: Weekly Ops Review Assembler</h3>
+          <div style="display:flex;gap:8px;">
+            <span class="badge badge-gold">Sunday 8 PM</span>
+            <span class="badge badge-navy">Calendar + Drive + Gmail</span>
+          </div>
+        </div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Assembles the past week's calendar data, builds a structured weekly review prompt, writes it to Drive, and emails it to you — so the Monday morning review is ready to run instantly with Claude.</p>
+        <div class="code-block" id="code-script-3">
+          <button class="copy-btn" onclick="copyCode('code-script-3', this)">Copy</button>
+          <pre><span class="cm">// Weekly Review Assembler — runs Sunday at 8 PM</span>
+<span class="cm">// Pulls task completions, calendar summary, and writes a structured review prompt to Drive</span>
+
+<span class="kw">function</span> <span class="fn">weeklyReviewAssembler</span>() {
+  <span class="kw">const</span> <span class="vr">now</span>     = <span class="kw">new</span> <span class="fn">Date</span>();
+  <span class="kw">const</span> <span class="vr">weekAgo</span> = <span class="kw">new</span> <span class="fn">Date</span>(now.<span class="op">getTime</span>() - <span class="num">7</span> * <span class="num">24</span> * <span class="num">60</span> * <span class="num">60</span> * <span class="num">1000</span>);
+  
+  <span class="cm">// Calendar summary for the week</span>
+  <span class="kw">const</span> <span class="vr">cal</span>    = CalendarApp.<span class="op">getDefaultCalendar</span>();
+  <span class="kw">const</span> <span class="vr">events</span> = cal.<span class="op">getEvents</span>(weekAgo, now);
+  <span class="kw">const</span> <span class="vr">calSummary</span> = events.<span class="op">map</span>(<span class="vr">e</span> <span class="kw">=></span> 
+    <span class="str">`- <span class="vr">${Utilities.formatDate(e.getStartTime(), 'America/Los_Angeles', 'EEE MMM d h:mm a')}</span>: <span class="vr">${e.getTitle()}</span>`</span>
+  ).<span class="op">join</span>(<span class="str">'\n'</span>);
+  
+  <span class="cm">// Build the structured weekly review prompt</span>
+  <span class="kw">const</span> <span class="vr">reviewPrompt</span> = <span class="str">`## Weekly Executive Review — Week of <span class="vr">${Utilities.formatDate(weekAgo, 'America/Los_Angeles', 'MMM d')}</span>
+
+CALENDAR THIS WEEK:
+<span class="vr">${calSummary}</span>
+
+---
+Please produce a Weekly Executive Review covering:
+1. Wins this week
+2. What stalled and why
+3. Revenue / relationship opportunities surfaced
+4. Who needs follow-up (with specific names)
+5. What to cut or deprioritize
+6. Top 3 focus areas for next week
+7. Honest assessment: was this week well-spent?
+
+Cross-reference with Notion (active projects + pipeline) and Todoist (completed vs. incomplete).
+Write the operational version to Notion. Write the honest private version to Obsidian weekly note.`</span>;
+  
+  <span class="cm">// Write prompt file to Drive</span>
+  DriveApp.<span class="op">getFolderById</span>(<span class="str">'YOUR_BRIEFING_FOLDER_ID'</span>)
+    .<span class="op">createFile</span>(
+      <span class="str">'Weekly Review Prompt '</span> + Utilities.<span class="op">formatDate</span>(now, <span class="str">'America/Los_Angeles'</span>, <span class="str">'yyyy-MM-dd'</span>) + <span class="str">'.txt'</span>,
+      reviewPrompt
+    );
+  
+  <span class="cm">// Email it too — so it's waiting in your inbox Monday morning</span>
+  GmailApp.<span class="op">sendEmail</span>(
+    Session.<span class="op">getActiveUser</span>().<span class="op">getEmail</span>(),
+    <span class="str">'&#128203; Weekly Review Ready'</span>,
+    reviewPrompt,
+    { name: <span class="str">'Command Center Weekly'</span> }
+  );
+}</pre>
+        </div>
+        <div class="note-card" style="margin-top:12px;">
+          <div class="note-label">Setup</div>
+          Add Trigger &rarr; <code>weeklyReviewAssembler</code> &rarr; Time-driven &rarr; Week timer &rarr; Every Sunday &rarr; 8–9 PM. When you run the weekly review with Claude, paste the prompt from your email or Drive file to load the full calendar context.
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================
+         SECTION 8: PHASE ROADMAP
+    ========================================= -->
+    <section class="content-section" id="phase-roadmap" data-section="phase-roadmap">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 08</div>
+        <h2 class="section-title">&#128197; Phase Roadmap</h2>
+        <p class="section-subtitle">Three phases. Seven weeks to a fully operational system. Don't skip phases — each one builds the foundation for the next. Click checkboxes to track your progress.</p>
+      </div>
+
+      <div class="phase-grid">
+
+        <!-- Phase 1 -->
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-num">Phase 1</div>
+            <div class="phase-title">Foundation</div>
+            <div class="phase-range">&#128197; Days 1 – 7</div>
+          </div>
+          <div class="phase-body">
+            <ul class="phase-checklist">
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p1-1">
+                <span>Enable Claude Google Workspace connectors (Gmail, Calendar, Drive)</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p1-2">
+                <span>Enable Claude in Chrome extension</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p1-3">
+                <span>Set up Zapier MCP with the 12 approved actions</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p1-4">
+                <span>Create 5 Claude Skills (Morning Brief, Inbox Triage, Meeting Prep, Day Close, Publish Pack)</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p1-5">
+                <span>Create 4 Notion databases (Projects, CRM/Relationships, Content Pipeline, Opportunities)</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p1-6">
+                <span>Configure Todoist project tree and label system</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p1-7">
+                <span>Set up Apps Script Morning Digest trigger (daily 6:30 AM)</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p1-8">
+                <span>Set up Apps Script Meeting Prep trigger (every 30 min)</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p1-9">
+                <span>Identify and establish primary Google Drive folder structure</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p1-10">
+                <span>Run first Morning Brief to validate the full setup</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-num">Phase 2</div>
+            <div class="phase-title">Automation Layer</div>
+            <div class="phase-range">&#128197; Weeks 2 – 3</div>
+          </div>
+          <div class="phase-body">
+            <ul class="phase-checklist">
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p2-1">
+                <span>Deploy Apps Script Weekly Review Assembler (Sunday 8 PM)</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p2-2">
+                <span>Set up Obsidian Web Clipper with custom templates</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p2-3">
+                <span>Create Obsidian daily note template linked to Day Close skill</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p2-4">
+                <span>Build universal capture convention (single inbox alias or shortcut)</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p2-5">
+                <span>Set up Todoist–Calendar integration (one-way sync for deadlines)</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p2-6">
+                <span>Build Notion CRM → Todoist follow-up workflow via Zapier</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p2-7">
+                <span>Create Apps Script Gmail triage auto-labeler (leads, media, urgent)</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p2-8">
+                <span>Run 2-week system audit — identify friction points and what's not working</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p2-9">
+                <span>Tune Zapier action set based on real usage patterns</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-num">Phase 3</div>
+            <div class="phase-title">Custom Layer</div>
+            <div class="phase-range">&#128197; Month 2+</div>
+          </div>
+          <div class="phase-body">
+            <ul class="phase-checklist">
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p3-1">
+                <span>Evaluate Claude Code local web app shell (lightweight dashboard)</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p3-2">
+                <span>Install Obsidian Local REST API plugin (if programmatic access needed)</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p3-3">
+                <span>Build domain-specific Claude modes (Oath &amp; Action ops, income generation, family/personal)</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p3-4">
+                <span>Create custom MCP connectors for high-frequency workflows</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p3-5">
+                <span>Build Canva → Drive → Notion export pipeline</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p3-6">
+                <span>Monthly system review: cut anything unused, double down on what works</span>
+              </li>
+              <li>
+                <input type="checkbox" class="phase-checkbox" data-key="p3-7">
+                <span>Document your canonical workflow — write the SOP in Notion</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /phase-grid -->
+
+      <div class="note-card" style="margin-top:28px;">
+        <div class="note-label">&#128197; Phase discipline</div>
+        Don't start Phase 2 until Phase 1 is running daily without friction. Don't start Phase 3 until Phase 2 has been running for two full weeks. Complexity added before the foundation is solid creates systems that collapse under real use. Checkbox state is saved in your browser — reload the page and your progress persists.
+      </div>
+
+    </section>
+
+    <!-- ========================================
+         SECTION 9: FIRST 10 COMMANDS
+    ========================================= -->
+    <section class="content-section" id="first-commands" data-section="first-commands">
+      <div class="section-header">
+        <div class="section-eyebrow">Section 09</div>
+        <h2 class="section-title">&#9654; First 10 Commands</h2>
+        <p class="section-subtitle">The exact prompts to run when you first fire up the system. Copy, paste, and adapt. These 10 commands cover every major workflow and will validate that your setup is working end-to-end.</p>
+      </div>
+
+      <!-- Command 1 -->
+      <div class="command-card">
+        <div class="command-header">
+          <div class="command-num">01</div>
+          <div class="command-header-text">
+            <div class="command-name">First Morning Brief</div>
+            <div class="command-skill-badge"><span class="badge badge-gold">Morning Brief</span></div>
+          </div>
+        </div>
+        <div class="command-body">
+          <div class="command-prompt-label">Prompt &mdash; paste this into Claude</div>
+          <div class="command-prompt-box" id="cmd-1">
+            <button class="copy-btn" onclick="copyCode('cmd-1', this)">Copy</button>
+Run Morning Brief for today. Pull my calendar, Todoist tasks due today or overdue, and any high-signal emails from the last 18 hours. Give me my top 3 outcomes, schedule summary, email hotspots, and first focus block.
+          </div>
+          <div class="command-output">
+            <strong>Output:</strong>&nbsp;Formatted daily brief with schedule, email flags, project pulses, and recommended 90-min focus block
+          </div>
+        </div>
+      </div>
+
+      <!-- Command 2 -->
+      <div class="command-card">
+        <div class="command-header">
+          <div class="command-num">02</div>
+          <div class="command-header-text">
+            <div class="command-name">Route an Email</div>
+            <div class="command-skill-badge"><span class="badge badge-gold">Inbox Triage</span></div>
+          </div>
+        </div>
+        <div class="command-body">
+          <div class="command-prompt-label">Prompt &mdash; paste this into Claude</div>
+          <div class="command-prompt-box" id="cmd-2">
+            <button class="copy-btn" onclick="copyCode('cmd-2', this)">Copy</button>
+[Paste email text here]. Triage this. Tell me if it's a task, an opportunity, a relationship thread, or noise. Route it to the right system and confirm what you did.
+          </div>
+          <div class="command-output">
+            <strong>Output:</strong>&nbsp;Routing confirmation + action taken (Todoist task created / Notion record updated / Calendar event added)
+          </div>
+        </div>
+      </div>
+
+      <!-- Command 3 -->
+      <div class="command-card">
+        <div class="command-header">
+          <div class="command-num">03</div>
+          <div class="command-header-text">
+            <div class="command-name">Prep for a Meeting</div>
+            <div class="command-skill-badge"><span class="badge badge-gold">Meeting Prep</span></div>
+          </div>
+        </div>
+        <div class="command-body">
+          <div class="command-prompt-label">Prompt &mdash; paste this into Claude</div>
+          <div class="command-prompt-box" id="cmd-3">
+            <button class="copy-btn" onclick="copyCode('cmd-3', this)">Copy</button>
+I have a meeting with [Name] at [Time] about [Topic]. Use Meeting Prep to get me ready. Pull our email history, any Notion records linked to them, and give me context, my goal for the meeting, agenda, and 3 questions to ask.
+          </div>
+          <div class="command-output">
+            <strong>Output:</strong>&nbsp;Full meeting brief — context summary, confirmed goal, suggested agenda, 3 questions, 2 things not to forget, prep actions
+          </div>
+        </div>
+      </div>
+
+      <!-- Command 4 -->
+      <div class="command-card">
+        <div class="command-header">
+          <div class="command-num">04</div>
+          <div class="command-header-text">
+            <div class="command-name">Create a Project</div>
+            <div class="command-skill-badge"><span class="badge badge-amber">Zapier MCP (Notion)</span></div>
+          </div>
+        </div>
+        <div class="command-body">
+          <div class="command-prompt-label">Prompt &mdash; paste this into Claude</div>
+          <div class="command-prompt-box" id="cmd-4">
+            <button class="copy-btn" onclick="copyCode('cmd-4', this)">Copy</button>
+Create a new project in Notion called "[Project Name]". Domain: [Civic/Business/Content]. Status: Active. Owner: Me. First milestone: [Milestone]. Milestone date: [Date]. Add a note: [Any context].
+          </div>
+          <div class="command-output">
+            <strong>Output:</strong>&nbsp;New Notion Projects record with all fields populated + confirmation with record URL
+          </div>
+        </div>
+      </div>
+
+      <!-- Command 5 -->
+      <div class="command-card">
+        <div class="command-header">
+          <div class="command-num">05</div>
+          <div class="command-header-text">
+            <div class="command-name">Add Tasks from a Brain Dump</div>
+            <div class="command-skill-badge"><span class="badge badge-gold">Inbox Triage</span></div>
+          </div>
+        </div>
+        <div class="command-body">
+          <div class="command-prompt-label">Prompt &mdash; paste this into Claude</div>
+          <div class="command-prompt-box" id="cmd-5">
+            <button class="copy-btn" onclick="copyCode('cmd-5', this)">Copy</button>
+Here's my brain dump from this morning: [paste list]. Extract every actionable item, assign each to the right Todoist project and label, set priorities, and confirm the full task list you created.
+          </div>
+          <div class="command-output">
+            <strong>Output:</strong>&nbsp;Structured list of Todoist tasks created — with project, label, priority, and due date for each
+          </div>
+        </div>
+      </div>
+
+      <!-- Command 6 -->
+      <div class="command-card">
+        <div class="command-header">
+          <div class="command-num">06</div>
+          <div class="command-header-text">
+            <div class="command-name">Build a Publishing Pack</div>
+            <div class="command-skill-badge"><span class="badge badge-gold">Publish Pack</span></div>
+          </div>
+        </div>
+        <div class="command-body">
+          <div class="command-prompt-label">Prompt &mdash; paste this into Claude</div>
+          <div class="command-prompt-box" id="cmd-6">
+            <button class="copy-btn" onclick="copyCode('cmd-6', this)">Copy</button>
+Here's a memo I wrote: [paste memo]. Run Publish Pack. Give me the Substack draft, LinkedIn post, 5 X posts, and a one-pager outline. Flag anything that needs a Canva graphic or data viz.
+          </div>
+          <div class="command-output">
+            <strong>Output:</strong>&nbsp;Full content suite — Substack draft, LinkedIn post, 5 X posts, one-pager outline, slide deck outline, fact-check flags
+          </div>
+        </div>
+      </div>
+
+      <!-- Command 7 -->
+      <div class="command-card">
+        <div class="command-header">
+          <div class="command-num">07</div>
+          <div class="command-header-text">
+            <div class="command-name">Weekly CRM Sweep</div>
+            <div class="command-skill-badge"><span class="badge badge-amber">Zapier MCP (Notion query)</span></div>
+          </div>
+        </div>
+        <div class="command-body">
+          <div class="command-prompt-label">Prompt &mdash; paste this into Claude</div>
+          <div class="command-prompt-box" id="cmd-7">
+            <button class="copy-btn" onclick="copyCode('cmd-7', this)">Copy</button>
+Pull all CRM records in Notion where Last Contact is more than 14 days ago and Status is Active or Warm. List them with the person's name, organization, and what the last interaction was about. I'll tell you who to follow up with.
+          </div>
+          <div class="command-output">
+            <strong>Output:</strong>&nbsp;Follow-up list with name, org, last interaction summary — ready for you to select who gets outreach
+          </div>
+        </div>
+      </div>
+
+      <!-- Command 8 -->
+      <div class="command-card">
+        <div class="command-header">
+          <div class="command-num">08</div>
+          <div class="command-header-text">
+            <div class="command-name">Close Out the Day</div>
+            <div class="command-skill-badge"><span class="badge badge-gold">Day Close</span></div>
+          </div>
+        </div>
+        <div class="command-body">
+          <div class="command-prompt-label">Prompt &mdash; paste this into Claude</div>
+          <div class="command-prompt-box" id="cmd-8">
+            <button class="copy-btn" onclick="copyCode('cmd-8', this)">Copy</button>
+Run Day Close. Here's what actually happened today: [paste your voice note or summary]. Pull my completed Todoist tasks, note what didn't happen, carry forward incomplete P1/P2 items, and set up tomorrow's top 3 outcomes.
+          </div>
+          <div class="command-output">
+            <strong>Output:</strong>&nbsp;Day close brief + carry-forward tasks added to Todoist + tomorrow's top 3 outcomes + Obsidian daily note draft
+          </div>
+        </div>
+      </div>
+
+      <!-- Command 9 -->
+      <div class="command-card">
+        <div class="command-header">
+          <div class="command-num">09</div>
+          <div class="command-header-text">
+            <div class="command-name">Meeting After-Action</div>
+            <div class="command-skill-badge"><span class="badge badge-gold">Meeting Prep (post-meeting)</span></div>
+          </div>
+        </div>
+        <div class="command-body">
+          <div class="command-prompt-label">Prompt &mdash; paste this into Claude</div>
+          <div class="command-prompt-box" id="cmd-9">
+            <button class="copy-btn" onclick="copyCode('cmd-9', this)">Copy</button>
+Meeting just ended with [Name]. Here are my notes: [paste notes]. Extract all action items (mine and theirs), draft a follow-up email, update the Notion CRM record, create my tasks in Todoist, and write a 3-sentence Obsidian memo.
+          </div>
+          <div class="command-output">
+            <strong>Output:</strong>&nbsp;Action items list, Gmail draft, Notion CRM update, Todoist tasks created, Obsidian memo written — full after-action in one pass
+          </div>
+        </div>
+      </div>
+
+      <!-- Command 10 -->
+      <div class="command-card">
+        <div class="command-header">
+          <div class="command-num">10</div>
+          <div class="command-header-text">
+            <div class="command-name">Weekly Executive Review</div>
+            <div class="command-skill-badge"><span class="badge badge-amber">Weekly Review (Apps Script + MCP)</span></div>
+          </div>
+        </div>
+        <div class="command-body">
+          <div class="command-prompt-label">Prompt &mdash; paste this into Claude</div>
+          <div class="command-prompt-box" id="cmd-10">
+            <button class="copy-btn" onclick="copyCode('cmd-10', this)">Copy</button>
+Run the weekly executive review. Pull active projects from Notion, check completed vs. incomplete tasks in Todoist, and give me: wins, stalls, who needs follow-up, what to cut, and my top 3 priorities for next week. Write the ops version to Notion and flag the honest private questions for my Obsidian review.
+          </div>
+          <div class="command-output">
+            <strong>Output:</strong>&nbsp;Full weekly review — wins, stalls, relationship follow-ups, cuts, top 3 priorities, Notion ops note, Obsidian private reflection prompts
+          </div>
+        </div>
+      </div>
+
+      <!-- Final note -->
+      <div class="card" style="background:var(--navy);border-color:var(--gold-border);margin-top:8px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <span style="font-size:2rem;">&#129504;</span>
+          <div>
+            <div style="font-family:'Libre Baskerville',serif;font-size:1rem;color:var(--gold);margin-bottom:6px;">The system compounds over time.</div>
+            <p style="font-size:0.875rem;color:var(--warm-gray);line-height:1.7;">The value of this stack doesn't come from any single command — it comes from running these workflows consistently, every day, for weeks. Claude learns your patterns from context. Your databases get richer. Your prompts get sharper. By week four, the Morning Brief will be faster than your coffee. By month two, you'll have caught and closed things that would have fallen through the cracks of any other system.</p>
+            <p style="font-size:0.875rem;color:var(--warm-gray);margin-top:10px;line-height:1.7;">Start with Command 1. Run it tomorrow morning. Build from there.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main><!-- /main -->
+</div><!-- /layout -->
+
+<!-- ========================================
+     JAVASCRIPT
+========================================= -->
+<script>
+// ---- Sidebar Active State via Intersection Observer ----
+(function() {
+  const sections = document.querySelectorAll('.content-section[data-section]');
+  const navLinks  = document.querySelectorAll('.sidebar-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('data-section');
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, {
+    rootMargin: '-20% 0px -70% 0px',
+    threshold: 0
+  });
+
+  sections.forEach(s => observer.observe(s));
+})();
+
+// ---- Smooth Scroll on Sidebar Link Click ----
+document.querySelectorAll('.sidebar-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // Close mobile sidebar
+    document.getElementById('sidebar').classList.remove('open');
+  });
+});
+
+// ---- Copy Code Buttons ----
+function copyCode(id, btn) {
+  const block = document.getElementById(id);
+  if (!block) return;
+
+  // Get text content, stripping HTML tags
+  const text = block.innerText
+    .replace(/^Copy\n/, '')   // remove the "Copy" button text if it bled in
+    .trim();
+
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.style.background = 'var(--gold)';
+    btn.style.color = 'var(--navy-deep)';
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 2000);
+  }).catch(() => {
+    // Fallback for older browsers
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+
+// Make copyCode globally available
+window.copyCode = copyCode;
+
+// ---- Checkbox Persistence via localStorage ----
+(function() {
+  const checkboxes = document.querySelectorAll('.phase-checkbox[data-key]');
+  
+  // Load saved state
+  checkboxes.forEach(cb => {
+    const saved = localStorage.getItem('hcc_' + cb.dataset.key);
+    if (saved === 'true') {
+      cb.checked = true;
+    }
+  });
+
+  // Save on change
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', function() {
+      localStorage.setItem('hcc_' + this.dataset.key, this.checked);
+    });
+  });
+})();
+
+// ---- Mobile Menu Toggle ----
+(function() {
+  const btn     = document.getElementById('mobile-menu-btn');
+  const sidebar = document.getElementById('sidebar');
+  if (!btn || !sidebar) return;
+
+  btn.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+  });
+
+  // Close sidebar when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!sidebar.contains(e.target) && !btn.contains(e.target)) {
+      sidebar.classList.remove('open');
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
